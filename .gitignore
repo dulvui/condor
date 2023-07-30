@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.com>
+
+# SPDX-License-Identifier: CC0-1.0
+
+# Swipe2Snake
+
+# Godot-specific ignores
+app/.import/
+app/export.cfg
+app/export_presets.cfg
+app/.godot/
+
+
+# Imported translations (automatically generated from CSV files)
+**.translation
+*.~lock.translations.csv#
+
+# Mono-specific ignores
+app/.mono/
+app/data_*/
+
+# Android
+*.apk
+*.aab
+*.keystore
+
+app/android/
+*.aar
+app/android/build/local.properties
+app/android/build/build/
+app/android/build/keystore.properties
+app/android/.idea/
+app/android/build/.idea/
+app/android/build/gradlew.bat
+app/android/build/gradlew
+app/android/build/gradle/
+app/android/build/.gradle/
+
+# screenshots
+screenshots/
+
