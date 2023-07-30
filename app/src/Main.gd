@@ -4,17 +4,18 @@
 
 extends Control
 
-const MIN_TIME = 5
-const MAX_TIME = 600
-const DEFAULT_TIME = 60
-
 @onready var timer:Timer = $Timer
 @onready var time_label:Label = $VBoxContainer/Time
 @onready var start_button:TextureButton = $VBoxContainer/TimeControl/Start
 
+const MIN_TIME:int = 5
+const MAX_TIME:int = 600
+const DEFAULT_TIME:int = 60
+
 
 func _ready() -> void:
-	pass
+	timer.wait_time = Config.active_time
+	time_label.text = "%2.2f"%timer.time_left
 
 
 func _process(delta: float) -> void:
@@ -42,12 +43,15 @@ func _on_restart_pressed() -> void:
 	timer.start()
 
 func _set_time(time:float) -> void:
-	if timer.wait_time + time <= MIN_TIME:
-		timer.wait_time = MIN_TIME
-	elif timer.wait_time + time > MAX_TIME:
-		timer.wait_time = MAX_TIME
+	if Config.active_time + time <= MIN_TIME:
+		Config.active_time = MIN_TIME
+	elif Config.active_time + time > MAX_TIME:
+		Config.active_time = MAX_TIME
 	else:
-		timer.wait_time += time
+		Config.active_time += time
+		
+	timer.wait_time = Config.active_time
+	Config.save_all_data()
 
 func _on_minus_minutes_pressed() -> void:
 	if timer.is_stopped():

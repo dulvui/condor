@@ -13,7 +13,10 @@ config_version=5
 config/name="Fanta Timer"
 run/main_scene="res://src/Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[autoload]
+
+Config="*res://src/Config.gd"
 
 [display]
 
