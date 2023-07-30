@@ -12,6 +12,7 @@ const MIN_TIME:int = 5
 const MAX_TIME:int = 600
 const DEFAULT_TIME:int = 60
 
+var finished:bool = false
 
 func _ready() -> void:
 	timer.wait_time = Config.active_time
@@ -19,13 +20,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if timer.is_stopped():
+	if timer.is_stopped() and not finished:
 		time_label.text = "%2.2f"%timer.wait_time
 	else:
-		time_label.text = "%2.2f"%timer.time_left
+		time_label.text = "%2.2f"%(timer.time_left)
 
 
 func _on_start_pressed() -> void:
+	finished = false
 	if timer.is_stopped():
 		timer.start()
 	else:
@@ -33,14 +35,16 @@ func _on_start_pressed() -> void:
 
 
 func _on_stop_pressed() -> void:
+	finished = false
 	timer.stop()
 	timer.paused = false
 	start_button.set_pressed_no_signal(false)
 
 
 func _on_restart_pressed() -> void:
-	timer.stop()
-	timer.start()
+	if not finished:
+		timer.stop()
+		timer.start()
 
 func _set_time(time:float) -> void:
 	if Config.active_time + time <= MIN_TIME:
@@ -81,3 +85,4 @@ func _on_reset_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	start_button.set_pressed_no_signal(false)
+	finished = true
