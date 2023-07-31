@@ -24,11 +24,38 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 194.0
+offset_top = 6.0
 offset_bottom = -105.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 60
+
+[node name="TimeControl" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Back" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+texture_normal = ExtResource("3_k64qi")
+flip_h = true
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TimeControl"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Stop" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+texture_normal = ExtResource("2_6dyl3")
+
+[node name="Pause" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+texture_normal = ExtResource("4_munfx")
+
+[node name="Restart" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_us2kl")
 
 [node name="Time" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -37,30 +64,21 @@ text = "60.00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BigButton" type="TextureButton" parent="VBoxContainer"]
+modulate = Color(0.956863, 0.145098, 0.262745, 1)
+layout_mode = 2
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_6dyl3")
+stretch_mode = 6
+
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="TimeControl" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Stop" type="TextureButton" parent="VBoxContainer/TimeControl"]
-layout_mode = 2
-texture_normal = ExtResource("2_6dyl3")
-
-[node name="Start" type="TextureButton" parent="VBoxContainer/TimeControl"]
-layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("3_k64qi")
-texture_pressed = ExtResource("4_munfx")
-
-[node name="Restart" type="TextureButton" parent="VBoxContainer/TimeControl"]
-layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("5_us2kl")
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Stop" to="." method="_on_stop_pressed"]
-[connection signal="pressed" from="VBoxContainer/TimeControl/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/BigButton" to="." method="_on_bug_button_pressed"]
