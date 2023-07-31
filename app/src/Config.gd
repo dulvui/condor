@@ -8,7 +8,7 @@ var active_time:int
 func _ready() -> void:
 	config = ConfigFile.new()
 	config.load("user://settings.cfg")
-	active_time = config.get_value("settings", "active_time", 60)
+	active_time = config.get_value("settings", "active_time", 30)
 	
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)

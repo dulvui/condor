@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://cce4r3em5m283"]
+
+[ext_resource type="Script" path="res://src/menu/Menu.gd" id="1_lsxx0"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lsxx0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = 43.0
+offset_right = -48.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "FANTA TIMER"
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "30"
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "START"
+
+[node name="TimeSettings" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="MinusMinutes" type="Button" parent="VBoxContainer/TimeSettings"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "-60"
+
+[node name="MinusSeconds" type="Button" parent="VBoxContainer/TimeSettings"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "-1"
+
+[node name="Reset" type="Button" parent="VBoxContainer/TimeSettings"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "60"
+
+[node name="PlusSeconds" type="Button" parent="VBoxContainer/TimeSettings"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "+1"
+
+[node name="PlusMinutes" type="Button" parent="VBoxContainer/TimeSettings"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "+60"
+
+[node name="Homepage" type="LinkButton" parent="."]
+layout_mode = 2
+anchor_left = 0.38
+anchor_top = 0.606
+anchor_right = 0.622
+anchor_bottom = 0.63
+offset_left = -4.20001
+offset_top = 288.24
+offset_right = -3.88004
+offset_bottom = 288.2
+size_flags_horizontal = 4
+text = "simondalvai.com"
+structured_text_bidi_override = 1
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeSettings/MinusMinutes" to="." method="_on_minus_minutes_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeSettings/MinusSeconds" to="." method="_on_minus_seconds_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeSettings/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeSettings/PlusSeconds" to="." method="_on_plus_seconds_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeSettings/PlusMinutes" to="." method="_on_plus_minutes_pressed"]
+[connection signal="pressed" from="Homepage" to="." method="_on_homepage_pressed"]

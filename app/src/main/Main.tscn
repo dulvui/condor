@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbv4v5l8m8s18"]
+
+[ext_resource type="Script" path="res://src/main/Main.gd" id="1_labyq"]
+[ext_resource type="Texture2D" uid="uid://lo7b8773fcli" path="res://assets/game-icons/stop.png" id="2_6dyl3"]
+[ext_resource type="Texture2D" uid="uid://dxqqiypugyt3q" path="res://assets/game-icons/right.png" id="3_k64qi"]
+[ext_resource type="Texture2D" uid="uid://bw67e84jfryea" path="res://assets/game-icons/pause.png" id="4_munfx"]
+[ext_resource type="Texture2D" uid="uid://c65hgkldf7g3x" path="res://assets/game-icons/return.png" id="5_us2kl"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_labyq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 194.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+
+[node name="Time" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 142
+text = "60.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="TimeControl" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Stop" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+texture_normal = ExtResource("2_6dyl3")
+
+[node name="Start" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_k64qi")
+texture_pressed = ExtResource("4_munfx")
+
+[node name="Restart" type="TextureButton" parent="VBoxContainer/TimeControl"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_us2kl")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/Stop" to="." method="_on_stop_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/Restart" to="." method="_on_restart_pressed"]
