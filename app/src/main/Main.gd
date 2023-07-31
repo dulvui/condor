@@ -7,6 +7,7 @@ extends Control
 @onready var timer:Timer = $Timer
 @onready var time_label:Label = $VBoxContainer/Time
 @onready var big_button:TextureButton = $VBoxContainer/BigButton
+@onready var sound:Node2D = $Sound
 
 
 var finished:bool = false
@@ -21,6 +22,9 @@ func _process(delta: float) -> void:
 		time_label.text = "%2.2f"%timer.wait_time
 	else:
 		time_label.text = "%2.2f"%(timer.time_left)
+		
+	if not timer.is_stopped() and not finished:
+		sound.countdown(timer.time_left)
 
 
 func _on_start_pressed() -> void:
@@ -36,6 +40,7 @@ func _on_restart_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	finished = true
+	sound.final()
 
 
 func _on_back_pressed() -> void:

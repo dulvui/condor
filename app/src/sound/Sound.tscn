@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://o0gy3lchayf2"]
+
+[ext_resource type="Script" path="res://src/sound/Sound.gd" id="1_o0e0j"]
+[ext_resource type="AudioStream" uid="uid://ccpxhjqvh26b0" path="res://assets/sound/switch36.ogg" id="2_omqrt"]
+[ext_resource type="AudioStream" uid="uid://csaqdgpvt4vt1" path="res://assets/sound/jingles_PIZZI10.ogg" id="3_cn4ua"]
+
+[node name="Sound" type="Node2D"]
+script = ExtResource("1_o0e0j")
+
+[node name="Bip" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(267, 510)
+stream = ExtResource("2_omqrt")
+
+[node name="Final" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(267, 510)
+stream = ExtResource("3_cn4ua")
+
+[connection signal="finished" from="Bip" to="." method="_on_bip_finished"]
+[connection signal="finished" from="Final" to="." method="_on_bip_finished"]

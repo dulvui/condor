@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbv4v5l8m8s18"]
+[gd_scene load_steps=7 format=3 uid="uid://cbv4v5l8m8s18"]
 
 [ext_resource type="Script" path="res://src/main/Main.gd" id="1_labyq"]
 [ext_resource type="Texture2D" uid="uid://lo7b8773fcli" path="res://assets/game-icons/stop.png" id="2_6dyl3"]
 [ext_resource type="Texture2D" uid="uid://dxqqiypugyt3q" path="res://assets/game-icons/right.png" id="3_k64qi"]
 [ext_resource type="Texture2D" uid="uid://bw67e84jfryea" path="res://assets/game-icons/pause.png" id="4_munfx"]
 [ext_resource type="Texture2D" uid="uid://c65hgkldf7g3x" path="res://assets/game-icons/return.png" id="5_us2kl"]
+[ext_resource type="PackedScene" uid="uid://o0gy3lchayf2" path="res://src/sound/Sound.tscn" id="6_klali"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -71,6 +72,8 @@ stretch_mode = 6
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+
+[node name="Sound" parent="." instance=ExtResource("6_klali")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Back" to="." method="_on_back_pressed"]

@@ -7,6 +7,10 @@ Source: https://github.com/dulvui/fanta-timer
 # First party 
 ####################################
 
+#########
+# Code
+#########
+
 # Godot files
 Files: app/src/**.tscn app/project.godot app/**.import
 Copyright: 2023 Simon Dalvai <info@simondalvai.com>
@@ -21,7 +25,25 @@ License: CC0-1.0
 # Third Party 
 ####################################
 
-# kenney.nl 2D app icons https://www.kenney.nl/assets/app-icons
+#########
+# 2D
+#########
+
+# kenney.nl 2D game icons https://www.kenney.nl/assets/game-icons
 Files: app/assets/game-icons/*
+Copyright: 2010 - 2022 https://kenney.nl
+License: CC0-1.0
+
+#########
+# Audio
+#########
+
+# kenney.nl ui audio https://www.kenney.nl/assets/ui-audio
+Files: app/assets/sound/switch36.ogg
+Copyright: 2010 - 2022 https://kenney.nl
+License: CC0-1.0
+
+# kenney.nl music jingles https://www.kenney.nl/assets/music-jingles
+Files: app/assets/sound/jingles_PIZZI10.ogg
 Copyright: 2010 - 2022 https://kenney.nl
 License: CC0-1.0
