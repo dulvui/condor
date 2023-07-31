@@ -52,3 +52,7 @@ func _on_reset_pressed() -> void:
 	Config.active_time = DEFAULT_TIME
 	Config.save_all_data()
 	time_label.text = "%2.2f"%Config.active_time
+
+
+func _on_credits_pressed() -> void:
+	pass # Replace with function body.
