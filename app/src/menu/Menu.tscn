@@ -22,21 +22,14 @@ offset_right = -48.0
 offset_bottom = -54.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 alignment = 1
-
-[node name="Title" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "FANTA TIMER"
-horizontal_alignment = 1
 
 [node name="Time" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 142
 text = "30"
 horizontal_alignment = 1
-
-[node name="Start" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "START"
 
 [node name="TimeSettings" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -47,7 +40,7 @@ alignment = 1
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 43
-text = "-60"
+text = "-10"
 
 [node name="MinusSeconds" type="Button" parent="VBoxContainer/TimeSettings"]
 custom_minimum_size = Vector2(75, 75)
@@ -59,7 +52,7 @@ text = "-1"
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 43
-text = "60"
+text = "30"
 
 [node name="PlusSeconds" type="Button" parent="VBoxContainer/TimeSettings"]
 custom_minimum_size = Vector2(75, 75)
@@ -71,7 +64,12 @@ text = "+1"
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 43
-text = "+60"
+text = "+10"
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "START"
 
 [node name="Homepage" type="LinkButton" parent="."]
 layout_mode = 2
@@ -87,10 +85,10 @@ size_flags_horizontal = 4
 text = "simondalvai.com"
 structured_text_bidi_override = 1
 
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeSettings/MinusMinutes" to="." method="_on_minus_minutes_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeSettings/MinusSeconds" to="." method="_on_minus_seconds_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeSettings/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeSettings/PlusSeconds" to="." method="_on_plus_seconds_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeSettings/PlusMinutes" to="." method="_on_plus_minutes_pressed"]
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Homepage" to="." method="_on_homepage_pressed"]

@@ -31,14 +31,8 @@ func _on_start_pressed() -> void:
 		timer.paused = not timer.paused
 
 
-func _on_stop_pressed() -> void:
-	_reset()
-
-
 func _on_restart_pressed() -> void:
-	if not finished:
-		timer.stop()
-		timer.start()
+	_restart()
 
 func _on_timer_timeout() -> void:
 	finished = true
@@ -55,13 +49,13 @@ func _on_bug_button_pressed() -> void:
 		timer.stop()
 		timer.start()
 	else:
-		_reset() 
+		_restart() 
 
 
 func _on_pause_pressed() -> void:
 	timer.paused = true
 
-func _reset() ->void:
+func _restart() ->void:
 	finished = false
 	timer.stop()
 	timer.paused = false

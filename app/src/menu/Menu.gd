@@ -6,7 +6,7 @@ extends Control
 
 const MIN_TIME:int = 5
 const MAX_TIME:int = 600
-const DEFAULT_TIME:int = 60
+const DEFAULT_TIME:int = 30
 
 @onready var time_label:Label = $VBoxContainer/Time
 
@@ -33,7 +33,7 @@ func _set_time(time:float) -> void:
 	time_label.text = "%2.2f"%Config.active_time
 
 func _on_minus_minutes_pressed() -> void:
-	_set_time(-60)
+	_set_time(-10)
 
 
 func _on_minus_seconds_pressed() -> void:
@@ -45,9 +45,10 @@ func _on_plus_seconds_pressed() -> void:
 
 
 func _on_plus_minutes_pressed() -> void:
-	_set_time(+60)
+	_set_time(+10)
 		
 
-
 func _on_reset_pressed() -> void:
-	pass # Replace with function body.
+	Config.active_time = DEFAULT_TIME
+	Config.save_all_data()
+	time_label.text = "%2.2f"%Config.active_time

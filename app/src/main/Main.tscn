@@ -44,10 +44,6 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Stop" type="TextureButton" parent="VBoxContainer/TimeControl"]
-layout_mode = 2
-texture_normal = ExtResource("2_6dyl3")
-
 [node name="Pause" type="TextureButton" parent="VBoxContainer/TimeControl"]
 layout_mode = 2
 texture_normal = ExtResource("4_munfx")
@@ -78,7 +74,6 @@ layout_mode = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="VBoxContainer/TimeControl/Stop" to="." method="_on_stop_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/BigButton" to="." method="_on_bug_button_pressed"]
