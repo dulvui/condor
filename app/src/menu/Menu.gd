@@ -5,8 +5,8 @@
 extends Control
 
 const MIN_TIME:int = 5
-const MAX_TIME:int = 600
-const DEFAULT_TIME:int = 30
+const MAX_TIME:int = 30
+const DEFAULT_TIME:int = 10
 
 @onready var time_label:Label = $VBoxContainer/Time
 

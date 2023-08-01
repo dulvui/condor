@@ -61,7 +61,7 @@ text = "-1"
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 43
-text = "30"
+text = "10"
 
 [node name="PlusSeconds" type="Button" parent="VBoxContainer/TimeSettings"]
 custom_minimum_size = Vector2(75, 75)
@@ -83,7 +83,7 @@ text = "START"
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "CREDITS"
+text = "INFO"
 
 [node name="Homepage" type="LinkButton" parent="."]
 layout_mode = 1
