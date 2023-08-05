@@ -80,6 +80,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "START"
 
+[node name="List" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "LIST"
+
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
@@ -110,5 +115,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="VBoxContainer/TimeSettings/PlusSeconds" to="." method="_on_plus_seconds_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeSettings/PlusMinutes" to="." method="_on_plus_minutes_pressed"]
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/List" to="." method="_on_list_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Homepage" to="." method="_on_homepage_pressed"]

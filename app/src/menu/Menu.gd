@@ -13,10 +13,6 @@ const DEFAULT_TIME:int = 10
 func _ready() -> void:
 	time_label.text = "%2.2f"%Config.active_time
 
-
-func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/main/Main.tscn")
-
 func _on_homepage_pressed() -> void:
 	OS.shell_open("https://simondalvai.com")
 
@@ -53,6 +49,11 @@ func _on_reset_pressed() -> void:
 	Config.save_all_data()
 	time_label.text = "%2.2f"%Config.active_time
 
+func _on_start_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/main/Main.tscn")
 
 func _on_credits_pressed() -> void:
 	pass # Replace with function body.
+
+func _on_list_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/player-list/PlayerList.tscn")
