@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbv4v5l8m8s18"]
 
-[ext_resource type="Script" path="res://src/main/Main.gd" id="1_labyq"]
+[ext_resource type="Script" path="res://src/timer/Timer.gd" id="1_labyq"]
 [ext_resource type="Texture2D" uid="uid://78gth2yfhuwk" path="res://assets/cancel.png" id="2_6c5du"]
 [ext_resource type="Texture2D" uid="uid://lo7b8773fcli" path="res://assets/game-icons/stop.png" id="2_6dyl3"]
 [ext_resource type="Texture2D" uid="uid://hghu8bqjqrmb" path="res://assets/pause-button.png" id="3_82hg2"]
