@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://0rh5um1afxh3" path="res://assets/backward-time.png" id="4_htehr"]
 [ext_resource type="PackedScene" uid="uid://o0gy3lchayf2" path="res://src/sound/Sound.tscn" id="6_klali"]
 
-[node name="Main" type="Control"]
+[node name="Timer" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +42,7 @@ offset_right = -16.0
 offset_bottom = -4.12
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 10
 
 [node name="TimeControl" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -58,6 +58,36 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="MinusMinutes" type="Button" parent="VBoxContainer/TimeControl"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "-10"
+
+[node name="MinusSeconds" type="Button" parent="VBoxContainer/TimeControl"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "-1"
+
+[node name="Reset" type="Button" parent="VBoxContainer/TimeControl"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "10"
+
+[node name="PlusSeconds" type="Button" parent="VBoxContainer/TimeControl"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "+1"
+
+[node name="PlusMinutes" type="Button" parent="VBoxContainer/TimeControl"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "+10"
+
 [node name="Pause" type="TextureButton" parent="VBoxContainer/TimeControl"]
 layout_mode = 2
 texture_normal = ExtResource("3_82hg2")
@@ -67,6 +97,13 @@ layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("4_htehr")
 stretch_mode = 3
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Time" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -91,6 +128,11 @@ layout_mode = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/MinusMinutes" to="." method="_on_minus_minutes_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/MinusSeconds" to="." method="_on_minus_seconds_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/PlusSeconds" to="." method="_on_plus_seconds_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimeControl/PlusMinutes" to="." method="_on_plus_minutes_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/BigButton" to="." method="_on_bug_button_pressed"]
