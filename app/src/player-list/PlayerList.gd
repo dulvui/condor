@@ -11,28 +11,29 @@ extends Control
 
 
 var list_path:String = "res://assets/players/players_05082023.csv"
-var players:Dictionary = {
-	"P" : [], 
-	"D" : [],
-	"C" : [],
-	"A" : [],
-}
 
 
 func _ready() -> void:
-	var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
-	_init_players(file)
+	if Config.players.is_empty():
+		Config.players = {
+			"P" : [], 
+			"D" : [],
+			"C" : [],
+			"A" : [],
+		}
+		var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
+		_init_players(file)
 	
-	for player in players["P"]:
+	for player in Config.players["P"]:
 		goalkeepers.add_text(player_to_string(player) + "\n")
 		
-	for player in players["D"]:
+	for player in Config.players["D"]:
 		defenders.add_text(player_to_string(player) + "\n")
 		
-	for player in players["C"]:
+	for player in Config.players["C"]:
 		midfielders.add_text(player_to_string(player) + "\n")
 		
-	for player in players["A"]:
+	for player in Config.players["A"]:
 		attackers.add_text(player_to_string(player) + "\n")
 	
 
@@ -56,9 +57,7 @@ func _init_players(file:FileAccess):
 		# check if not empty
 		if not line[0]:
 			break
-		players[line[1]].append(_get_player(line))
-	
-	print(players)
+		Config.players[line[1]].append(_get_player(line))
 		
 func _get_player(line:Array) -> Dictionary:
 	return {
