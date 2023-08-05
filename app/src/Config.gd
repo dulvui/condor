@@ -8,6 +8,9 @@ var config:ConfigFile
 
 var active_time:int
 var players:Dictionary
+var teams:Array
+
+var budget:int = 500
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,10 +18,12 @@ func _ready() -> void:
 	config.load("user://settings.cfg")
 	active_time = config.get_value("settings", "active_time", 30)
 	players = config.get_value("data", "players", {})
+	teams = config.get_value("data", "teams", [])
 	
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("data","players",players)
+	config.set_value("data","teams",teams)
 	config.save("user://settings.cfg")
 	
 # save on quit on mobile

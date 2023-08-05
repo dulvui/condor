@@ -74,6 +74,6 @@ func player_to_string(player:Dictionary) -> String:
 	return "%s %s %s"%[player["name"],player["team"],player["price_initial"]]
 	
 
-
+  
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
