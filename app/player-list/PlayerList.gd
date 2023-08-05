@@ -4,7 +4,13 @@
 
 extends Control
 
-var list_path:String
+@onready var goalkeepers = $TabContainer/POR
+@onready var defenders = $TabContainer/DIF
+@onready var midfielders = $TabContainer/CEN
+@onready var attackers = $TabContainer/ATT
+
+
+var list_path:String = "res://assets/players/players_05082023.csv"
 var players:Dictionary = {
 	"P" : [],
 	"D" : [],
@@ -12,13 +18,23 @@ var players:Dictionary = {
 	"A" : [],
 }
 
+
 func _ready() -> void:
-	pass
-
-
-func _process(delta: float) -> void:
-	pass
-
+	var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
+	_init_players(file)
+	
+	for player in players["P"]:
+		goalkeepers.add_text(player_to_string(player) + "\n")
+		
+	for player in players["D"]:
+		defenders.add_text(player_to_string(player) + "\n")
+		
+	for player in players["C"]:
+		midfielders.add_text(player_to_string(player) + "\n")
+		
+	for player in players["A"]:
+		attackers.add_text(player_to_string(player) + "\n")
+	
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	list_path = path
@@ -45,13 +61,16 @@ func _init_players(file:FileAccess):
 	print(players)
 		
 func _get_player(line:Array) -> Dictionary:
-#	print(line)
 	return {
 		"id" : line[0],
+		"position" : line[1],
 		"name" : line[2],
 		"team" : line[3],
 		"mfv" : line[4],
 		"price_initial" : line[5],
 		"price_current" : line[6],
 	}
+	
+func player_to_string(player:Dictionary) -> String:
+	return "%s %s %s"%[player["name"],player["team"],player["price_initial"]]
 	

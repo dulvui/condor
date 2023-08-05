@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ba1d3gqdkxgm1"
+
+[deps]
+
+files=["res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation"]
+
+source_file="res://assets/players/players_05082023.csv"
+dest_files=["res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation", "res://assets/players/players_05082023..translation"]
+
+[params]
+
+compress=true
+delimiter=0

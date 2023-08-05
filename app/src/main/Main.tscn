@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbv4v5l8m8s18"]
 
 [ext_resource type="Script" path="res://src/main/Main.gd" id="1_labyq"]
+[ext_resource type="Texture2D" uid="uid://78gth2yfhuwk" path="res://assets/cancel.png" id="2_6c5du"]
 [ext_resource type="Texture2D" uid="uid://lo7b8773fcli" path="res://assets/game-icons/stop.png" id="2_6dyl3"]
-[ext_resource type="Texture2D" uid="uid://dxqqiypugyt3q" path="res://assets/game-icons/right.png" id="3_k64qi"]
-[ext_resource type="Texture2D" uid="uid://bw67e84jfryea" path="res://assets/game-icons/pause.png" id="4_munfx"]
-[ext_resource type="Texture2D" uid="uid://c65hgkldf7g3x" path="res://assets/game-icons/return.png" id="5_us2kl"]
+[ext_resource type="Texture2D" uid="uid://hghu8bqjqrmb" path="res://assets/pause-button.png" id="3_82hg2"]
+[ext_resource type="Texture2D" uid="uid://0rh5um1afxh3" path="res://assets/backward-time.png" id="4_htehr"]
 [ext_resource type="PackedScene" uid="uid://o0gy3lchayf2" path="res://src/sound/Sound.tscn" id="6_klali"]
 
 [node name="Main" type="Control"]
@@ -36,9 +36,10 @@ anchor_left = 0.059
 anchor_top = 0.075
 anchor_right = 1.0
 anchor_bottom = 0.947
-offset_left = -31.86
-offset_top = -8.0
-offset_bottom = 3.88
+offset_left = -15.86
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -4.12
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 60
@@ -49,7 +50,7 @@ alignment = 1
 
 [node name="Back" type="TextureButton" parent="VBoxContainer/TimeControl"]
 layout_mode = 2
-texture_normal = ExtResource("3_k64qi")
+texture_normal = ExtResource("2_6c5du")
 flip_h = true
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/TimeControl"]
@@ -59,12 +60,13 @@ size_flags_horizontal = 3
 
 [node name="Pause" type="TextureButton" parent="VBoxContainer/TimeControl"]
 layout_mode = 2
-texture_normal = ExtResource("4_munfx")
+texture_normal = ExtResource("3_82hg2")
 
 [node name="Restart" type="TextureButton" parent="VBoxContainer/TimeControl"]
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("5_us2kl")
+texture_normal = ExtResource("4_htehr")
+stretch_mode = 3
 
 [node name="Time" type="Label" parent="VBoxContainer"]
 layout_mode = 2

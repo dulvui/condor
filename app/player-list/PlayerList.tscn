@@ -15,19 +15,33 @@ script = ExtResource("1_twu85")
 title = "Open a File"
 position = Vector2i(0, 36)
 size = Vector2i(493, 162)
-visible = true
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.csv")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="POR" type="RichTextLabel" parent="TabContainer"]
+layout_mode = 2
+
+[node name="DIF" type="RichTextLabel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="CEN" type="RichTextLabel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ATT" type="RichTextLabel" parent="TabContainer"]
+visible = false
+layout_mode = 2
 
 [connection signal="confirmed" from="FileDialog" to="." method="_on_file_dialog_confirmed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
