@@ -64,8 +64,9 @@ func add_player_to_team(active_team:int, active_player:Dictionary, price:int) ->
 	active_player.price = price
 	Config.teams[active_team].players[pos].append(active_player)
 	Config.teams[active_team].budget -= price
-	print(Config.teams[active_team])
 	Config.save_all_data()
+	
+	players[pos].erase(active_player)
 	return true
 
 func get_teams_with_empty_slots_for_pos(pos:String) -> Array:

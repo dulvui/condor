@@ -17,12 +17,23 @@ func _ready() -> void:
 			
 		var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
 		_init_players(file)
+	set_up()
+	
+func set_up():
+	for child in table.get_children():
+		child.queue_free()
 	
 	for pos in Config.POSITIONS:
 		for player in Config.players[pos]:
 			var label:Label = Label.new()
 			label.text = player_to_string(player)
 			table.add_child(label)
+			
+			if player.id == current_player().id:
+				var label_settings:LabelSettings = LabelSettings.new()
+				label_settings.font_color = Color.GOLD
+				label_settings.font_size = get_theme_default_font_size()
+				label.label_settings = label_settings
 
 func current_player() -> Dictionary:
 	return Config.players[Config.POSITIONS[Config.active_position]][Config.active_player]

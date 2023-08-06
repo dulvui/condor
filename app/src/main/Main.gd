@@ -25,6 +25,7 @@ func _next_player():
 
 func _on_button_pressed() -> void:
 	_next_player()
+	player_list.set_up()
 
 
 func _on_auction_pressed() -> void:
@@ -37,8 +38,10 @@ func _on_assign_pressed() -> void:
 	assign_player.set_player(active_player)
 	assign_player.popup_centered()
 
-
 func _on_assign_player_assigned() -> void:
 	team_overview.set_up()
-	_next_player()
+	player_list.set_up()
+	active_player = player_list.current_player()
+	player_label.text = player_list.player_to_string(active_player)
+
 
