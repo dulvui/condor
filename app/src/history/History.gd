@@ -15,5 +15,5 @@ func set_up():
 	
 	for transfer in Config.history:
 		var label:Label = Label.new()
-		label.text = "%s -> %s %d"%[transfer.player, transfer.team, transfer.price]
+		label.text = "%s (%d) %s"%[transfer.team, transfer.price, transfer.player]
 		trasfer_list.add_child(label)
