@@ -73,6 +73,7 @@ func _get_player(line:Array) -> Dictionary:
 		"mfv" : line[4],
 		"price_initial" : line[5],
 		"price_current" : line[6],
+		"price" : 0,
 	}
 	
 func player_to_string(player:Dictionary) -> String:

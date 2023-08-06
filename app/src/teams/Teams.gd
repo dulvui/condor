@@ -26,6 +26,7 @@ func _on_button_pressed() -> void:
 	
 	_add_team(team)
 	
+	name_edit.text = ""
 	
 func _add_team(team:Dictionary):
 	
@@ -45,6 +46,8 @@ func _add_team(team:Dictionary):
 	hbox.add_child(delete_button)
 	
 	team_list.add_child(hbox)
+	
+	Config.save_all_data()
 	
 
 func _create_team(team_name:String) -> Dictionary:

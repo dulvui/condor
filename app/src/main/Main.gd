@@ -6,26 +6,40 @@ extends Control
 
 const AuctionTimer:PackedScene = preload("res://src/timer/Timer.tscn")
 
-@onready var player_list:Control = $PlayerList
-@onready var player_label:Label = $ActivePlayer
+@onready var player_list:Control = $MarginContainer/HSplitContainer/PlayerList
+@onready var player_label:Label = $MarginContainer/HSplitContainer/VBoxContainer/ActivePlayer
+@onready var assign_player:PopupPanel = $AssignPlayer
+@onready var team_overview:Control = $MarginContainer/HSplitContainer/VBoxContainer/TeamOverview
 
-var current_player:Dictionary
+
+
+var active_player:Dictionary
 
 func _ready() -> void:
-	current_player = player_list.current_player()
-	player_label.text = player_list.player_to_string(current_player)
+	active_player = player_list.current_player()
+	player_label.text = player_list.player_to_string(active_player)
 
-func _process(delta: float) -> void:
-	pass
-
+func _next_player():
+	active_player = player_list.next_player()
+	player_label.text = player_list.player_to_string(active_player)
 
 func _on_button_pressed() -> void:
-	current_player = player_list.next_player()
-	player_label.text = player_list.player_to_string(current_player)
+	_next_player()
 
 
 
 func _on_auction_pressed() -> void:
 	var timer = AuctionTimer.instantiate()
-	timer.set_player(current_player)
+	timer.set_player(active_player)
 	add_child(timer)
+
+
+func _on_assign_pressed() -> void:
+	assign_player.set_player(active_player)
+	assign_player.popup_centered()
+
+
+func _on_assign_player_assigned() -> void:
+	team_overview.set_up()
+	_next_player()
+

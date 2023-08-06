@@ -25,7 +25,8 @@ func _ready() -> void:
 	players = config.get_value("data", "players", {})
 	active_player = config.get_value("data", "active_player", 0)
 	active_position = config.get_value("data", "active_position", 0)
-	teams = config.get_value("data", "teams", [])
+	teams = config.get_value("data", "teams", _get_default_teams())
+#	teams = config.get_value("data", "teams", [])
 	
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
@@ -34,7 +35,29 @@ func save_all_data() -> void:
 	config.set_value("data","active_position",active_position)
 	config.set_value("data","active_player",active_player)
 	config.save("user://settings.cfg")
+
+func _get_default_teams() -> Array:
+	var default_teams = []
+	const desp_league = [
+		"Fc Messi Male",
+		"ASD Obergoller",
+		"Fc. MAINZ NA GIOIA",
+		"Lokomotiv Loska",
+		"Longobarda",
+		"FC MANCHESTER SINTY",
+		"TIRANA RAGLIA",
+		"Oscugnizzzzz",
+	]
 	
+	for team in desp_league:
+		default_teams.append({
+		"name": team,
+		"budget": budget,
+		"players": []
+		})
+	
+	return default_teams
+
 # save on quit on mobile
 func _notification(what) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
