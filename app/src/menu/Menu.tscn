@@ -39,15 +39,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "START"
 
-[node name="List" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "LIST"
-
 [node name="Teams" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "TEAMS"
+
+[node name="Export" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "EXPORT"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -75,6 +75,5 @@ structured_text_bidi_override = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/List" to="." method="_on_list_pressed"]
 [connection signal="pressed" from="VBoxContainer/Teams" to="." method="_on_teams_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]

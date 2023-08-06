@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4i873ru2skmw"]
+[gd_scene load_steps=3 format=3 uid="uid://d4i873ru2skmw"]
 
 [ext_resource type="Script" path="res://src/main/Main.gd" id="1_labyq"]
+[ext_resource type="PackedScene" uid="uid://cmxee5ywoanvl" path="res://src/player-list/PlayerList.tscn" id="2_o4m2h"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -10,3 +11,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_labyq")
+
+[node name="PlayerList" parent="." instance=ExtResource("2_o4m2h")]
+layout_mode = 1
+anchors_preset = 9
+anchor_right = 0.0
+offset_right = 360.0
+grow_horizontal = 1
+
+[node name="ActivePlayer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 16.0
+offset_right = 704.0
+offset_bottom = 42.0
+
+[node name="Skip" type="Button" parent="."]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 240.0
+offset_right = 830.0
+offset_bottom = 274.0
+text = "SKIP"
+
+[node name="Auction" type="Button" parent="."]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 240.0
+offset_right = 614.0
+offset_bottom = 274.0
+text = "AUCTION"
+
+[connection signal="pressed" from="Skip" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Auction" to="." method="_on_auction_pressed"]

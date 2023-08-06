@@ -46,6 +46,7 @@ theme_override_font_sizes/font_size = 32
 text = "ADD"
 
 [node name="Back" type="TextureButton" parent="."]
+layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 texture_normal = ExtResource("2_h0br7")

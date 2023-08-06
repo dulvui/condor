@@ -4,38 +4,39 @@
 
 extends Control
 
-@onready var goalkeepers = $TabContainer/POR
-@onready var defenders = $TabContainer/DIF
-@onready var midfielders = $TabContainer/CEN
-@onready var attackers = $TabContainer/ATT
-
+@onready var table:GridContainer = $ScrollContainer/GridContainer
 
 var list_path:String = "res://assets/players/players_05082023.csv"
+
+const POSITIONS = ["P", "D", "C", "A"]
 
 
 func _ready() -> void:
 	if Config.players.is_empty():
-		Config.players = {
-			"P" : [], 
-			"D" : [],
-			"C" : [],
-			"A" : [],
-		}
+		for pos in POSITIONS:
+			Config.players[pos] = []
+			
 		var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
 		_init_players(file)
 	
-	for player in Config.players["P"]:
-		goalkeepers.add_text(player_to_string(player) + "\n")
-		
-	for player in Config.players["D"]:
-		defenders.add_text(player_to_string(player) + "\n")
-		
-	for player in Config.players["C"]:
-		midfielders.add_text(player_to_string(player) + "\n")
-		
-	for player in Config.players["A"]:
-		attackers.add_text(player_to_string(player) + "\n")
-	
+	for pos in POSITIONS:
+		for player in Config.players[pos]:
+			var label:Label = Label.new()
+			label.text = player_to_string(player)
+			table.add_child(label)
+
+func current_player() -> Dictionary:
+	return Config.players[POSITIONS[Config.active_position]][Config.active_player]
+
+func next_player() -> Dictionary:
+	if Config.active_player + 1 < Config.players[POSITIONS[Config.active_position]].size():
+		Config.active_player += 1
+		return current_player()
+	elif Config.active_position + 1  < POSITIONS.size():
+		Config.active_position += 1
+		Config.active_player = 0
+		return current_player() 
+	return {}
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	list_path = path
@@ -57,7 +58,11 @@ func _init_players(file:FileAccess):
 		# check if not empty
 		if not line[0]:
 			break
-		Config.players[line[1]].append(_get_player(line))
+		var pos = line[1]
+		Config.players[pos].append(_get_player(line))
+	
+	for pos in POSITIONS:
+		Config.players[pos].sort_custom(func(a, b): return a.name < b.name)
 		
 func _get_player(line:Array) -> Dictionary:
 	return {
@@ -71,9 +76,9 @@ func _get_player(line:Array) -> Dictionary:
 	}
 	
 func player_to_string(player:Dictionary) -> String:
-	return "%s %s %s"%[player["name"],player["team"],player["price_initial"]]
+	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
 	
 
-
+	
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")

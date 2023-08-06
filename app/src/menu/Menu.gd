@@ -11,9 +11,5 @@ func _on_start_pressed() -> void:
 func _on_credits_pressed() -> void:
 	pass # Replace with function body.
 
-func _on_list_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/player-list/PlayerList.tscn")
-
-
 func _on_teams_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/teams/Teams.tscn")
