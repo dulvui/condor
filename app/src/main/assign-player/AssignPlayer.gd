@@ -17,6 +17,9 @@ func set_player(player:Dictionary) -> void:
 	
 	teams.clear()
 	
+	active_team = 0
+	
+	
 	for team in Config.teams:
 		teams.add_item(team.name)
 
