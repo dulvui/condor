@@ -17,6 +17,7 @@ var budget:int = 500
 var players:Dictionary
 var active_position:int = 0
 var active_player:int = 0
+var history:Array
 
 var team_size:Dictionary = {
 	"P" : 3,
@@ -24,7 +25,6 @@ var team_size:Dictionary = {
 	"C" : 8,
 	"A" : 6
 }
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,6 +36,7 @@ func _ready() -> void:
 	active_player = config.get_value("data", "active_player", 0)
 	active_position = config.get_value("data", "active_position", 0)
 	teams = config.get_value("data", "teams", _get_default_teams())
+	history = config.get_value("data", "history", [])
 #	teams = config.get_value("data", "teams", [])
 
 	team_size["total"] = 0
@@ -50,6 +51,7 @@ func save_all_data() -> void:
 	config.set_value("data","teams",teams)
 	config.set_value("data","active_position",active_position)
 	config.set_value("data","active_player",active_player)
+	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
 func add_player_to_team(active_team:int, active_player:Dictionary, price:int) -> bool:
@@ -60,6 +62,8 @@ func add_player_to_team(active_team:int, active_player:Dictionary, price:int) ->
 	
 	if team.budget - price < 0:
 		return false
+		
+	add_to_history(active_player.name, Config.teams[active_team].name, price)
 	
 	active_player.price = price
 	Config.teams[active_team].players[pos].append(active_player)
@@ -68,6 +72,14 @@ func add_player_to_team(active_team:int, active_player:Dictionary, price:int) ->
 	
 	players[pos].erase(active_player)
 	return true
+	
+func add_to_history(player:String, team: String, price:int):
+	var transfer = {
+		"player" : player,
+		"team" : team,
+		"price" : price,
+	}
+	history.append(transfer)
 
 func get_teams_with_empty_slots_for_pos(pos:String) -> Array:
 	var teams_with_slots = []

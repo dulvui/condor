@@ -6,11 +6,11 @@ extends Control
 
 const AuctionTimer:PackedScene = preload("res://src/timer/Timer.tscn")
 
-@onready var player_list:Control = $MarginContainer/HSplitContainer/PlayerList
 @onready var player_label:Label = $MarginContainer/HSplitContainer/VBoxContainer/ActivePlayer
 @onready var assign_player:PopupPanel = $AssignPlayer
 @onready var team_overview:Control = $MarginContainer/HSplitContainer/VBoxContainer/TeamOverview
-
+@onready var player_list:Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
+@onready var history:Control = $MarginContainer/HSplitContainer/VSplitContainer/History
 
 
 var active_player:Dictionary
@@ -41,7 +41,8 @@ func _on_assign_pressed() -> void:
 func _on_assign_player_assigned() -> void:
 	team_overview.set_up()
 	player_list.set_up()
+	history.set_up()
 	active_player = player_list.current_player()
 	player_label.text = player_list.player_to_string(active_player)
-
+	
 
