@@ -28,7 +28,7 @@ func _add_team(team:Dictionary) -> void:
 	for pos in team.players:
 		for player in team.players[pos]:
 			var player_label:Label = Label.new()
-			player_label.text = "%s %d"%[player.name, player.price]
+			player_label.text = "%s %s %d"%[player.position, player.name, player.price]
 		
 			vbox.add_child(player_label)
 	
