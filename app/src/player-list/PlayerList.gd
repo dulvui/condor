@@ -8,31 +8,30 @@ extends Control
 
 var list_path:String = "res://assets/players/players_05082023.csv"
 
-const POSITIONS = ["P", "D", "C", "A"]
 
 
 func _ready() -> void:
 	if Config.players.is_empty():
-		for pos in POSITIONS:
+		for pos in Config.POSITIONS:
 			Config.players[pos] = []
 			
 		var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
 		_init_players(file)
 	
-	for pos in POSITIONS:
+	for pos in Config.POSITIONS:
 		for player in Config.players[pos]:
 			var label:Label = Label.new()
 			label.text = player_to_string(player)
 			table.add_child(label)
 
 func current_player() -> Dictionary:
-	return Config.players[POSITIONS[Config.active_position]][Config.active_player]
+	return Config.players[Config.POSITIONS[Config.active_position]][Config.active_player]
 
 func next_player() -> Dictionary:
-	if Config.active_player + 1 < Config.players[POSITIONS[Config.active_position]].size():
+	if Config.active_player + 1 < Config.players[Config.POSITIONS[Config.active_position]].size():
 		Config.active_player += 1
 		return current_player()
-	elif Config.active_position + 1  < POSITIONS.size():
+	elif Config.active_position + 1  < Config.POSITIONS.size():
 		Config.active_position += 1
 		Config.active_player = 0
 		return current_player() 
@@ -61,7 +60,7 @@ func _init_players(file:FileAccess):
 		var pos = line[1]
 		Config.players[pos].append(_get_player(line))
 	
-	for pos in POSITIONS:
+	for pos in Config.POSITIONS:
 		Config.players[pos].sort_custom(func(a, b): return a.name < b.name)
 		
 func _get_player(line:Array) -> Dictionary:

@@ -27,7 +27,6 @@ func _on_button_pressed() -> void:
 	_next_player()
 
 
-
 func _on_auction_pressed() -> void:
 	var timer = AuctionTimer.instantiate()
 	timer.set_player(active_player)

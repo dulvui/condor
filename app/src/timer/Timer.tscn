@@ -116,7 +116,6 @@ vertical_alignment = 1
 modulate = Color(0.956863, 0.145098, 0.262745, 1)
 layout_mode = 2
 size_flags_vertical = 3
-toggle_mode = true
 texture_normal = ExtResource("2_6dyl3")
 stretch_mode = 6
 

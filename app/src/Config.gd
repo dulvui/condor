@@ -4,6 +4,9 @@
 
 extends Node
 
+# trasnform to enum
+const POSITIONS = ["P", "D", "C", "A"]
+
 var config:ConfigFile
 
 var active_time:int
@@ -14,6 +17,13 @@ var budget:int = 500
 var players:Dictionary
 var active_position:int = 0
 var active_player:int = 0
+
+var team_size:Dictionary = {
+	"P" : 3,
+	"D" : 8,
+	"C" : 8,
+	"A" : 6
+}
 
 
 
@@ -27,7 +37,13 @@ func _ready() -> void:
 	active_position = config.get_value("data", "active_position", 0)
 	teams = config.get_value("data", "teams", _get_default_teams())
 #	teams = config.get_value("data", "teams", [])
+
+	team_size["total"] = 0
+	for size in team_size.values():
+		team_size["total"] += size
+	print(team_size["total"])
 	
+
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("data","players",players)
@@ -35,6 +51,29 @@ func save_all_data() -> void:
 	config.set_value("data","active_position",active_position)
 	config.set_value("data","active_player",active_player)
 	config.save("user://settings.cfg")
+
+func add_player_to_team(active_team:int, active_player:Dictionary, price:int) -> bool:
+	var team = Config.teams[active_team]
+	var pos = active_player.position
+	if  team.players[pos].size() + 1 > team_size[pos]:
+		return false
+	
+	if team.budget - price < 0:
+		return false
+	
+	active_player.price = price
+	Config.teams[active_team].players[pos].append(active_player)
+	Config.teams[active_team].budget -= price
+	print(Config.teams[active_team])
+	Config.save_all_data()
+	return true
+
+func get_teams_with_empty_slots_for_pos(pos:String) -> Array:
+	var teams_with_slots = []
+	for team in teams:
+		if team.players[pos].size() < team_size[pos]:
+			teams_with_slots.append(team)
+	return teams_with_slots
 
 func _get_default_teams() -> Array:
 	var default_teams = []
@@ -53,8 +92,11 @@ func _get_default_teams() -> Array:
 		default_teams.append({
 		"name": team,
 		"budget": budget,
-		"players": []
+		"players": {}
 		})
+		
+		for pos in Config.POSITIONS:
+			default_teams[-1]["players"][pos] = []
 	
 	return default_teams
 
