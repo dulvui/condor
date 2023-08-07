@@ -46,3 +46,7 @@ func _on_assign_player_assigned() -> void:
 	player_label.text = player_list.player_to_string(active_player)
 	
 
+
+
+func _on_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
