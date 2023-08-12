@@ -6,7 +6,7 @@ extends Control
 
 @onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
 
-var list_path:String = "res://assets/players/players_05082023.csv"
+var list_path:String = "res://assets/players/players_05082023.list"
 
 var filters:Dictionary = {
 	"name" : "",
