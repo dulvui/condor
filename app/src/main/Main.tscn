@@ -57,6 +57,10 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
+[node name="Previous" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "<<"
+
 [node name="Auction" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "AUCTION"
@@ -65,9 +69,9 @@ text = "AUCTION"
 layout_mode = 2
 text = "ASSIGN"
 
-[node name="Skip" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
+[node name="Next" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "SKIP"
+text = ">>"
 
 [node name="AssignPlayer" parent="." instance=ExtResource("3_0h60k")]
 visible = false
@@ -84,8 +88,9 @@ offset_right = -0.680054
 offset_bottom = 0.519897
 text = "MENU"
 
+[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Auction" to="." method="_on_auction_pressed"]
 [connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Assign" to="." method="_on_assign_pressed"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Skip" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Next" to="." method="_on_next_pressed"]
 [connection signal="assigned" from="AssignPlayer" to="." method="_on_assign_player_assigned"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

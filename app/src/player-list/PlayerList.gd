@@ -49,8 +49,16 @@ func next_player() -> Dictionary:
 	elif Config.active_position + 1  < Config.POSITIONS.size():
 		Config.active_position += 1
 		Config.active_player = 0
-		return current_player() 
-	return {}
+	return current_player() 
+	
+func previous_player() -> Dictionary:
+	if Config.active_player -1 >= 0:
+		Config.active_player -= 1
+		return current_player()
+	elif Config.active_position - 1  >= 0:
+		Config.active_position -= 1
+		Config.active_player = Config.players[Config.POSITIONS[Config.active_position]].size() - 1
+	return current_player() 
 	
 func player_to_string(player:Dictionary) -> String:
 	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
