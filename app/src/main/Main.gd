@@ -25,7 +25,7 @@ func _next_player():
 
 func _on_button_pressed() -> void:
 	_next_player()
-	player_list.set_up()
+	player_list.set_up_list()
 
 
 func _on_auction_pressed() -> void:
