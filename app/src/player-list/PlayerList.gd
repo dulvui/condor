@@ -4,11 +4,14 @@
 
 extends Control
 
-@onready var table:GridContainer = $ScrollContainer/GridContainer
+@onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
 
 var list_path:String = "res://assets/players/players_05082023.csv"
 
-
+var filters:Dictionary = {
+	"name" : "",
+	"positions" : ""
+}
 
 func _ready() -> void:
 	if Config.players.is_empty():
@@ -17,23 +20,24 @@ func _ready() -> void:
 			
 		var file:FileAccess = FileAccess.open(list_path, FileAccess.READ)
 		_init_players(file)
-	set_up()
+	set_up_list()
 	
-func set_up():
-	for child in table.get_children():
+func set_up_list():
+	for child in list.get_children():
 		child.queue_free()
 	
 	for pos in Config.POSITIONS:
 		for player in Config.players[pos]:
-			var label:Label = Label.new()
-			label.text = player_to_string(player)
-			table.add_child(label)
-			
-			if player.id == current_player().id:
-				var label_settings:LabelSettings = LabelSettings.new()
-				label_settings.font_color = Color.GOLD
-				label_settings.font_size = get_theme_default_font_size()
-				label.label_settings = label_settings
+			if _filter(player):
+				var label:Label = Label.new()
+				label.text = player_to_string(player)
+				list.add_child(label)
+				
+				if player.id == current_player().id:
+					var label_settings:LabelSettings = LabelSettings.new()
+					label_settings.font_color = Color.GOLD
+					label_settings.font_size = get_theme_default_font_size()
+					label.label_settings = label_settings
 
 func current_player() -> Dictionary:
 	return Config.players[Config.POSITIONS[Config.active_position]][Config.active_player]
@@ -90,6 +94,17 @@ func player_to_string(player:Dictionary) -> String:
 	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
 	
 
-	
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
+
+
+func _on_search_text_changed(new_text: String) -> void:
+	filters.name = new_text.to_lower()
+	set_up_list()
+
+func _filter(player:Dictionary) -> bool:
+	for key in filters.keys():
+		if not filters[key].is_empty():
+			if not filters[key] in player[key].to_lower():
+				return false
+	return true
