@@ -23,12 +23,12 @@ func _on_export_pressed() -> void:
 	
 	for team in Config.teams:
 		var team_line:PackedStringArray = PackedStringArray()
-		team_line.append_array([team.name, team.budget])
+		team_line.append_array(["$", "$", "$"])
 		file.store_csv_line(team_line)
 		for pos in Config.POSITIONS:
 			for player in team.players[pos]:
 				var player_line:PackedStringArray = PackedStringArray()
-				player_line.append_array([player.id, player.name, player.price])
+				player_line.append_array([team.name, player.id, player.price])
 				file.store_csv_line(player_line)
 		
 		
