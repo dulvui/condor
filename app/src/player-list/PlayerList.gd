@@ -51,6 +51,11 @@ func next_player() -> Dictionary:
 		Config.active_player = 0
 		return current_player() 
 	return {}
+	
+func player_to_string(player:Dictionary) -> String:
+	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
+
+	
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	list_path = path
@@ -89,10 +94,6 @@ func _get_player(line:Array) -> Dictionary:
 		"price_current" : line[6],
 		"price" : 0,
 	}
-	
-func player_to_string(player:Dictionary) -> String:
-	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
-	
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")

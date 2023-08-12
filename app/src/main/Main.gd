@@ -40,12 +40,10 @@ func _on_assign_pressed() -> void:
 
 func _on_assign_player_assigned() -> void:
 	team_overview.set_up()
-	player_list.set_up()
+	player_list.set_up_list()
 	history.set_up()
 	active_player = player_list.current_player()
 	player_label.text = player_list.player_to_string(active_player)
-	
-
 
 
 func _on_menu_pressed() -> void:

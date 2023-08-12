@@ -76,4 +76,5 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Teams" to="." method="_on_teams_pressed"]
+[connection signal="pressed" from="VBoxContainer/Export" to="." method="_on_export_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
