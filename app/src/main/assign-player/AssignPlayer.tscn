@@ -4,7 +4,7 @@
 
 [node name="AssignPlayer" type="PopupPanel"]
 mode = 3
-size = Vector2i(600, 204)
+size = Vector2i(600, 400)
 visible = true
 script = ExtResource("1_8u85o")
 
@@ -12,10 +12,15 @@ script = ExtResource("1_8u85o")
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 596.0
-offset_bottom = 200.0
+offset_bottom = 396.0
 
 [node name="Player" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="Price" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+text = "1"
+placeholder_text = "PRICE"
 
 [node name="FastPrices" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -37,17 +42,12 @@ text = "3"
 layout_mode = 2
 text = "4"
 
-[node name="Price" type="LineEdit" parent="VBoxContainer"]
-layout_mode = 2
-text = "1"
-placeholder_text = "PRICE"
-
-[node name="Teams" type="OptionButton" parent="VBoxContainer"]
+[node name="Teams" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="Assign" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "DONE"
 
-[connection signal="item_selected" from="VBoxContainer/Teams" to="." method="_on_teams_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Assign" to="." method="_on_assign_pressed"]

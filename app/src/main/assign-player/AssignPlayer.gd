@@ -6,22 +6,24 @@ extends Popup
 
 signal assigned
 
-@onready var teams:OptionButton = $VBoxContainer/Teams
+@onready var teams:VBoxContainer = $VBoxContainer/Teams
 @onready var price:LineEdit = $VBoxContainer/Price
 
 var active_player:Dictionary
 var active_team:int = 0
 
+func _ready() -> void:
+	for team in Config.teams:
+		var button:Button = Button.new()
+		button.text = team.name
+#		button.pressed.connect(_on)
+		teams.add_child(button)
+
 func set_player(player:Dictionary) -> void:
 	active_player = player
 	
-	teams.clear()
-	
 	active_team = 0
-	
-	
-	for team in Config.teams:
-		teams.add_item(team.name)
+
 
 func _on_teams_item_selected(index: int) -> void:
 	active_team = index
