@@ -29,6 +29,11 @@ License: CC0-1.0
 # 2D
 #########
 
+# condor icon https://openclipart.org/detail/145585/ave-colombiana
+Files: app/icon.png
+Copyright: 2011 Esteban 
+License: CC0-1.0
+
 # kenney.nl 2D game icons https://www.kenney.nl/assets/game-icons
 Files: app/assets/game-icons/*
 Copyright: 2010 - 2022 https://kenney.nl
