@@ -4,14 +4,14 @@ SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.com>
 SPDX-License-Identifier: CC0-1.0
 -->
 
-# Fanta Timer
+# Condor
 
 [![Android upload](https://github.com/dulvui/fanta-timer/actions/workflows/upload-android.yml/badge.svg)](https://github.com/dulvui/fanta-timer/actions/workflows/upload-android.yml)
 [![iOS upload](https://github.com/dulvui/fanta-timer/actions/workflows/upload-ios.yml/badge.svg)](https://github.com/dulvui/fanta-timer/actions/workflows/upload-ios.yml)
 [![itch.io upload](https://github.com/dulvui/fanta-timer/actions/workflows/upload-itchio.yml/badge.svg)](https://github.com/dulvui/fanta-timer/actions/workflows/upload-itchio.yml)
 [![REUSE Compliance Check](https://github.com/dulvui/fanta-timer/actions/workflows/reuse.yml/badge.svg?branch=main)](https://github.com/dulvui/fanta-timer/actions/workflows/reuse.yml)
 
-Simple timer for the Fantacalcio auction
+Mobile and desktop application for the Fantacalcio auction.
 
 Made with [Godot Engine](https://godotengine.org) version 4.1.0
 
