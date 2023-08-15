@@ -101,12 +101,15 @@ func _get_default_teams() -> Array:
 		"Oscugnizzzzz",
 	]
 	
+	var id:int = 0
 	for team in desp_league:
 		default_teams.append({
+		"id": id,
 		"name": team,
 		"budget": budget,
-		"players": {}
+		"players": {},
 		})
+		id += 1
 		
 		for pos in Config.POSITIONS:
 			default_teams[-1]["players"][pos] = []
