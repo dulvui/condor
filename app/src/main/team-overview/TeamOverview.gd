@@ -4,6 +4,8 @@
 
 extends Control
 
+const PlayerBox:PackedScene = preload("res://src/main/team-overview/player-box/PlayerBox.tscn")
+
 @onready var team_list:HBoxContainer = $ScrollContainer/TeamList
 
 func _ready() -> void:
@@ -24,13 +26,12 @@ func _add_team(team:Dictionary) -> void:
 	name_label.text = "%s\nBudget %d\n"%[team.name, team.budget]
 	
 	vbox.add_child(name_label)
+	team_list.add_child(vbox)
 
 	for pos in Config.POSITIONS:
 		for player in team.players[pos]:
-			var player_label:Label = Label.new()
-			player_label.text = "%s %s %d"%[player.position, player.name, player.price]
-		
-			vbox.add_child(player_label)
+			var player_box = PlayerBox.instantiate()
+			vbox.add_child(player_box)
+			player_box.set_up(player)
 	
 	
-	team_list.add_child(vbox)
