@@ -10,8 +10,9 @@ signal edit
 @onready var name_label:Label = $Name
 @onready var price_label:Label = $Price
 
+var player:Dictionary 
 
-func set_up(player:Dictionary):
+func _ready() -> void:
 	position_label.text = player.position
 	name_label.text = player.name
 	price_label.text = "%d M"%player.price
@@ -32,7 +33,8 @@ func set_up(player:Dictionary):
 	
 	position_label.label_settings = position_label_settings
 	
-
+func set_player(player:Dictionary) -> void:
+	self.player = player
 
 func _on_edit_pressed() -> void:
 	emit_signal("edit")

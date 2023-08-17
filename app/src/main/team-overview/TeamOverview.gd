@@ -26,12 +26,12 @@ func _add_team(team:Dictionary) -> void:
 	name_label.text = "%s\nBudget %d\n"%[team.name, team.budget]
 	
 	vbox.add_child(name_label)
-	team_list.add_child(vbox)
 
 	for pos in Config.POSITIONS:
 		for player in team.players[pos]:
 			var player_box = PlayerBox.instantiate()
+			player_box.set_player(player)
 			vbox.add_child(player_box)
-			player_box.set_up(player)
 	
+	team_list.add_child(vbox)
 	
