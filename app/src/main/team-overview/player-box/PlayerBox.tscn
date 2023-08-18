@@ -21,14 +21,36 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cragno"
-text_overrun_behavior = 3
+text_overrun_behavior = 4
 
 [node name="Price" type="Label" parent="."]
 layout_mode = 2
 text = "12 M"
 
-[node name="Edit" type="Button" parent="."]
+[node name="Remove" type="Button" parent="."]
 layout_mode = 2
-text = "~"
+text = "-"
 
-[connection signal="pressed" from="Edit" to="." method="_on_edit_pressed"]
+[node name="RemoveDialog" type="ConfirmationDialog" parent="."]
+title = "REMOVE"
+position = Vector2i(336, 79)
+size = Vector2i(400, 110)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RemoveDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 50.0
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="RemoveDialog/HBoxContainer"]
+layout_mode = 2
+text = "REMOVE_PRICE"
+
+[node name="Price" type="LineEdit" parent="RemoveDialog/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "PRICE"
+
+[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]
+[connection signal="confirmed" from="RemoveDialog" to="." method="_on_remove_dialog_confirmed"]

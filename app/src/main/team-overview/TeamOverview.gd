@@ -4,11 +4,14 @@
 
 extends Control
 
+signal player_removed
+
 const PlayerBox:PackedScene = preload("res://src/main/team-overview/player-box/PlayerBox.tscn")
 
 @onready var team_list:HBoxContainer = $ScrollContainer/TeamList
 
 func _ready() -> void:
+	set_process(false)
 	set_up()
 
 
@@ -21,6 +24,7 @@ func set_up() -> void:
 func _add_team(team:Dictionary) -> void:
 	
 	var vbox:VBoxContainer = VBoxContainer.new()
+	vbox.custom_minimum_size = Vector2(300, 800)
 	
 	var name_label:Label = Label.new()
 	name_label.text = "%s\nBudget %d\n"%[team.name, team.budget]
@@ -30,8 +34,12 @@ func _add_team(team:Dictionary) -> void:
 	for pos in Config.POSITIONS:
 		for player in team.players[pos]:
 			var player_box = PlayerBox.instantiate()
-			player_box.set_player(player)
+			player_box.set_player(player, team.id)
+			player_box.player_removed.connect(func(): _on_player_removed())
 			vbox.add_child(player_box)
 	
 	team_list.add_child(vbox)
+	
+func _on_player_removed():
+	emit_signal("player_removed")
 	

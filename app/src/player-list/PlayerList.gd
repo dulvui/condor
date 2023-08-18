@@ -63,8 +63,6 @@ func previous_player() -> Dictionary:
 func player_to_string(player:Dictionary) -> String:
 	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
 
-	
-
 func _on_file_dialog_file_selected(path: String) -> void:
 	list_path = path
 

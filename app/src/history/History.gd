@@ -15,5 +15,8 @@ func set_up():
 	
 	for transfer in Config.history:
 		var label:Label = Label.new()
-		label.text = "%s (%d) %s"%[transfer.team, transfer.price, transfer.player]
+		if transfer.price <= 0:
+			label.text = tr("SELL") + " %s (%d) %s"%[transfer.team, transfer.price, transfer.player]
+		else:
+			label.text = tr("BUY") + " %s (%d) %s"%[transfer.team, transfer.price, transfer.player]
 		trasfer_list.add_child(label)

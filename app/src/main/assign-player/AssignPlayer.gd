@@ -18,8 +18,8 @@ func _ready() -> void:
 		button.pressed.connect(_on_assign_pressed.bind(team.id))
 		teams.add_child(button)
 
-func set_player(player:Dictionary) -> void:
-	self.player = player
+func set_player(_player:Dictionary) -> void:
+	player = _player
 	
 
 

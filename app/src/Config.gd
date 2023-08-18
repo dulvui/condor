@@ -73,6 +73,20 @@ func add_player_to_team(active_team:int, active_player:Dictionary, price:int) ->
 	players[pos].erase(active_player)
 	return true
 	
+func remove_player_from_team(active_team:int, active_player:Dictionary, price:int) -> bool:
+	var team = Config.teams[active_team]
+	var pos = active_player.position
+		
+	add_to_history(active_player.name, Config.teams[active_team].name, -price)
+	
+	active_player.price = 0
+	Config.teams[active_team].players[pos].erase(active_player)
+	Config.teams[active_team].budget += price
+	Config.save_all_data()
+	
+	players[pos].append(active_player)
+	return true
+
 func add_to_history(player:String, team: String, price:int):
 	var transfer = {
 		"player" : player,
