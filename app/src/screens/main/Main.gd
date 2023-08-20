@@ -42,13 +42,13 @@ func _on_menu_pressed() -> void:
 func _on_next_pressed() -> void:
 	active_player = Config.next_player()
 	player_label.text = active_player.name
-	player_list.set_up_list()
+	player_list.update()
 
 
 func _on_previous_pressed() -> void:
 	active_player = Config.previous_player()
 	player_label.text = active_player.name
-	player_list.set_up_list()
+	player_list.update()
 
 
 func _on_team_overview_player_removed(player:Player, team:Team) -> void:
@@ -57,6 +57,6 @@ func _on_team_overview_player_removed(player:Player, team:Team) -> void:
 	
 func _refresh_lists() -> void:
 	team_overview.set_up()
-	player_list.set_up_list()
+	player_list.update()
 	history.set_up()
 
