@@ -26,7 +26,11 @@ func set_up(_player:Player) -> void:
 	position_label.text = player.get_position_string()
 	name_label.text = player.name
 	team_name_label.text = player.real_team
-	price_label.text = "%d M"%player.price
+	if player.price != 0:
+		price_label.text = "%d M"%player.price
+	else:
+		price_label.text = "%d M|%d M"%[player.price_initial, player.price_current]
+
 	
 	# set position label color
 	var position_label_settings = LabelSettings.new()
