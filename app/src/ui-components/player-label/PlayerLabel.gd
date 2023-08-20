@@ -33,20 +33,26 @@ func set_up(_player:Player) -> void:
 
 	
 	# set position label color
-	var position_label_settings = LabelSettings.new()
-	position_label_settings.font_size = get_theme_default_font_size()
+	var label_settings = LabelSettings.new()
+	label_settings.font_size = get_theme_default_font_size()
 	
-	match player.position:
-		Player.Position.P:
-			position_label_settings.font_color = Color.YELLOW
-		Player.Position.D:
-			position_label_settings.font_color = Color.GREEN
-		Player.Position.C:
-			position_label_settings.font_color = Color.BLUE
-		Player.Position.A:
-			position_label_settings.font_color = Color.RED
+	if player.team_id >= 0:
+		label_settings.font_color = Color.GRAY
+		name_label.label_settings = label_settings
+		team_name_label.label_settings = label_settings
+		price_label.label_settings = label_settings
+	else:
+		match player.position:
+			Player.Position.P:
+				label_settings.font_color = Color.YELLOW
+			Player.Position.D:
+				label_settings.font_color = Color.GREEN
+			Player.Position.C:
+				label_settings.font_color = Color.BLUE
+			Player.Position.A:
+				label_settings.font_color = Color.RED
 	
-	position_label.label_settings = position_label_settings
+	position_label.label_settings = label_settings
 
 
 func set_button_text(text:String):

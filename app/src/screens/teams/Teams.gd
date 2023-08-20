@@ -49,7 +49,8 @@ func _add_team(team:Team):
 
 func _create_team(team_name:String) -> Team:
 	var team:Team = Team.new()
-	team.set_up(team_name)
+	# todo use global incremetnal id
+	team.set_up(team_name, 0)
 	return 
 
 
