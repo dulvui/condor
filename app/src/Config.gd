@@ -108,7 +108,7 @@ func _init_players() -> Array:
 		
 func _get_player(line:Array) -> Player:
 	var id:int = int(line[0])
-	var position:Player.Position = int(line[1])
+	var position:int = Player.Position.keys().find(line[1])
 	var name:String = line[2]
 	var real_team:String = line[3]
 	var mfv:float = float(line[4])

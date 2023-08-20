@@ -33,3 +33,6 @@ func set_up(id:int, position:Position, name:String, real_team:String, mfv:float,
 	self.price_current = price_current
 	
 	return self
+	
+func get_position_string() -> String:
+	return Position.keys()[position]

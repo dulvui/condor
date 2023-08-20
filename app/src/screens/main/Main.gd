@@ -20,11 +20,11 @@ func _ready() -> void:
 
 func _next_player():
 	active_player = player_list.next_player()
-	player_label.text = player_list.player_to_string(active_player)
+	player_label.text = active_player.name
 	
 func _previous_player():
 	active_player = player_list.previous_player()
-	player_label.text = player_list.player_to_string(active_player)
+	player_label.text = active_player.name
 
 
 func _on_auction_pressed() -> void:

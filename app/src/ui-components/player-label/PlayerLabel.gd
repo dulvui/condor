@@ -23,7 +23,7 @@ func _ready() -> void:
 func set_up(_player:Player) -> void:
 	player = _player
 	
-	position_label.text = str(player.position)
+	position_label.text = player.get_position_string()
 	name_label.text = player.name
 	team_name_label.text = player.real_team
 	price_label.text = "%d M"%player.price
