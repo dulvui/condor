@@ -20,7 +20,6 @@ func _ready() -> void:
 
 func set_player(_player:Player) -> void:
 	player = _player
-	
 
 
 func _on_assign_pressed(team:Team) -> void:

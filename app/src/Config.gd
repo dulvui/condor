@@ -53,8 +53,10 @@ func add_player_to_team(team:Team, player:Player, price:int) -> bool:
 func remove_player_from_team(player:Player) -> void:
 	add_to_history(player.name, player.team.name, -player.price)
 	
-	player.team = null
+	player.team.budget += player.price
+	
 	player.price = 0
+	player.team = null
 	
 	Config.save_all_data()
 
