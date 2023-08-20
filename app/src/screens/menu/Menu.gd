@@ -21,14 +21,24 @@ func _on_export_pressed() -> void:
 	
 	var content:String = "";
 	
+	var export_teams:Dictionary = {}
 	for team in Config.teams:
+		export_teams[team.id] = {
+			"name": team.name,
+			"players": [],
+		}
+	
+	for player in Config.players:
+		if player.team_id >= 0:
+			export_teams[player.team_id].players.append(player)
+	
+	for team in export_teams.values():
 		var team_line:PackedStringArray = PackedStringArray()
 		team_line.append_array(["$", "$", "$"])
 		file.store_csv_line(team_line)
-		for pos in Config.POSITIONS:
-			for player in team.players[pos]:
-				var player_line:PackedStringArray = PackedStringArray()
-				player_line.append_array([team.name, player.id, player.price])
-				file.store_csv_line(player_line)
+		for player in team.players:
+			var player_line:PackedStringArray = PackedStringArray()
+			player_line.append_array([team.name, player.id, player.price])
+			file.store_csv_line(player_line)
 		
 		
