@@ -5,7 +5,7 @@
 class_name  PlayerLabel
 extends HBoxContainer
 
-signal action(player:Player)
+signal action
 
 @onready var position_label:Label = $Position
 @onready var name_label:Label = $Name
@@ -60,4 +60,4 @@ func set_button_text(text:String):
 
 
 func _on_action_pressed() -> void:
-	action.emit(player)
+	action.emit()

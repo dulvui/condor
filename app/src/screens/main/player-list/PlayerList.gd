@@ -30,12 +30,19 @@ func set_up_list():
 			else:
 				player_label.set_button_text("<>")
 				# todo make active player on click
-#				player_box.player_removed.connect(func(): _on_player_removed(player, team.id))
+				player_label.action.connect(_set_active_player.bind(player))
 
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
 
+func _set_active_player(player:Player) -> void:
+	Config.set_active_player(player)
+	for player_label in list.get_children():
+		if player_label.player.id == player.id:
+			player_label.set_button_text("<*>")
+		else:
+			player_label.set_button_text("<>")
 
 func _on_search_text_changed(new_text: String) -> void:
 	filters.name = new_text.to_lower()

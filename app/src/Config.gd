@@ -72,6 +72,10 @@ func add_to_history(player:Player, team:Team, price:int):
 
 func active_player() -> Player:
 	return players[active_player_index]
+
+func set_active_player(player:Player) -> Player:
+	active_player_index = players.find(player)
+	return active_player()
 	
 func next_player() -> Player:
 	if active_player_index + 1 < players.size():
