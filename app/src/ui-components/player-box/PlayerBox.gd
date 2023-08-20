@@ -16,7 +16,7 @@ var team_id:int
 func set_player(_player:Dictionary, _team_id:int) -> void:
 	player = _player
 	team_id = _team_id
-	player_label.set_up(_player, _team_id)
+	player_label.set_up(_player, team_id)
 
 func _on_remove_dialog_confirmed() -> void:
 	var price:int = int(price_edit.text)

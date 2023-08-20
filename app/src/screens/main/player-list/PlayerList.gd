@@ -4,6 +4,8 @@
 
 extends Control
 
+const PlayerLabel:PackedScene = preload("res://src/ui-components/player-label/PlayerLabel.tscn")
+
 @onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
 
 var list_path:String = "res://assets/players/players_05082023.list"
@@ -29,15 +31,15 @@ func set_up_list():
 	for pos in Config.POSITIONS:
 		for player in Config.players[pos]:
 			if _filter(player):
-				var label:Label = Label.new()
-				label.text = player_to_string(player)
-				list.add_child(label)
-				
+				var player_label = PlayerLabel.instantiate()
+				list.add_child(player_label)
+				player_label.set_up(player)
 				if player.id == current_player().id:
-					var label_settings:LabelSettings = LabelSettings.new()
-					label_settings.font_color = Color.GOLD
-					label_settings.font_size = get_theme_default_font_size()
-					label.label_settings = label_settings
+					player_label.set_button_text("<*>")
+				else:
+					player_label.set_button_text("<>")
+#				player_box.player_removed.connect(func(): _on_player_removed(player, team.id))
+				
 
 func current_player() -> Dictionary:
 	return Config.players[Config.POSITIONS[Config.active_position]][Config.active_player]
@@ -60,9 +62,6 @@ func previous_player() -> Dictionary:
 		Config.active_player = Config.players[Config.POSITIONS[Config.active_position]].size() - 1
 	return current_player() 
 	
-func player_to_string(player:Dictionary) -> String:
-	return "%s %s %s %s"%[player["position"],player["team"],player["price_initial"],player["name"]]
-
 func _on_file_dialog_file_selected(path: String) -> void:
 	list_path = path
 

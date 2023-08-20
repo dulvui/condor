@@ -39,6 +39,7 @@ size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="confirmed" from="FileDialog" to="." method="_on_file_dialog_confirmed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

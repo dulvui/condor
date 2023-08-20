@@ -21,10 +21,9 @@ func _ready() -> void:
 	set_process(false)
 
 	
-func set_up(_player:Dictionary, _team_id:int, button_text:String="-") -> void:
+func set_up(_player:Dictionary, _team_id:int = 0) -> void:
 	player = _player
 	team_id = _team_id
-	action_button.text = button_text
 	
 	position_label.text = player.position
 	name_label.text = player.name
@@ -45,6 +44,9 @@ func set_up(_player:Dictionary, _team_id:int, button_text:String="-") -> void:
 			position_label_settings.font_color = Color.RED
 	
 	position_label.label_settings = position_label_settings
+
+func set_button_text(text:String):
+	action_button.text = text
 
 
 func _on_action_pressed() -> void:
