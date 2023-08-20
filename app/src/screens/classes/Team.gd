@@ -12,9 +12,11 @@ const SIZE:Dictionary = {
 }
 
 var name:String
+var id:int
 var budget:int
 
-func set_up(name:String) -> Team:
+func set_up(name:String, id:int) -> Team:
 	self.name = name
+	self.id = id
 	self.budget = Config.BUDGET
 	return self

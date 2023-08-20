@@ -41,35 +41,37 @@ func add_player_to_team(team:Team, player:Player, price:int) -> bool:
 	if team.budget - price < 0:
 		return false
 		
-	add_to_history(player.name, team.name, price)
+	add_to_history(player, team, price)
 	
 	player.price = price
-	player.team = team
+	player.team_id = team.id
 	team.budget -= price
 	Config.save_all_data()
 	
 	return true
 	
-func remove_player_from_team(player:Player) -> void:
-	add_to_history(player.name, player.team.name, -player.price)
+func remove_player_from_team(player:Player, team:Team) -> void:
+	add_to_history(player, team, -player.price)
 	
-	player.team.budget += player.price
+	team.budget += player.price 
 	
 	player.price = 0
-	player.team = null
+	player.team_id = -1
 	
 	Config.save_all_data()
 
-func add_to_history(player:String, team: String, price:int):
+
+func add_to_history(player:Player, team:Team, price:int):
 	var transfer = {
-		"player" : player,
-		"team" : team,
+		"player" : player.name,
+		"team" : team.name,
 		"price" : price,
 	}
 	history.append(transfer)
 
+
 func _get_default_teams() -> Array:
-	var default_teams = []
+	var default_teams:Array = []
 	const desp_league_names = [
 		"Fc Messi Male",
 		"ASD Obergoller",
@@ -81,9 +83,11 @@ func _get_default_teams() -> Array:
 		"Oscugnizzzzz",
 	]
 	
+	var id:int = 0
 	for name in desp_league_names:
 		var team = Team.new()
-		default_teams.append(team.set_up(name))
+		default_teams.append(team.set_up(name, id))
+		id += 1
 		
 	return default_teams
 	

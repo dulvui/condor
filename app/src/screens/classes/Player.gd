@@ -15,7 +15,7 @@ enum Position {
 var id:int
 var position:int
 var name:String
-var team:Team
+var team_id:int
 var real_team:String
 var mfv:float
 var price:int
@@ -26,6 +26,7 @@ func set_up(id:int, position:Position, name:String, real_team:String, mfv:float,
 	self.id = id
 	self.position = position
 	self.name = name
+	self.team_id = -1
 	self.real_team = real_team
 	self.mfv = mfv
 	self.price = price
