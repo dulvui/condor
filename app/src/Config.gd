@@ -106,7 +106,12 @@ func _get_default_teams() -> Array:
 	return default_teams
 	
 func _init_players() -> Array:
-	var list = []
+	var list:Array = []
+	var temp_list:Dictionary = {}
+	
+	for position in Player.Position.keys():
+		temp_list[position] = []
+	
 	var file:FileAccess = FileAccess.open(FILE_PATH, FileAccess.READ)
 	# skip header lines
 	while not file.eof_reached():
@@ -119,9 +124,13 @@ func _init_players() -> Array:
 		# check if not empty
 		if not line[0]:
 			break
-		list.append(_get_player(line))
-	# TODO sorting
-#	Config.players[pos].sort_custom(func(a, b): return a.name < b.name)
+		var pos:String = line[1]
+		temp_list[pos].append(_get_player(line))
+	
+	for position in Player.Position.keys():
+		temp_list[position].sort_custom(func(a, b): return a.name < b.name)
+		list.append_array(temp_list[position])
+	
 	return list
 		
 func _get_player(line:Array) -> Player:
