@@ -7,6 +7,7 @@ extends HBoxContainer
 
 signal action
 
+@onready var active_label:Label = $Active
 @onready var position_label:Label = $Position
 @onready var name_label:Label = $Name
 @onready var team_name_label:Label = $TeamName
@@ -22,6 +23,9 @@ func _ready() -> void:
 
 func set_up(_player:Player) -> void:
 	player = _player
+	
+	if player.was_active:
+		active_label.text = "+"
 	
 	position_label.text = player.get_position_string()
 	name_label.text = player.name

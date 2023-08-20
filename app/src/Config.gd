@@ -71,6 +71,7 @@ func add_to_history(player:Player, team:Team, price:int):
 	history.append(transfer)
 
 func active_player() -> Player:
+	players[active_player_index].was_active = true
 	return players[active_player_index]
 
 func set_active_player(player:Player) -> Player:

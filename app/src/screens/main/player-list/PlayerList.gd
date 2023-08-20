@@ -38,15 +38,18 @@ func _on_back_pressed() -> void:
 
 func _set_active_player(player:Player) -> void:
 	Config.set_active_player(player)
-	for player_label in list.get_children():
-		if player_label.player.id == player.id:
-			player_label.set_button_text("<*>")
-		else:
-			player_label.set_button_text("<>")
+	_update_active_player()
 
 func _on_search_text_changed(new_text: String) -> void:
 	filters.name = new_text.to_lower()
 	set_up_list()
+	
+func _update_active_player() -> void:
+	for player_label in list.get_children():
+		if player_label.player.id == Config.active_player().id:
+			player_label.set_button_text("<*>")
+		else:
+			player_label.set_button_text("<>")
 
 func _filter(player:Player) -> bool:
 	for key in filters.keys():
