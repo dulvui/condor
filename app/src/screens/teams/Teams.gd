@@ -59,4 +59,4 @@ func _create_team(team_name:String) -> Dictionary:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")

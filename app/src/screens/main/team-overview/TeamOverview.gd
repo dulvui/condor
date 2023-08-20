@@ -6,7 +6,7 @@ extends Control
 
 signal player_removed
 
-const PlayerBox:PackedScene = preload("res://src/main/team-overview/player-box/PlayerBox.tscn")
+const PlayerBox:PackedScene = preload("res://src/ui-components/player-box/PlayerBox.tscn")
 
 @onready var team_list:HBoxContainer = $ScrollContainer/TeamList
 

@@ -4,7 +4,7 @@
 
 extends Control
 
-const AuctionTimer:PackedScene = preload("res://src/timer/Timer.tscn")
+const AuctionTimer:PackedScene = preload("res://src/ui-components/timer/Timer.tscn")
 
 @onready var player_label:Label = $MarginContainer/HSplitContainer/VBoxContainer/ActivePlayer
 @onready var assign_player:PopupPanel = $AssignPlayer
@@ -44,7 +44,7 @@ func _on_assign_player_assigned() -> void:
 
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
 
 
 func _on_next_pressed() -> void:

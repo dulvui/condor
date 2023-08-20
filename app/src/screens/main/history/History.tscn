@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddxmw2r05sce7"]
 
-[ext_resource type="Script" path="res://src/history/History.gd" id="1_2la6q"]
+[ext_resource type="Script" path="res://src/screens/main/history/History.gd" id="1_wmlp3"]
 
 [node name="History" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2la6q")
+script = ExtResource("1_wmlp3")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1

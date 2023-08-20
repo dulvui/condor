@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://h78og16kspcj"]
 
-[ext_resource type="Script" path="res://src/teams/Teams.gd" id="1_rs82a"]
+[ext_resource type="Script" path="res://src/screens/teams/Teams.gd" id="1_rs82a"]
 [ext_resource type="Texture2D" uid="uid://78gth2yfhuwk" path="res://assets/cancel.png" id="2_h0br7"]
 
 [node name="Teams" type="Control"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqr46eapnnw57"]
 
-[ext_resource type="Script" path="res://src/main/assign-player/AssignPlayer.gd" id="1_8u85o"]
+[ext_resource type="Script" path="res://src/screens/main/assign-player/AssignPlayer.gd" id="1_8u85o"]
 
 [node name="AssignPlayer" type="PopupPanel"]
 mode = 3

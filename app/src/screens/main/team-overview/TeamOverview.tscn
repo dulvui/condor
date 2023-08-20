@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cy6ujws16sijb"]
 
-[ext_resource type="Script" path="res://src/main/team-overview/TeamOverview.gd" id="1_7hu2m"]
+[ext_resource type="Script" path="res://src/screens/main/team-overview/TeamOverview.gd" id="1_7hu2m"]
 
 [node name="TeamOverview" type="Control"]
 layout_mode = 3

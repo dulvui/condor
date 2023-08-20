@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://d4i873ru2skmw"]
 
 [ext_resource type="Theme" uid="uid://ctqg0on3ebbdy" path="res://fanta_theme.tres" id="1_g3ee7"]
-[ext_resource type="Script" path="res://src/main/Main.gd" id="1_labyq"]
-[ext_resource type="PackedScene" uid="uid://cmxee5ywoanvl" path="res://src/player-list/PlayerList.tscn" id="2_o4m2h"]
-[ext_resource type="PackedScene" uid="uid://dqr46eapnnw57" path="res://src/main/assign-player/AssignPlayer.tscn" id="3_0h60k"]
-[ext_resource type="PackedScene" uid="uid://cy6ujws16sijb" path="res://src/main/team-overview/TeamOverview.tscn" id="3_nkpax"]
-[ext_resource type="PackedScene" uid="uid://ddxmw2r05sce7" path="res://src/history/History.tscn" id="4_in5of"]
+[ext_resource type="Script" path="res://src/screens/main/Main.gd" id="1_labyq"]
+[ext_resource type="PackedScene" uid="uid://cmxee5ywoanvl" path="res://src/screens/main/player-list/PlayerList.tscn" id="2_o4m2h"]
+[ext_resource type="PackedScene" uid="uid://dqr46eapnnw57" path="res://src/screens/main/assign-player/AssignPlayer.tscn" id="3_0h60k"]
+[ext_resource type="PackedScene" uid="uid://cy6ujws16sijb" path="res://src/screens/main/team-overview/TeamOverview.tscn" id="3_nkpax"]
+[ext_resource type="PackedScene" uid="uid://ddxmw2r05sce7" path="res://src/screens/main/history/History.tscn" id="4_in5of"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bnxg8kp13wc77"]
 
-[ext_resource type="Script" path="res://src/main/team-overview/player-box/PlayerBox.gd" id="1_51hmb"]
+[ext_resource type="Script" path="res://src/ui-components/player-box/PlayerBox.gd" id="1_51hmb"]
 
 [node name="PlayerBox" type="HBoxContainer"]
 anchors_preset = 15
