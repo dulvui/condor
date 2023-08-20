@@ -12,7 +12,7 @@ const AuctionTimer:PackedScene = preload("res://src/ui-components/timer/Timer.ts
 @onready var player_list:Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
 @onready var history:Control = $MarginContainer/HSplitContainer/VSplitContainer/History
 
-var active_player:Dictionary
+var active_player:Player
 
 func _ready() -> void:
 	active_player = player_list.current_player()
@@ -40,7 +40,7 @@ func _on_assign_pressed() -> void:
 func _on_assign_player_assigned() -> void:
 	_refresh_lists()
 	active_player = player_list.current_player()
-	player_label.text = active_player.text
+	player_label.text = active_player.name
 
 
 func _on_menu_pressed() -> void:
@@ -57,8 +57,8 @@ func _on_previous_pressed() -> void:
 	player_list.set_up_list()
 
 
-func _on_team_overview_player_removed(player:Dictionary,team_id:int) -> void:
-	Config.remove_player_from_team(player,team_id)
+func _on_team_overview_player_removed(player:Player) -> void:
+	Config.remove_player_from_team(player)
 	_refresh_lists()
 	
 func _refresh_lists() -> void:

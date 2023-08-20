@@ -4,85 +4,57 @@
 
 extends Node
 
-# trasnform to enum
-const POSITIONS = ["P", "D", "C", "A"]
+const BUDGET:int = 500
+const FILE_PATH:String = "res://assets/players/players_05082023.list"
 
 var config:ConfigFile
 
 var active_time:int
 
 var teams:Array
-var budget:int = 500
+var players:Array
 
-var players:Dictionary
-var active_position:int = 0
-var active_player:int = 0
+var active_player:Player
 var history:Array
-
-var team_size:Dictionary = {
-	"P" : 3,
-	"D" : 8,
-	"C" : 8,
-	"A" : 6
-}
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	config = ConfigFile.new()
 	config.load("user://settings.cfg")
 	active_time = config.get_value("settings", "active_time", 30)
-	players = config.get_value("data", "players", {})
-	active_player = config.get_value("data", "active_player", 0)
-	active_position = config.get_value("data", "active_position", 0)
+	# try saving teams and players as dictionary to save space
+	# construct/deconstruct methods
 	teams = config.get_value("data", "teams", _get_default_teams())
+	players = config.get_value("data", "players", _init_players())
 	history = config.get_value("data", "history", [])
-#	teams = config.get_value("data", "teams", [])
-
-	team_size["total"] = 0
-	for size in team_size.values():
-		team_size["total"] += size
-	print(team_size["total"])
 	
 
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
-	config.set_value("data","active_position",active_position)
 	config.set_value("data","active_player",active_player)
 	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
-func add_player_to_team(active_team:int, active_player:Dictionary, price:int) -> bool:
-	var team = Config.teams[active_team]
-	var pos = active_player.position
-	if  team.players[pos].size() + 1 > team_size[pos]:
-		return false
-	
+func add_player_to_team(team:Team, player:Player, price:int) -> bool:
 	if team.budget - price < 0:
 		return false
 		
-	add_to_history(active_player.name, Config.teams[active_team].name, price)
+	add_to_history(player.name, team.name, price)
 	
-	active_player.price = price
-	Config.teams[active_team].players[pos].append(active_player)
-	Config.teams[active_team].budget -= price
+	player.price = price
+	player.team = team
+	team.budget -= price
 	Config.save_all_data()
 	
-	players[pos].erase(active_player)
 	return true
 	
-func remove_player_from_team(player:Dictionary,team_id:int) -> void:
-	var team = Config.teams[team_id]
-	var pos = player.position
-		
-	add_to_history(player.name, Config.teams[team_id].name, -player.price)
+func remove_player_from_team(player:Player) -> void:
+	add_to_history(player.name, player.team.name, -player.price)
 	
-	Config.teams[team_id].players[pos].erase(player)
-	Config.teams[team_id].budget += player.price
+	player.team = null
 	player.price = 0
-	players[pos].append(player)
 	
 	Config.save_all_data()
 
@@ -94,16 +66,9 @@ func add_to_history(player:String, team: String, price:int):
 	}
 	history.append(transfer)
 
-func get_teams_with_empty_slots_for_pos(pos:String) -> Array:
-	var teams_with_slots = []
-	for team in teams:
-		if team.players[pos].size() < team_size[pos]:
-			teams_with_slots.append(team)
-	return teams_with_slots
-
 func _get_default_teams() -> Array:
 	var default_teams = []
-	const desp_league = [
+	const desp_league_names = [
 		"Fc Messi Male",
 		"ASD Obergoller",
 		"Fc. MAINZ NA GIOIA",
@@ -114,20 +79,43 @@ func _get_default_teams() -> Array:
 		"Oscugnizzzzz",
 	]
 	
-	var id:int = 0
-	for team in desp_league:
-		default_teams.append({
-		"id": id,
-		"name": team,
-		"budget": budget,
-		"players": {},
-		})
-		id += 1
+	for name in desp_league_names:
+		var team = Team.new()
+		default_teams.append(team.set_up(name))
 		
-		for pos in Config.POSITIONS:
-			default_teams[-1]["players"][pos] = []
-	
 	return default_teams
+	
+func _init_players() -> Array:
+	var list = []
+	var file:FileAccess = FileAccess.open(FILE_PATH, FileAccess.READ)
+	# skip header lines
+	while not file.eof_reached():
+		var line:Array = file.get_csv_line()
+		if line[0] == "Id":
+			break
+	
+	while not file.eof_reached():
+		var line:Array = file.get_csv_line()
+		# check if not empty
+		if not line[0]:
+			break
+		list.append(_get_player(line))
+	# TODO sorting
+#	Config.players[pos].sort_custom(func(a, b): return a.name < b.name)
+	return list
+		
+func _get_player(line:Array) -> Player:
+	var id:int = int(line[0])
+	var position:Player.Position = int(line[1])
+	var name:String = line[2]
+	var real_team:String = line[3]
+	var mfv:float = float(line[4])
+	var price_initial:int = int(line[5])
+	var price_current:int = int(line[6])
+	var price:int = 0
+	
+	var player = Player.new()
+	return player.set_up(id, position, name,real_team, mfv, price, price_initial, price_current)
 
 # save on quit on mobile
 func _notification(what) -> void:

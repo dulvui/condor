@@ -9,21 +9,21 @@ signal assigned
 @onready var teams:VBoxContainer = $VBoxContainer/Teams
 @onready var price:LineEdit = $VBoxContainer/Price
 
-var player:Dictionary
+var player:Player
 
 func _ready() -> void:
 	for team in Config.teams:
 		var button:Button = Button.new()
 		button.text = team.name
-		button.pressed.connect(_on_assign_pressed.bind(team.id))
+		button.pressed.connect(_on_assign_pressed.bind(team))
 		teams.add_child(button)
 
-func set_player(_player:Dictionary) -> void:
+func set_player(_player:Player) -> void:
 	player = _player
 	
 
 
-func _on_assign_pressed(team_id:int) -> void:
-	if Config.add_player_to_team(team_id, player, int(price.text)):
+func _on_assign_pressed(team:Team) -> void:
+	if Config.add_player_to_team(team, player, int(price.text)):
 		hide()
 		emit_signal("assigned")

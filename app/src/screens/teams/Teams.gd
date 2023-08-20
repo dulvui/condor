@@ -10,9 +10,6 @@ extends Control
 
 
 func _ready() -> void:
-	if Config.teams.is_empty():
-		Config.teams = []
-	
 	for team in Config.teams:
 		_add_team(team)
 
@@ -28,7 +25,7 @@ func _on_button_pressed() -> void:
 	
 	name_edit.text = ""
 	
-func _add_team(team:Dictionary):
+func _add_team(team:Team):
 	
 	var hbox:HBoxContainer = HBoxContainer.new()
 	
@@ -50,12 +47,10 @@ func _add_team(team:Dictionary):
 	Config.save_all_data()
 	
 
-func _create_team(team_name:String) -> Dictionary:
-	return {
-		"name": team_name,
-		"budget": Config.budget,
-		"players": []
-	}
+func _create_team(team_name:String) -> Team:
+	var team:Team = Team.new()
+	team.set_up(team_name)
+	return 
 
 
 func _on_back_pressed() -> void:

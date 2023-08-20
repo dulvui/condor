@@ -2,31 +2,30 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name  PlayerLabel
 extends HBoxContainer
 
-class_name  PlayerLabel
-
-signal action(player:Dictionary, team_id:int)
+signal action(player:Player)
 
 @onready var position_label:Label = $Position
 @onready var name_label:Label = $Name
+@onready var team_name_label:Label = $TeamName
 @onready var price_label:Label = $Price
 @onready var action_button:Button = $Action
 
 
-var player:Dictionary 
-var team_id:int
+var player:Player 
 
 func _ready() -> void:
 	set_process(false)
 
-	
-func set_up(_player:Dictionary, _team_id:int = 0) -> void:
+
+func set_up(_player:Player) -> void:
 	player = _player
-	team_id = _team_id
 	
-	position_label.text = player.position
+	position_label.text = str(player.position)
 	name_label.text = player.name
+	team_name_label.text = player.real_team
 	price_label.text = "%d M"%player.price
 	
 	# set position label color
@@ -34,20 +33,21 @@ func set_up(_player:Dictionary, _team_id:int = 0) -> void:
 	position_label_settings.font_size = get_theme_default_font_size()
 	
 	match player.position:
-		Config.POSITIONS[0]:
+		Player.Position.P:
 			position_label_settings.font_color = Color.YELLOW
-		Config.POSITIONS[1]:
+		Player.Position.D:
 			position_label_settings.font_color = Color.GREEN
-		Config.POSITIONS[2]:
+		Player.Position.C:
 			position_label_settings.font_color = Color.BLUE
-		Config.POSITIONS[3]:
+		Player.Position.A:
 			position_label_settings.font_color = Color.RED
 	
 	position_label.label_settings = position_label_settings
+
 
 func set_button_text(text:String):
 	action_button.text = text
 
 
 func _on_action_pressed() -> void:
-	action.emit(player,team_id)
+	action.emit(player)
