@@ -4,7 +4,7 @@
 
 extends Control
 
-signal player_removed
+signal player_removed(player:Dictionary, team_id:int)
 
 const PlayerBox:PackedScene = preload("res://src/ui-components/player-box/PlayerBox.tscn")
 
@@ -30,16 +30,17 @@ func _add_team(team:Dictionary) -> void:
 	name_label.text = "%s\nBudget %d\n"%[team.name, team.budget]
 	
 	vbox.add_child(name_label)
+	team_list.add_child(vbox)
 
 	for pos in Config.POSITIONS:
 		for player in team.players[pos]:
 			var player_box = PlayerBox.instantiate()
-			player_box.set_player(player, team.id)
-			player_box.player_removed.connect(func(): _on_player_removed())
 			vbox.add_child(player_box)
+			player_box.set_player(player, team.id)
+			player_box.player_removed.connect(func(): _on_player_removed(player, team.id))
+#			player_box.player_removed.connect(_on_player_removed)
 	
-	team_list.add_child(vbox)
 	
-func _on_player_removed():
-	emit_signal("player_removed")
+func _on_player_removed(player:Dictionary, team_id:int):
+	player_removed.emit(player, team_id)
 	

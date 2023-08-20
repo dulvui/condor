@@ -57,7 +57,8 @@ func _on_previous_pressed() -> void:
 	player_list.set_up_list()
 
 
-func _on_team_overview_player_removed() -> void:
+func _on_team_overview_player_removed(player:Dictionary,team_id:int) -> void:
+	Config.remove_player_from_team(player,team_id)
 	_refresh_lists()
 	
 func _refresh_lists() -> void:
