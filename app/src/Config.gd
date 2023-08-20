@@ -14,7 +14,7 @@ var active_time:int
 var teams:Array
 var players:Array
 
-var active_player:Player
+var active_player_index:int
 var history:Array
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +26,7 @@ func _ready() -> void:
 	# construct/deconstruct methods
 	teams = config.get_value("data", "teams", _get_default_teams())
 	players = config.get_value("data", "players", _init_players())
+	active_player_index = config.get_value("data", "active_player_index", 0)
 	history = config.get_value("data", "history", [])
 	
 
@@ -33,7 +34,7 @@ func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
-	config.set_value("data","active_player",active_player)
+	config.set_value("data","active_player_index",active_player_index)
 	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
@@ -69,6 +70,19 @@ func add_to_history(player:Player, team:Team, price:int):
 	}
 	history.append(transfer)
 
+func active_player() -> Player:
+	return players[active_player_index]
+	
+func next_player() -> Player:
+	if active_player_index + 1 < players.size():
+		active_player_index += 1
+	return active_player()
+
+
+func previous_player() -> Player:
+	if active_player_index - 1 >= 0:
+		active_player_index -= 1
+	return active_player() 
 
 func _get_default_teams() -> Array:
 	var default_teams:Array = []

@@ -15,15 +15,7 @@ const AuctionTimer:PackedScene = preload("res://src/ui-components/timer/Timer.ts
 var active_player:Player
 
 func _ready() -> void:
-	active_player = player_list.current_player()
-	player_label.text = active_player.name
-
-func _next_player():
-	active_player = player_list.next_player()
-	player_label.text = active_player.name
-	
-func _previous_player():
-	active_player = player_list.previous_player()
+	active_player = Config.active_player()
 	player_label.text = active_player.name
 
 
@@ -39,7 +31,7 @@ func _on_assign_pressed() -> void:
 
 func _on_assign_player_assigned() -> void:
 	_refresh_lists()
-	active_player = player_list.current_player()
+	active_player = Config.active_player()
 	player_label.text = active_player.name
 
 
@@ -48,12 +40,14 @@ func _on_menu_pressed() -> void:
 
 
 func _on_next_pressed() -> void:
-	_next_player()
+	active_player = Config.next_player()
+	player_label.text = active_player.name
 	player_list.set_up_list()
 
 
 func _on_previous_pressed() -> void:
-	_previous_player()
+	active_player = Config.previous_player()
+	player_label.text = active_player.name
 	player_list.set_up_list()
 
 
