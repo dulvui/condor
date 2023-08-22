@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Fanta Timer
-Upstream-Contact: Simon Dalvai <info@simondalvai.com>
+Upstream-Contact: Simon Dalvai <info@simondalvai.org>
 Source: https://github.com/dulvui/fanta-timer
 
 ####################################
@@ -13,12 +13,12 @@ Source: https://github.com/dulvui/fanta-timer
 
 # Godot files
 Files: app/src/**.tscn app/project.godot app/**.import
-Copyright: 2023 Simon Dalvai <info@simondalvai.com>
+Copyright: 2023 Simon Dalvai <info@simondalvai.org>
 License: AGPL-3.0-or-later
 
 # config files
 Files: version-android version-ios
-Copyright: 2023 Simon Dalvai <info@simondalvai.com>
+Copyright: 2023 Simon Dalvai <info@simondalvai.org>
 License: CC0-1.0
 
 ####################################

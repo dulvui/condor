@@ -69,8 +69,8 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 42
-text = "simondalvai.com"
-uri = "https://simondalvai.com"
+text = "simondalvai.org"
+uri = "https://simondalvai.org"
 structured_text_bidi_override = 1
 metadata/_edit_use_anchors_ = true
 
