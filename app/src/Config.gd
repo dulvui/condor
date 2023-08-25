@@ -41,9 +41,6 @@ func save_all_data() -> void:
 func add_player_to_team(team:Team, player:Player, price:int) -> bool:
 	if team.budget - price < 0:
 		return false
-		
-	add_to_history(player, team, price)
-	
 	player.price = price
 	player.team_id = team.id
 	team.budget -= price
@@ -52,8 +49,6 @@ func add_player_to_team(team:Team, player:Player, price:int) -> bool:
 	return true
 	
 func remove_player_from_team(player:Player, team:Team) -> void:
-	add_to_history(player, team, -player.price)
-	
 	team.budget += player.price 
 	
 	player.price = 0

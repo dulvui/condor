@@ -25,4 +25,5 @@ func set_player(_player:Player) -> void:
 func _on_assign_pressed(team:Team) -> void:
 	if Config.add_player_to_team(team, player, int(price.text)):
 		hide()
+		Config.add_to_history(player, team, player.price)
 		emit_signal("assigned")
