@@ -17,7 +17,6 @@ func set_up(list:Array = Config.history):
 		else:
 			label.text = "+ %s (%d) %s"%[transfer.player, transfer.price, transfer.team]
 		trasfer_list.add_child(label)
-		# move to top of list
 		trasfer_list.move_child(label, 0)
 
 

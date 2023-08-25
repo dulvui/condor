@@ -74,15 +74,22 @@ func set_active_player(player:Player) -> Player:
 	return active_player()
 	
 func next_player() -> Player:
-	if active_player_index + 1 < players.size():
-		active_player_index += 1
+	var next_player_index:int = active_player_index
+	while next_player_index + 1  < players.size():
+		next_player_index += 1
+		if players[next_player_index].team_id == -1:
+			active_player_index = next_player_index
+			return active_player()
 	return active_player()
 
-
 func previous_player() -> Player:
-	if active_player_index - 1 >= 0:
-		active_player_index -= 1
-	return active_player() 
+	var next_player_index:int = active_player_index
+	while next_player_index - 1  >= 0:
+		next_player_index -= 1
+		if players[next_player_index].team_id == -1:
+			active_player_index = next_player_index
+			return active_player()
+	return active_player()
 
 func _get_default_teams() -> Array:
 	var default_teams:Array = []
