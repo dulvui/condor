@@ -21,16 +21,15 @@ func set_up_list():
 		child.queue_free()
 	
 	for player in Config.players:
-		if _filter(player):
-			var player_label = PlayerLabel.instantiate()
-			list.add_child(player_label)
-			player_label.set_up(player)
-			if player.id == Config.active_player().id:
-				player_label.set_button_text("<*>")
-			else:
-				player_label.set_button_text("<>")
-				# todo make active player on click
-				player_label.action.connect(_set_active_player.bind(player))
+		var player_label = PlayerLabel.instantiate()
+		list.add_child(player_label)
+		player_label.set_up(player)
+		if player.id == Config.active_player().id:
+			player_label.set_button_text("<*>")
+		else:
+			player_label.set_button_text("<>")
+			# todo make active player on click
+			player_label.action.connect(_set_active_player.bind(player))
 
 func update() -> void:
 	for player_label in list.get_children():
@@ -48,7 +47,8 @@ func _set_active_player(player:Player) -> void:
 
 func _on_search_text_changed(new_text: String) -> void:
 	filters.name = new_text.to_lower()
-	set_up_list()
+	for player_label in list.get_children():
+		player_label.visible = _filter(player_label.player)
 
 func _filter(player:Player) -> bool:
 	for key in filters.keys():
