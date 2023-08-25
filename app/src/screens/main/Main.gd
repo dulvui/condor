@@ -31,7 +31,7 @@ func _on_assign_pressed() -> void:
 
 func _on_assign_player_assigned() -> void:
 	_refresh_lists()
-	active_player = Config.active_player()
+	active_player = Config.next_player()
 	player_label.text = active_player.name
 
 
