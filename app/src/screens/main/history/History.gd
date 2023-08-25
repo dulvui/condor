@@ -5,7 +5,6 @@
 extends Control
 
 @onready var trasfer_list:VBoxContainer = $ScrollContainer/TransferList
-var counter:int = 0
 
 func _ready() -> void:
 	set_up()
@@ -18,7 +17,6 @@ func set_up(list:Array = Config.history):
 		else:
 			label.text = tr("BUY") + " %s (%d) %s"%[transfer.team, transfer.price, transfer.player]
 		trasfer_list.add_child(label)
-		counter += 1
 
 func update() -> void:
-	set_up(Config.history.slice(counter))
+	set_up(Config.history.slice(trasfer_list.get_child_count()))
