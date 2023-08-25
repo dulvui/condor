@@ -21,6 +21,6 @@ func _on_remove_dialog_confirmed() -> void:
 	player.price = price
 	player_removed.emit()
 
-func _on_player_label_action(player) -> void:
+func _on_player_label_action() -> void:
 	price_edit.text = str(player.price)
 	remove_dialog.popup_centered()

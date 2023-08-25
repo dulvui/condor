@@ -52,8 +52,8 @@ func _on_previous_pressed() -> void:
 
 
 func _on_team_overview_player_removed(player:Player, team:Team) -> void:
+	Config.add_to_history(player, team, player.price)
 	Config.remove_player_from_team(player, team)
-	Config.add_to_history(player, team, -player.price)
 	_refresh_lists()
 	
 func _refresh_lists() -> void:
