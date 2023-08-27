@@ -88,6 +88,7 @@ offset_right = -0.680054
 offset_bottom = 0.519897
 text = "MENU"
 
+[connection signal="active_player_change" from="MarginContainer/HSplitContainer/VSplitContainer/PlayerList" to="." method="_on_player_list_active_player_change"]
 [connection signal="player_removed" from="MarginContainer/HSplitContainer/VBoxContainer/TeamOverview" to="." method="_on_team_overview_player_removed"]
 [connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Auction" to="." method="_on_auction_pressed"]

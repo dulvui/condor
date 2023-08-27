@@ -4,6 +4,8 @@
 
 extends Control
 
+signal active_player_change
+
 const PlayerLabel:PackedScene = preload("res://src/ui-components/player-label/PlayerLabel.tscn")
 
 @onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
@@ -26,6 +28,7 @@ func set_up_list():
 		player_label.set_up(player)
 		if player.id == Config.active_player().id:
 			player_label.set_button_text("<*>")
+			player_label.action.connect(_set_active_player.bind(player))
 		elif player.team_id < 0:
 			player_label.set_button_text("<>")
 			# todo make active player on click
@@ -47,6 +50,7 @@ func _on_back_pressed() -> void:
 func _set_active_player(player:Player) -> void:
 	Config.set_active_player(player)
 	update()
+	active_player_change.emit()
 
 func _on_search_text_changed(new_text: String) -> void:
 	filters.name = new_text.to_lower()

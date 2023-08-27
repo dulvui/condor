@@ -50,6 +50,10 @@ func _on_previous_pressed() -> void:
 	player_label.text = active_player.name
 	player_list.update()
 
+func _on_player_list_active_player_change() -> void:
+	active_player = Config.active_player()
+	player_label.text = active_player.name
+	player_list.update()
 
 func _on_team_overview_player_removed(player:Player, team:Team) -> void:
 	Config.add_to_history(player, team, player.price)
@@ -60,4 +64,5 @@ func _refresh_lists() -> void:
 	team_overview.set_up()
 	player_list.update()
 	history.update()
+
 
