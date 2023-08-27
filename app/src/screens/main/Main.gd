@@ -18,7 +18,6 @@ func _ready() -> void:
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 
-
 func _on_auction_control_auction() -> void:
 	var timer = AuctionTimer.instantiate()
 	timer.set_player(active_player)
@@ -55,13 +54,11 @@ func _on_player_list_active_player_change() -> void:
 	auction_control.set_player(active_player)
 	player_list.update()
 
-func _on_team_overview_player_removed(player:Player, team:Team) -> void:
-	Config.add_to_history(player, team, player.price)
-	Config.remove_player_from_team(player, team)
+func _on_team_overview_player_removed() -> void:
 	_refresh_lists()
 	
 func _refresh_lists() -> void:
-	team_overview.set_up()
+	team_overview.update()
 	player_list.update()
 	history.update()
 

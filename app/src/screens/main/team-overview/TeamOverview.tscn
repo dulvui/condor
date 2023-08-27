@@ -23,4 +23,6 @@ grow_vertical = 2
 
 [node name="TeamList" type="HBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
