@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4i873ru2skmw"]
+[gd_scene load_steps=8 format=3 uid="uid://d4i873ru2skmw"]
 
 [ext_resource type="Theme" uid="uid://ctqg0on3ebbdy" path="res://fanta_theme.tres" id="1_g3ee7"]
 [ext_resource type="Script" path="res://src/screens/main/Main.gd" id="1_labyq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dqr46eapnnw57" path="res://src/screens/main/assign-player/AssignPlayer.tscn" id="3_0h60k"]
 [ext_resource type="PackedScene" uid="uid://cy6ujws16sijb" path="res://src/screens/main/team-overview/TeamOverview.tscn" id="3_nkpax"]
 [ext_resource type="PackedScene" uid="uid://ddxmw2r05sce7" path="res://src/screens/main/history/History.tscn" id="4_in5of"]
+[ext_resource type="PackedScene" uid="uid://by5xqkpdiio2o" path="res://src/screens/main/auction-control/AuctionControl.tscn" id="5_eb40d"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -22,6 +23,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
@@ -44,34 +46,13 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 60
+
+[node name="AuctionControl" parent="MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("5_eb40d")]
+layout_mode = 2
 
 [node name="TeamOverview" parent="MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_nkpax")]
 layout_mode = 2
-
-[node name="ActivePlayer" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer"]
-layout_mode = 2
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Previous" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "<<"
-
-[node name="Auction" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "AUCTION"
-
-[node name="Assign" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "ASSIGN"
-
-[node name="Next" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = ">>"
 
 [node name="AssignPlayer" parent="." instance=ExtResource("3_0h60k")]
 visible = false
@@ -89,10 +70,10 @@ offset_bottom = 0.519897
 text = "MENU"
 
 [connection signal="active_player_change" from="MarginContainer/HSplitContainer/VSplitContainer/PlayerList" to="." method="_on_player_list_active_player_change"]
+[connection signal="assign" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_assign"]
+[connection signal="auction" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_auction"]
+[connection signal="next" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_next"]
+[connection signal="previous" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_previous"]
 [connection signal="player_removed" from="MarginContainer/HSplitContainer/VBoxContainer/TeamOverview" to="." method="_on_team_overview_player_removed"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Previous" to="." method="_on_previous_pressed"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Auction" to="." method="_on_auction_pressed"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Assign" to="." method="_on_assign_pressed"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/HBoxContainer/Next" to="." method="_on_next_pressed"]
 [connection signal="assigned" from="AssignPlayer" to="." method="_on_assign_player_assigned"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

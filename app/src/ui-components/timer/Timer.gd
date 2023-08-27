@@ -17,7 +17,7 @@ const DEFAULT_TIME:int = 10
 
 var finished:bool = false
 
-var active_player:Dictionary 
+var active_player:Player
 
 func _ready() -> void:
 	timer.wait_time = Config.active_time
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	if not timer.is_stopped() and not finished:
 		sound.countdown(timer.time_left)
 
-func set_player(player:Dictionary):
+func set_player(player:Player):
 	active_player = player
 
 func _on_start_pressed() -> void:
@@ -54,7 +54,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/main/Main.tscn")
+	get_tree().change_scene_to_file("res://src/screens/main/Main.tscn")
 
 
 func _on_bug_button_pressed() -> void:

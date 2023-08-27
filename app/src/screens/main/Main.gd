@@ -6,7 +6,7 @@ extends Control
 
 const AuctionTimer:PackedScene = preload("res://src/ui-components/timer/Timer.tscn")
 
-@onready var player_label:Label = $MarginContainer/HSplitContainer/VBoxContainer/ActivePlayer
+@onready var auction_control:AuctionControl = $MarginContainer/HSplitContainer/VBoxContainer/AuctionControl
 @onready var assign_player:PopupPanel = $AssignPlayer
 @onready var team_overview:Control = $MarginContainer/HSplitContainer/VBoxContainer/TeamOverview
 @onready var player_list:Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
@@ -16,43 +16,43 @@ var active_player:Player
 
 func _ready() -> void:
 	active_player = Config.active_player()
-	player_label.text = active_player.name
+	auction_control.set_player(active_player)
 
 
-func _on_auction_pressed() -> void:
+func _on_auction_control_auction() -> void:
 	var timer = AuctionTimer.instantiate()
 	timer.set_player(active_player)
 	add_child(timer)
 
 
-func _on_assign_pressed() -> void:
+func _on_auction_control_assign() -> void:
 	assign_player.set_player(active_player)
 	assign_player.popup_centered()
 
 func _on_assign_player_assigned() -> void:
 	_refresh_lists()
 	active_player = Config.next_player()
-	player_label.text = active_player.name
+	auction_control.set_player(active_player)
 
 
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
 
 
-func _on_next_pressed() -> void:
+func _on_auction_control_next() -> void:
 	active_player = Config.next_player()
-	player_label.text = active_player.name
+	auction_control.set_player(active_player)
 	player_list.update()
 
 
-func _on_previous_pressed() -> void:
+func _on_auction_control_previous() -> void:
 	active_player = Config.previous_player()
-	player_label.text = active_player.name
+	auction_control.set_player(active_player)
 	player_list.update()
 
 func _on_player_list_active_player_change() -> void:
 	active_player = Config.active_player()
-	player_label.text = active_player.name
+	auction_control.set_player(active_player)
 	player_list.update()
 
 func _on_team_overview_player_removed(player:Player, team:Team) -> void:
@@ -64,5 +64,4 @@ func _refresh_lists() -> void:
 	team_overview.set_up()
 	player_list.update()
 	history.update()
-
 
