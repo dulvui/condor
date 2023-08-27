@@ -26,10 +26,13 @@ func set_up_list():
 		player_label.set_up(player)
 		if player.id == Config.active_player().id:
 			player_label.set_button_text("<*>")
-		else:
+		elif player.team_id < 0:
 			player_label.set_button_text("<>")
 			# todo make active player on click
 			player_label.action.connect(_set_active_player.bind(player))
+		else:
+			player_label.set_button_text("<>")
+			player_label.disable_player()
 
 func update() -> void:
 	for player_label in list.get_children():

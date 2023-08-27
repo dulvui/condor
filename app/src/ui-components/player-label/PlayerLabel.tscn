@@ -7,6 +7,7 @@ size_flags_horizontal = 3
 script = ExtResource("1_myfyj")
 
 [node name="Active" type="Label" parent="."]
+visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "-"

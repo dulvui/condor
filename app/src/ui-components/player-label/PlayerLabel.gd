@@ -33,35 +33,42 @@ func set_up(_player:Player) -> void:
 	if player.price != 0:
 		price_label.text = "%d M"%player.price
 	else:
-		price_label.text = "%d M|%d M"%[player.price_initial, player.price_current]
+		price_label.text = "%d M"%[player.price_current]
 
 	
 	# set position label color
 	var label_settings = LabelSettings.new()
 	label_settings.font_size = get_theme_default_font_size()
-	
-	if player.team_id >= 0:
-		label_settings.font_color = Color.GRAY
-		name_label.label_settings = label_settings
-		team_name_label.label_settings = label_settings
-		price_label.label_settings = label_settings
-	else:
-		match player.position:
-			Player.Position.P:
-				label_settings.font_color = Color.YELLOW
-			Player.Position.D:
-				label_settings.font_color = Color.GREEN
-			Player.Position.C:
-				label_settings.font_color = Color.BLUE
-			Player.Position.A:
-				label_settings.font_color = Color.RED
+
+	match player.position:
+		Player.Position.P:
+			label_settings.font_color = Color.YELLOW
+		Player.Position.D:
+			label_settings.font_color = Color.GREEN
+		Player.Position.C:
+			label_settings.font_color = Color.BLUE
+		Player.Position.A:
+			label_settings.font_color = Color.RED
 	
 	position_label.label_settings = label_settings
 
+func disable_player() -> void:
+	# set position label color
+	var label_settings = LabelSettings.new()
+	label_settings.font_size = get_theme_default_font_size()
+	
+	label_settings.font_color = Color.GRAY
+	name_label.label_settings = label_settings
+	team_name_label.label_settings = label_settings
+	price_label.label_settings = label_settings
+	position_label.label_settings = label_settings
 
-func set_button_text(text:String):
+	action_button.disabled = true
+	
+
+
+func set_button_text(text:String) -> void:
 	action_button.text = text
-
-
+	
 func _on_action_pressed() -> void:
 	action.emit()
