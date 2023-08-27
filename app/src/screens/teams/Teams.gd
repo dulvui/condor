@@ -38,7 +38,7 @@ func _update_list() -> void:
 	for team in Config.teams:
 		_add_team(team)
 
-func _on_back_pressed() -> void:
+func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
 
 
@@ -53,3 +53,4 @@ func _on_add_pressed() -> void:
 	
 	name_edit.text = ""
 	_update_list()
+
