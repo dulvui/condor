@@ -12,6 +12,7 @@ var config:ConfigFile
 var active_time:int
 
 var teams:Array
+var next_team_id:int
 var players:Array
 
 var active_player_index:int
@@ -25,6 +26,7 @@ func _ready() -> void:
 	# try saving teams and players as dictionary to save space
 	# construct/deconstruct methods
 	teams = config.get_value("data", "teams", _get_default_teams())
+	next_team_id = config.get_value("data", "next_team_id", 0)
 	players = config.get_value("data", "players", _init_players())
 	active_player_index = config.get_value("data", "active_player_index", 0)
 	history = config.get_value("data", "history", [])
@@ -91,6 +93,10 @@ func previous_player() -> Player:
 			return active_player()
 	return active_player()
 
+func get_next_team_id():
+	next_team_id += 1
+	return next_team_id
+
 func _get_default_teams() -> Array:
 	var default_teams:Array = []
 	const desp_league_names = [
@@ -111,7 +117,13 @@ func _get_default_teams() -> Array:
 		id += 1
 		
 	return default_teams
-	
+
+func delete_team(team:Team) -> void:
+	teams.erase(team)
+	for player in players:
+		if player.team_id == team.id:
+			player.team_id = -1
+
 func _init_players() -> Array:
 	var list:Array = []
 	var temp_list:Dictionary = {}

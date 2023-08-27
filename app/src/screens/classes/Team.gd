@@ -17,6 +17,6 @@ var budget:int
 
 func set_up(name:String, id:int) -> Team:
 	self.name = name
-	self.id = id
+	self.id = Config.get_next_team_id()
 	self.budget = Config.BUDGET
 	return self

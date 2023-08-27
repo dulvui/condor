@@ -4,17 +4,45 @@
 
 extends Control
 
+const TeamBox:PackedScene = preload("res://src/screens/teams/TeamBox/TeamBox.tscn")
+
 @onready var add_button:Button = $HBoxContainer/Add
 @onready var name_edit:LineEdit = $HBoxContainer/Name
-@onready var team_list:VBoxContainer = $VBoxContainer
+@onready var team_list:VBoxContainer = $List
 
+var team_to_delte:Team
 
 func _ready() -> void:
 	for team in Config.teams:
 		_add_team(team)
 
+	
+func _add_team(team:Team):
+	var team_box:TeamBox = TeamBox.instantiate()
+	team_list.add_child(team_box)
+	team_box.set_up(team)
+	team_box.deleted.connect(_update_list)
+	Config.save_all_data()
 
-func _on_button_pressed() -> void:
+
+func _create_team(team_name:String) -> Team:
+	var team:Team = Team.new()
+	# todo use global incremetnal id
+	team.set_up(team_name, 0)
+	return team
+
+func _update_list() -> void:
+	for team_box in team_list.get_children():
+		team_box.queue_free()
+	
+	for team in Config.teams:
+		_add_team(team)
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
+
+
+func _on_add_pressed() -> void:
 	if name_edit.text.length() < 1:
 		return
 		
@@ -24,35 +52,4 @@ func _on_button_pressed() -> void:
 	_add_team(team)
 	
 	name_edit.text = ""
-	
-func _add_team(team:Team):
-	
-	var hbox:HBoxContainer = HBoxContainer.new()
-	
-	var label:Label = Label.new()
-	label.text = team.name
-	
-	var edit_button:Button = Button.new()
-	edit_button.text = "EDIT"
-	
-	var delete_button:Button = Button.new()
-	delete_button.text = "DELETE"
-	
-	hbox.add_child(label)
-	hbox.add_child(edit_button)
-	hbox.add_child(delete_button)
-	
-	team_list.add_child(hbox)
-	
-	Config.save_all_data()
-	
-
-func _create_team(team_name:String) -> Team:
-	var team:Team = Team.new()
-	# todo use global incremetnal id
-	team.set_up(team_name, 0)
-	return 
-
-
-func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
+	_update_list()
