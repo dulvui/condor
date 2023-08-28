@@ -29,3 +29,7 @@ func _on_delete_dialog_confirmed() -> void:
 
 func _on_edit_pressed() -> void:
 	pass # Replace with function body.
+
+
+func _on_active_pressed() -> void:
+	Config.active_team_id = team.id

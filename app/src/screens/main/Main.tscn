@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4i873ru2skmw"]
+[gd_scene load_steps=9 format=3 uid="uid://d4i873ru2skmw"]
 
 [ext_resource type="Theme" uid="uid://ctqg0on3ebbdy" path="res://fanta_theme.tres" id="1_g3ee7"]
 [ext_resource type="Script" path="res://src/screens/main/Main.gd" id="1_labyq"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cy6ujws16sijb" path="res://src/screens/main/team-overview/TeamOverview.tscn" id="3_nkpax"]
 [ext_resource type="PackedScene" uid="uid://ddxmw2r05sce7" path="res://src/screens/main/history/History.tscn" id="4_in5of"]
 [ext_resource type="PackedScene" uid="uid://by5xqkpdiio2o" path="res://src/screens/main/auction-control/AuctionControl.tscn" id="5_eb40d"]
+[ext_resource type="PackedScene" uid="uid://cbv4v5l8m8s18" path="res://src/ui-components/timer/Timer.tscn" id="8_nny5i"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -17,6 +18,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_g3ee7")
 script = ExtResource("1_labyq")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -56,6 +65,10 @@ layout_mode = 2
 
 [node name="AssignPlayer" parent="." instance=ExtResource("3_0h60k")]
 visible = false
+
+[node name="Timer" parent="." instance=ExtResource("8_nny5i")]
+visible = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Menu" type="Button" parent="."]
 layout_mode = 2

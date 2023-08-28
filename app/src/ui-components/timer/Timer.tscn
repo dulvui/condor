@@ -7,42 +7,53 @@
 [ext_resource type="Texture2D" uid="uid://0rh5um1afxh3" path="res://assets/backward-time.png" id="4_htehr"]
 [ext_resource type="PackedScene" uid="uid://o0gy3lchayf2" path="res://src/sound/Sound.tscn" id="6_klali"]
 
-[node name="Timer" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Timer" type="PopupPanel"]
+size = Vector2i(773, 538)
+visible = true
 script = ExtResource("1_labyq")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 60.0
 one_shot = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.059
 anchor_top = 0.075
 anchor_right = 1.0
 anchor_bottom = 0.947
-offset_left = -15.86
-offset_top = -16.0
-offset_right = -16.0
-offset_bottom = -4.12
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 769.0
+offset_bottom = 534.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 142
+text = "60.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BigButton" type="TextureButton" parent="VBoxContainer"]
+modulate = Color(0.956863, 0.145098, 0.262745, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("2_6dyl3")
+stretch_mode = 6
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 
 [node name="TimeControl" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -98,34 +109,10 @@ toggle_mode = true
 texture_normal = ExtResource("4_htehr")
 stretch_mode = 3
 
-[node name="Name" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "NAME"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Time" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 142
-text = "60.00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BigButton" type="TextureButton" parent="VBoxContainer"]
-modulate = Color(0.956863, 0.145098, 0.262745, 1)
-layout_mode = 2
-size_flags_vertical = 3
-texture_normal = ExtResource("2_6dyl3")
-stretch_mode = 6
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-
 [node name="Sound" parent="." instance=ExtResource("6_klali")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="VBoxContainer/BigButton" to="." method="_on_bug_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/MinusMinutes" to="." method="_on_minus_minutes_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/MinusSeconds" to="." method="_on_minus_seconds_pressed"]
@@ -134,4 +121,3 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/TimeControl/PlusMinutes" to="." method="_on_plus_minutes_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="VBoxContainer/TimeControl/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="VBoxContainer/BigButton" to="." method="_on_bug_button_pressed"]

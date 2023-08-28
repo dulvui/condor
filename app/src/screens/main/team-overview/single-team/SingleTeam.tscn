@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj8ttgc8rkpxf"]
+[gd_scene load_steps=3 format=3 uid="uid://dj8ttgc8rkpxf"]
 
 [ext_resource type="Script" path="res://src/screens/main/team-overview/single-team/SingleTeam.gd" id="1_jm1qh"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ey61e"]
+font_size = 32
+
 [node name="SingleTeam" type="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1720.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -14,6 +19,9 @@ script = ExtResource("1_jm1qh")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_ey61e")
+text_overrun_behavior = 3
+uppercase = true
 
 [node name="Budget" type="Label" parent="."]
 layout_mode = 2

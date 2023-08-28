@@ -19,12 +19,19 @@ layout_mode = 2
 
 [node name="Price" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-text = "1"
 placeholder_text = "PRICE"
 
 [node name="FastPrices" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="Add1" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "+1"
+
+[node name="Remove1" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "-1"
 
 [node name="Price1" type="Button" parent="VBoxContainer/FastPrices"]
 layout_mode = 2
@@ -42,6 +49,18 @@ text = "3"
 layout_mode = 2
 text = "4"
 
+[node name="Price5" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "5"
+
+[node name="Price10" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "10"
+
+[node name="Price50" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "50"
+
 [node name="Teams" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -49,5 +68,15 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 text = "DONE"
+
+[node name="Error" type="AcceptDialog" parent="."]
+size = Vector2i(206, 105)
+
+[node name="Label" type="Label" parent="Error"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 198.0
+offset_bottom = 45.0
+text = "ERROR MESSAGE"
 
 [connection signal="pressed" from="VBoxContainer/Assign" to="." method="_on_assign_pressed"]

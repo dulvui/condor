@@ -9,6 +9,7 @@ signal active_player_change
 const PlayerLabel:PackedScene = preload("res://src/ui-components/player-label/PlayerLabel.tscn")
 
 @onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
+@onready var scroll:ScrollContainer = $VBoxContainer/ScrollContainer
 
 var filters:Dictionary = {
 	"name" : "",
@@ -41,6 +42,7 @@ func update() -> void:
 	for player_label in list.get_children():
 		if player_label.player.id == Config.active_player().id:
 			player_label.set_button_text("<*>")
+			scroll.ensure_control_visible(player_label)
 		else:
 			player_label.set_button_text("<>")
 

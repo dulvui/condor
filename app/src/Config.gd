@@ -12,6 +12,7 @@ var config:ConfigFile
 var active_time:int
 
 var teams:Array
+var active_team_id:int
 var next_team_id:int
 var players:Array
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 	# try saving teams and players as dictionary to save space
 	# construct/deconstruct methods
 	teams = config.get_value("data", "teams", _get_default_teams())
+	active_team_id = config.get_value("data", "active_team_id", -1)
 	next_team_id = config.get_value("data", "next_team_id", 0)
 	players = config.get_value("data", "players", _init_players())
 	active_player_index = config.get_value("data", "active_player_index", 0)
@@ -36,22 +38,23 @@ func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
+	config.set_value("data","active_team_id",active_team_id)
 	config.set_value("data","active_player_index",active_player_index)
 	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
-func add_player_to_team(team:Team, player:Player, price:int) -> bool:
-	if team.budget - price < 0:
-		return false
+func add_player_to_team(team:Team, player:Player, price:int) -> String:
+	var error_message:String = team.add_player(player, price)
+	if not error_message.is_empty():
+		return error_message
 	player.price = price
 	player.team_id = team.id
-	team.budget -= price
 	Config.save_all_data()
 	
-	return true
+	return ""
 	
 func remove_player_from_team(player:Player, team:Team) -> void:
-	team.budget += player.price 
+	team.remove_player(player)
 	
 	player.price = 0
 	player.team_id = -1
@@ -61,8 +64,8 @@ func remove_player_from_team(player:Player, team:Team) -> void:
 
 func add_to_history(player:Player, team:Team, price:int):
 	var transfer = {
-		"player" : player.name,
-		"team" : team.name,
+		"player" : player,
+		"team" : team,
 		"price" : price,
 	}
 	history.append(transfer)

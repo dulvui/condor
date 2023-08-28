@@ -4,13 +4,12 @@
 
 extends Control
 
-const AuctionTimer:PackedScene = preload("res://src/ui-components/timer/Timer.tscn")
-
 @onready var auction_control:AuctionControl = $MarginContainer/HSplitContainer/VBoxContainer/AuctionControl
 @onready var assign_player:PopupPanel = $AssignPlayer
 @onready var team_overview:Control = $MarginContainer/HSplitContainer/VBoxContainer/TeamOverview
 @onready var player_list:Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
 @onready var history:Control = $MarginContainer/HSplitContainer/VSplitContainer/History
+@onready var timer:AuctionTimer = $Timer
 
 var active_player:Player
 
@@ -19,10 +18,8 @@ func _ready() -> void:
 	auction_control.set_player(active_player)
 
 func _on_auction_control_auction() -> void:
-	var timer = AuctionTimer.instantiate()
 	timer.set_player(active_player)
-	add_child(timer)
-
+	timer.popup_centered()
 
 func _on_auction_control_assign() -> void:
 	assign_player.set_player(active_player)
@@ -30,6 +27,8 @@ func _on_auction_control_assign() -> void:
 
 func _on_assign_player_assigned() -> void:
 	_refresh_lists()
+	var latest_transfer = Config.history[-1]
+	team_overview.add_player(latest_transfer.player, latest_transfer.team)
 	active_player = Config.next_player()
 	auction_control.set_player(active_player)
 
@@ -58,7 +57,6 @@ func _on_team_overview_player_removed() -> void:
 	_refresh_lists()
 	
 func _refresh_lists() -> void:
-	team_overview.update()
 	player_list.update()
 	history.update()
 

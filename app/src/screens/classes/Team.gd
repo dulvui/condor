@@ -4,11 +4,12 @@
 
 class_name Team
 
-const SIZE:Dictionary = {
+var slots:Dictionary = {
 	"P" : 3,
 	"D" : 8,
 	"C" : 8,
-	"A" : 6
+	"A" : 6,
+	"total" : 25
 }
 
 var name:String
@@ -20,3 +21,20 @@ func set_up(name:String, id:int) -> Team:
 	self.id = Config.get_next_team_id()
 	self.budget = Config.BUDGET
 	return self
+
+func add_player(player:Player, price:int) -> String:
+	if slots[player.get_position_string()] - 1  < 0:
+		return "NO SLOTS AVBAILABLE"
+		
+	if budget - price < slots.total - 1:
+		return "OUT OF BUDGET"
+	
+	budget -= price
+	slots[player.get_position_string()] -= 1
+	slots.total -= 1
+	return ""
+	
+func remove_player(player:Player) -> void:
+	slots[player.get_position_string()] += 1
+	slots.total += 1
+	budget += player.price
