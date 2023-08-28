@@ -12,7 +12,8 @@ const PlayerBox:PackedScene = preload("res://src/ui-components/player-box/Player
 
 @onready var name_label:Label = $Name
 @onready var budget_label:Label = $Budget
-@onready var player_list:VBoxContainer = $PlayerList
+@onready var scrool:ScrollContainer = $ScrollContainer
+@onready var player_list:VBoxContainer = $ScrollContainer/PlayerList
 
 var team:Team
 
@@ -34,6 +35,7 @@ func _append_player_label(player:Player) -> void:
 	player_list.add_child(player_box)
 	player_box.set_player(player)
 	player_box.player_removed.connect(_on_player_removed.bind(player))
+	scrool.ensure_control_visible(player_box)
 
 func _on_player_removed(player:Player) -> void:
 	Config.add_to_history(player, team, player.price)

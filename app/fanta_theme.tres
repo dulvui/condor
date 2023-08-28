@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://ctqg0on3ebbdy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckpab"]
-bg_color = Color(0.133333, 0.470588, 0.74902, 1)
+bg_color = Color(0.134586, 0.470461, 0.74826, 1)
 
 [resource]
 default_font_size = 22
