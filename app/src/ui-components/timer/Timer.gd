@@ -7,7 +7,7 @@ class_name AuctionTimer
 extends PopupPanel
 
 const MIN_TIME:int = 5
-const MAX_TIME:int = 30
+const MAX_TIME:int = 60
 const DEFAULT_TIME:int = 10
 
 @onready var timer:Timer = $Timer
@@ -92,6 +92,8 @@ func _set_time(time:float) -> void:
 func _on_minus_minutes_pressed() -> void:
 	_set_time(-10)
 
+func _on_minus_5_pressed() -> void:
+	_set_time(-5)
 
 func _on_minus_seconds_pressed() -> void:
 	_set_time(-1)
@@ -100,6 +102,8 @@ func _on_minus_seconds_pressed() -> void:
 func _on_plus_seconds_pressed() -> void:
 	_set_time(+1)
 
+func _on_plus_5_pressed() -> void:
+	_set_time(+5)
 
 func _on_plus_minutes_pressed() -> void:
 	_set_time(+10)
@@ -108,3 +112,4 @@ func _on_reset_pressed() -> void:
 	Config.active_time = DEFAULT_TIME
 	Config.save_all_data()
 	timer.wait_time = Config.active_time
+
