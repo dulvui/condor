@@ -4,8 +4,8 @@
 
 extends Node2D
 
-@onready var bip_sound:AudioStreamPlayer2D = $Bip
-@onready var final_sound:AudioStreamPlayer2D = $Final
+@onready var bip_sound:AudioStreamPlayer = $Bip
+@onready var final_sound:AudioStreamPlayer = $Final
 
 var counter:int = 3
 var playing:bool = false

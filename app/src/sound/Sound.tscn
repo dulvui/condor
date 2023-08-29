@@ -7,12 +7,10 @@
 [node name="Sound" type="Node2D"]
 script = ExtResource("1_o0e0j")
 
-[node name="Bip" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(267, 510)
+[node name="Bip" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_omqrt")
 
-[node name="Final" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(267, 510)
+[node name="Final" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_cn4ua")
 
 [connection signal="finished" from="Bip" to="." method="_on_bip_finished"]
