@@ -20,7 +20,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Config="*res://src/Config.gd"
-Signaling="*res://src/web-rtc/Signaling.gd"
 
 [display]
 

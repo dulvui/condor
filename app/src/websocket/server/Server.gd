@@ -61,4 +61,3 @@ func _on_Connect_pressed():
 	multiplayer.multiplayer_peer = null
 	peer.create_client("ws://" + HOST + ":" + str(PORT))
 	multiplayer.multiplayer_peer = peer
-	start_game()
