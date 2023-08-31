@@ -8,6 +8,7 @@ const PORT = 8999
 const PROTOCOL = "ludus"
 const HOST = "localhost"
 
+var lobbies:Array
 
 var peer:WebSocketMultiplayerPeer = WebSocketMultiplayerPeer.new()
 
