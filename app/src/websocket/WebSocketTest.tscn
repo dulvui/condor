@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://82wxv4a0yn7y"]
+
+[ext_resource type="Script" path="res://src/websocket/WebSocketTest.gd" id="1_1mhwq"]
+[ext_resource type="PackedScene" uid="uid://dk7f0r01ryorp" path="res://src/websocket/client/Client.tscn" id="1_ee08y"]
+[ext_resource type="PackedScene" uid="uid://1vmj7gn02tqh" path="res://src/websocket/server/Server.tscn" id="2_h50if"]
+
+[node name="WebSocketTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1mhwq")
+
+[node name="Client" parent="." instance=ExtResource("1_ee08y")]
+
+[node name="Server" parent="." instance=ExtResource("2_h50if")]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 48.0
+offset_right = 1816.0
+offset_bottom = 840.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Listen" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Listen"
+
+[node name="Connect" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Connect"
+
+[connection signal="connected_to_server" from="Client" to="." method="_on_client_connected_to_server"]
+[connection signal="connection_closed" from="Client" to="." method="_on_client_connection_closed"]
+[connection signal="message_received" from="Client" to="." method="_on_client_message_received"]
+[connection signal="client_connected" from="Server" to="." method="_on_server_client_connected"]
+[connection signal="client_disconnected" from="Server" to="." method="_on_server_client_disconnected"]
+[connection signal="message_received" from="Server" to="." method="_on_server_message_received"]
+[connection signal="toggled" from="VBoxContainer/Listen" to="." method="_on_listen_toggled"]
+[connection signal="toggled" from="VBoxContainer/Connect" to="." method="_on_connect_toggled"]

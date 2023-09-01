@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 class_name Client
 
-extends Control
+extends Node
 
 @export var handshake_headers: PackedStringArray
 @export var supported_protocols: PackedStringArray
