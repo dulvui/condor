@@ -34,19 +34,21 @@ func _on_client_message_received(message) -> void:
 
 
 func _on_server_client_connected(peer_id) -> void:
-	pass # Replace with function body.
+	var peer: WebSocketPeer = server.peers[peer_id]
+	info("Remote client connected: %d. Protocol: %s" % [peer_id, peer.get_selected_protocol()])
+	server.send(-peer_id, "[%d] connected" % peer_id)
 
 
 func _on_server_client_disconnected(peer_id) -> void:
-	pass # Replace with function body.
+	var peer: WebSocketPeer = server.peers[peer_id]
+	info("Remote client disconnected: %d. Code: %d, Reason: %s" % [peer_id, peer.get_close_code(), peer.get_close_reason()])
+	server.send(-peer_id, "[%d] disconnected" % peer_id)
+
 
 
 func _on_server_message_received(peer_id, message) -> void:
-	pass # Replace with function body.
-
-
-func _on_listen_pressed() -> void:
-	pass # Replace with function body.
+	info("Server received data from peer %d: %s" % [peer_id, message])
+	server.send(-peer_id, "[%d] Says: %s" % [peer_id, message])
 
 
 func _on_listen_toggled(button_pressed: bool) -> void:
