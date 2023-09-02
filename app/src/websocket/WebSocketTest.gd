@@ -4,9 +4,7 @@
 
 extends Control
 
-@onready var server:Server = $Server
 @onready var client:Client = $Client
-
 @onready var log_dest = $RichTextLabel
 @onready var line_edit = $Panel/VBoxContainer/Send/LineEdit
 
@@ -31,24 +29,6 @@ func _on_client_connection_closed() -> void:
 
 func _on_client_message_received(message) -> void:
 	pass # Replace with function body.
-
-
-func _on_server_client_connected(peer_id) -> void:
-	var peer: WebSocketPeer = server.peers[peer_id]
-	info("Remote client connected: %d. Protocol: %s" % [peer_id, peer.get_selected_protocol()])
-	server.send(-peer_id, "[%d] connected" % peer_id)
-
-
-func _on_server_client_disconnected(peer_id) -> void:
-	var peer: WebSocketPeer = server.peers[peer_id]
-	info("Remote client disconnected: %d. Code: %d, Reason: %s" % [peer_id, peer.get_close_code(), peer.get_close_reason()])
-	server.send(-peer_id, "[%d] disconnected" % peer_id)
-
-
-
-func _on_server_message_received(peer_id, message) -> void:
-	info("Server received data from peer %d: %s" % [peer_id, message])
-	server.send(-peer_id, "[%d] Says: %s" % [peer_id, message])
 
 
 func _on_listen_toggled(button_pressed: bool) -> void:

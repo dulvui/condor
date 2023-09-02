@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://1vmj7gn02tqh"]
-
-[ext_resource type="Script" path="res://src/websocket/server/Server.gd" id="1_wac2w"]
-
-[node name="Server" type="Node"]
-script = ExtResource("1_wac2w")
