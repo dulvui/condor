@@ -21,3 +21,4 @@ func _on_server_client_disconnected(peer_id:int) -> void:
 
 func _on_server_message_received(peer_id:int, message) -> void:
 	print("message received from peer %d : %s"%[peer_id, message])
+	server.send_all(peer_id, message)

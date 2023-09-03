@@ -48,8 +48,13 @@ func stop():
 	pending_peers.clear()
 	peers.clear()
 
+func send_all(peer_id, message) -> int:
+	for peer in peers:
+		if peer != peer_id:
+			send(peer, message)
+	return 0
 
-func send(peer_id, message) -> int:
+func send(peer_id:int, message) -> int:
 	var type = typeof(message)
 	if peer_id <= 0:
 		# Send to multiple peers, (zero = brodcast, negative = exclude one)

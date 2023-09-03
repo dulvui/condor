@@ -4,6 +4,8 @@
 
 extends Control
 
+const HOST:String = "ws://localhost:8000/"
+
 @onready var client:Client = $Client
 @onready var log_dest = $RichTextLabel
 @onready var line_edit = $Panel/VBoxContainer/Send/LineEdit
@@ -32,17 +34,15 @@ func _on_client_message_received(message) -> void:
 
 
 func _on_connect_toggled(button_pressed: bool) -> void:
-	var host = Label.new()
-	host.text = "ws://localhost:8000/"
 	if not button_pressed:
 		client.close()
 		return
-	if host.text == "":
+	if HOST == "":
 		return
-	info("Connecting to host: %s." % [host.text])
-	var err = client.connect_to_url(host.text)
+	info("Connecting to host: %s." % [HOST])
+	var err = client.connect_to_url(HOST)
 	if err != OK:
-		info("Error connecting to host: %s" % [host.text])
+		info("Error connecting to host: %s" % [HOST])
 		return
 
 
