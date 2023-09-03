@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://088jkysn3jn"]
+
+[ext_resource type="Script" path="res://src/Main.gd" id="1_6jfwt"]
+[ext_resource type="PackedScene" uid="uid://dc2xstdblwn06" path="res://src/websocket/Server.tscn" id="1_83kkq"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_6jfwt")
+
+[node name="Server" parent="." instance=ExtResource("1_83kkq")]
+
+[connection signal="client_connected" from="Server" to="." method="_on_server_client_connected"]
+[connection signal="client_disconnected" from="Server" to="." method="_on_server_client_disconnected"]
+[connection signal="message_received" from="Server" to="." method="_on_server_message_received"]

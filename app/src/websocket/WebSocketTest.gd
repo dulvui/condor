@@ -20,33 +20,20 @@ func info(msg):
 	log_dest.add_text(str(msg) + "\n")
 
 func _on_client_connected_to_server() -> void:
-	pass # Replace with function body.
+	print("connected to server")
 
 
 func _on_client_connection_closed() -> void:
-	pass # Replace with function body.
+	print("connection to server closed")
 
 
 func _on_client_message_received(message) -> void:
-	pass # Replace with function body.
-
-
-func _on_listen_toggled(button_pressed: bool) -> void:
-	if not button_pressed:
-		server.stop()
-		info("Server stopped")
-		return
-	var port = int(8000)
-	var err = server.listen(port)
-	if err != OK:
-		info("Error listing on port %s" % port)
-		return
-	info("Listing on port %s, supported protocols: %s" % [port, server.supported_protocols])
+	print("message recieved %s"%message)
 
 
 func _on_connect_toggled(button_pressed: bool) -> void:
 	var host = Label.new()
-	host.text = "ws://localhost:8000/test/"
+	host.text = "ws://localhost:8000/"
 	if not button_pressed:
 		client.close()
 		return
@@ -57,3 +44,11 @@ func _on_connect_toggled(button_pressed: bool) -> void:
 	if err != OK:
 		info("Error connecting to host: %s" % [host.text])
 		return
+
+
+func _on_send_pressed() -> void:
+	var err:int = client.send("test")
+	
+	if err != OK:
+		print("error sending message")
+	print("message sent")

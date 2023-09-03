@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://82wxv4a0yn7y"]
+[gd_scene load_steps=3 format=3 uid="uid://82wxv4a0yn7y"]
 
 [ext_resource type="Script" path="res://src/websocket/WebSocketTest.gd" id="1_1mhwq"]
 [ext_resource type="PackedScene" uid="uid://dk7f0r01ryorp" path="res://src/websocket/client/Client.tscn" id="1_ee08y"]
-[ext_resource type="PackedScene" uid="uid://1vmj7gn02tqh" path="res://src/websocket/server/Server.tscn" id="2_h50if"]
 
 [node name="WebSocketTest" type="Control"]
 layout_mode = 3
@@ -14,8 +13,6 @@ grow_vertical = 2
 script = ExtResource("1_1mhwq")
 
 [node name="Client" parent="." instance=ExtResource("1_ee08y")]
-
-[node name="Server" parent="." instance=ExtResource("2_h50if")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -29,21 +26,20 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Listen" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-text = "Listen"
-
 [node name="Connect" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Connect"
 
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Send" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "SEND"
+
 [connection signal="connected_to_server" from="Client" to="." method="_on_client_connected_to_server"]
 [connection signal="connection_closed" from="Client" to="." method="_on_client_connection_closed"]
 [connection signal="message_received" from="Client" to="." method="_on_client_message_received"]
-[connection signal="client_connected" from="Server" to="." method="_on_server_client_connected"]
-[connection signal="client_disconnected" from="Server" to="." method="_on_server_client_disconnected"]
-[connection signal="message_received" from="Server" to="." method="_on_server_message_received"]
-[connection signal="toggled" from="VBoxContainer/Listen" to="." method="_on_listen_toggled"]
 [connection signal="toggled" from="VBoxContainer/Connect" to="." method="_on_connect_toggled"]
+[connection signal="pressed" from="VBoxContainer/Send" to="." method="_on_send_pressed"]
