@@ -20,16 +20,7 @@ signal message_received(message: Variant)
 
 func _process(delta):
 	poll()
-
-func connect_to_url(url) -> int:
-	socket.supported_protocols = supported_protocols
-	socket.handshake_headers = handshake_headers
-	var err = socket.connect_to_url(url, tls_options)
-	if err != OK:
-		return err
-	last_state = socket.get_ready_state()
-	return OK
-
+	
 
 func send(message) -> int:
 	if typeof(message) == TYPE_STRING:
@@ -45,6 +36,14 @@ func get_message() -> Variant:
 		return pkt.get_string_from_utf8()
 	return bytes_to_var(pkt)
 
+func connect_to_url(url) -> int:
+	socket.supported_protocols = supported_protocols
+	socket.handshake_headers = handshake_headers
+	var err = socket.connect_to_url(url, tls_options)
+	if err != OK:
+		return err
+	last_state = socket.get_ready_state()
+	return OK
 
 func close(code := 1000, reason := "") -> void:
 	socket.close(code, reason)

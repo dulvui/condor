@@ -19,11 +19,14 @@ var players:Array
 var active_player_index:int
 var history:Array
 
+var is_admin:bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	config = ConfigFile.new()
 	config.load("user://settings.cfg")
 	active_time = config.get_value("settings", "active_time", 30)
+	is_admin = config.get_value("settings", "is_admin", false)
 	# try saving teams and players as dictionary to save space
 	# construct/deconstruct methods
 	teams = config.get_value("data", "teams", _get_default_teams())
@@ -36,6 +39,7 @@ func _ready() -> void:
 
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
+	config.set_value("settings","is_admin",is_admin)
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
 	config.set_value("data","active_team_id",active_team_id)
@@ -167,6 +171,10 @@ func _get_player(line:Array) -> Player:
 	
 	var player = Player.new()
 	return player.set_up(id, position, name,real_team, mfv, price, price_initial, price_current)
+
+func toogle_admin() -> bool:
+	is_admin = not is_admin
+	return is_admin
 
 # save on quit on mobile
 func _notification(what) -> void:
