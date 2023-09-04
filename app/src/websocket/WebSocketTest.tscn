@@ -13,6 +13,8 @@ grow_vertical = 2
 script = ExtResource("1_1mhwq")
 
 [node name="Client" parent="." instance=ExtResource("1_ee08y")]
+handshake_headers = null
+supported_protocols = null
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -38,8 +40,13 @@ layout_mode = 2
 layout_mode = 2
 text = "SEND"
 
+[node name="Rpc" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "RPC"
+
 [connection signal="connected_to_server" from="Client" to="." method="_on_client_connected_to_server"]
 [connection signal="connection_closed" from="Client" to="." method="_on_client_connection_closed"]
 [connection signal="message_received" from="Client" to="." method="_on_client_message_received"]
 [connection signal="toggled" from="VBoxContainer/Connect" to="." method="_on_connect_toggled"]
 [connection signal="pressed" from="VBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="VBoxContainer/Rpc" to="." method="_on_rpc_pressed"]

@@ -38,6 +38,13 @@ var pending_peers: Array[PendingPeer] = []
 var peers: Dictionary
 
 
+func _process(delta):
+	poll()
+
+@rpc("any_peer")
+func start_session(id) -> void:
+	print("session starts ", id)
+
 func listen(port: int) -> int:
 	assert(not tcp_server.is_listening())
 	return tcp_server.listen(port)
@@ -166,6 +173,3 @@ func _connect_pending(p: PendingPeer) -> bool:
 			return true # Failure.
 		return false
 
-
-func _process(delta):
-	poll()

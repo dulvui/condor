@@ -10,7 +10,7 @@ extends Node
 var tls_options: TLSOptions = null
 
 
-var socket = WebSocketPeer.new()
+var socket = WebSocketMultiplayerPeer.new()
 var last_state = WebSocketPeer.STATE_CLOSED
 
 
@@ -20,7 +20,13 @@ signal message_received(message: Variant)
 
 func _process(delta):
 	poll()
-	
+
+func start() -> void:
+	start_session.rpc(1)
+
+@rpc("call_local")
+func start_session(id) -> void:
+	print("session starts ",id)
 
 func send(message) -> int:
 	if typeof(message) == TYPE_STRING:

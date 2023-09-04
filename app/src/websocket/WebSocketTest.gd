@@ -8,7 +8,6 @@ const HOST:String = "ws://localhost:8000/"
 
 @onready var client:Client = $Client
 @onready var log_dest = $RichTextLabel
-@onready var line_edit = $Panel/VBoxContainer/Send/LineEdit
 
 func _ready() -> void:
 	pass
@@ -47,8 +46,13 @@ func _on_connect_toggled(button_pressed: bool) -> void:
 
 
 func _on_send_pressed() -> void:
-	var err:int = client.send("test")
-	
+	var err:int = client.send("message")
 	if err != OK:
 		print("error sending message")
 	print("message sent")
+	
+	
+
+
+func _on_rpc_pressed() -> void:
+	client.start()
