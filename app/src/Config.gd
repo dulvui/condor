@@ -36,6 +36,7 @@ func _ready() -> void:
 	active_player_index = config.get_value("data", "active_player_index", 0)
 	history = config.get_value("data", "history", [])
 	
+	
 
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)

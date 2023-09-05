@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4i873ru2skmw"]
+[gd_scene load_steps=10 format=3 uid="uid://d4i873ru2skmw"]
 
 [ext_resource type="Theme" uid="uid://ctqg0on3ebbdy" path="res://fanta_theme.tres" id="1_g3ee7"]
 [ext_resource type="Script" path="res://src/screens/main/Main.gd" id="1_labyq"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ddxmw2r05sce7" path="res://src/screens/main/history/History.tscn" id="4_in5of"]
 [ext_resource type="PackedScene" uid="uid://by5xqkpdiio2o" path="res://src/screens/main/auction-control/AuctionControl.tscn" id="5_eb40d"]
 [ext_resource type="PackedScene" uid="uid://cbv4v5l8m8s18" path="res://src/ui-components/timer/Timer.tscn" id="8_nny5i"]
+[ext_resource type="PackedScene" uid="uid://dk7f0r01ryorp" path="res://src/websocket/client/Client.tscn" id="9_aa6gw"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -82,6 +83,8 @@ offset_right = -0.680054
 offset_bottom = 0.519897
 text = "MENU"
 
+[node name="Client" parent="." instance=ExtResource("9_aa6gw")]
+
 [connection signal="active_player_change" from="MarginContainer/HSplitContainer/VSplitContainer/PlayerList" to="." method="_on_player_list_active_player_change"]
 [connection signal="assign" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_assign"]
 [connection signal="auction" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_auction"]
@@ -90,3 +93,4 @@ text = "MENU"
 [connection signal="player_removed" from="MarginContainer/HSplitContainer/VBoxContainer/TeamOverview" to="." method="_on_team_overview_player_removed"]
 [connection signal="assigned" from="AssignPlayer" to="." method="_on_assign_player_assigned"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
+[connection signal="message_received" from="Client" to="." method="_on_client_message_received"]

@@ -10,14 +10,18 @@ extends Control
 @onready var player_list:Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
 @onready var history:Control = $MarginContainer/HSplitContainer/VSplitContainer/History
 @onready var timer:AuctionTimer = $Timer
+@onready var client:Client = $Client
 
 var active_player:Player
 
 func _ready() -> void:
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
+	
+	client.connect_to_server()
 
 func _on_auction_control_auction() -> void:
+	client.send("start_auction")
 	timer.set_player(active_player)
 	timer.popup_centered()
 
@@ -60,3 +64,8 @@ func _refresh_lists() -> void:
 	player_list.update()
 	history.update()
 
+func _on_client_message_received(message) -> void:
+	print(message)
+	
+	if message == "start_auction":
+		_on_auction_control_auction()

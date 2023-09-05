@@ -5,12 +5,14 @@ class_name Client
 
 extends Node
 
+const HOST:String = "ws://localhost:8000/"
+
 @export var handshake_headers: PackedStringArray
 @export var supported_protocols: PackedStringArray
 var tls_options: TLSOptions = null
 
 
-var socket = WebSocketMultiplayerPeer.new()
+var socket = WebSocketPeer.new()
 var last_state = WebSocketPeer.STATE_CLOSED
 
 
@@ -20,13 +22,6 @@ signal message_received(message: Variant)
 
 func _process(delta):
 	poll()
-
-func start() -> void:
-	start_session.rpc(1)
-
-@rpc("call_local")
-func start_session(id) -> void:
-	print("session starts ",id)
 
 func send(message) -> int:
 	if typeof(message) == TYPE_STRING:
@@ -42,10 +37,10 @@ func get_message() -> Variant:
 		return pkt.get_string_from_utf8()
 	return bytes_to_var(pkt)
 
-func connect_to_url(url) -> int:
+func connect_to_server() -> int:
 	socket.supported_protocols = supported_protocols
 	socket.handshake_headers = handshake_headers
-	var err = socket.connect_to_url(url, tls_options)
+	var err = socket.connect_to_url(HOST, tls_options)
 	if err != OK:
 		return err
 	last_state = socket.get_ready_state()
