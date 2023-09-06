@@ -37,7 +37,11 @@ func _process(delta: float) -> void:
 	if not timer.is_stopped() and not finished:
 		sound.countdown(timer.time_left)
 
-func trigger_toggle() -> void:
+func trigger_toggle(delta:int = 0) -> void:
+	if delta > 0:
+		timer.wait_time -= delta
+	else:
+		timer.wait_time = DEFAULT_TIME
 	if timer.paused:
 		timer.paused = false
 	elif not finished:

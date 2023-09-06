@@ -64,14 +64,17 @@ func _refresh_lists() -> void:
 	player_list.update()
 	history.update()
 
-func _on_client_message_received(message) -> void:
+func _on_client_message_received(message:String) -> void:
 	print(message)
 	if message == "start_auction":
 		timer.set_player(active_player)
 		timer.popup_centered()
-	elif message == "start_timer":
-		timer.trigger_toggle()
+	elif "start_timer" in message:
+		var timestamp:int  = int(message.split(":")[1])
+		var current_timestamp:int = Time.get_unix_time_from_system()
+		timer.trigger_toggle(current_timestamp - timestamp + 100)
 
 
 func _on_timer_toggle() -> void:
-	client.send("start_timer")
+	var timestamp:int = Time.get_unix_time_from_system()
+	client.send("start_timer:" + str(timestamp))

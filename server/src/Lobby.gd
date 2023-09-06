@@ -18,5 +18,3 @@ func set_up(players:Array, teams: Array, history:Array, active_player:Player) ->
 	self.teams = teams
 	self.history = history
 	self.active_player = active_player
-	
-
