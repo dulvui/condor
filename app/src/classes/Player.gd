@@ -4,8 +4,6 @@
 
 class_name Player
 
-extends Node
-
 # trasnform to enum
 enum Position {
 	P,
@@ -16,7 +14,7 @@ enum Position {
 
 var id:int
 var position:int
-#var name:String
+var name:String
 var team_id:int = -1
 var real_team:String
 var mfv:float
