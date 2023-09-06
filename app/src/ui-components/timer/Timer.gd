@@ -6,6 +6,8 @@ class_name AuctionTimer
 
 extends PopupPanel
 
+signal toggle
+
 const MIN_TIME:int = 5
 const MAX_TIME:int = 60
 const DEFAULT_TIME:int = 10
@@ -35,6 +37,15 @@ func _process(delta: float) -> void:
 	if not timer.is_stopped() and not finished:
 		sound.countdown(timer.time_left)
 
+func trigger_toggle() -> void:
+	if timer.paused:
+		timer.paused = false
+	elif not finished:
+		timer.stop()
+		timer.start()
+	else:
+		_restart() 
+
 func set_player(player:Player):
 	active_player = player
 	name_label.text = active_player.name
@@ -60,6 +71,7 @@ func _on_back_pressed() -> void:
 
 
 func _on_bug_button_pressed() -> void:
+	toggle.emit()
 	if timer.paused:
 		timer.paused = false
 	elif not finished:

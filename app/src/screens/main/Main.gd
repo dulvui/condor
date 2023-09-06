@@ -66,6 +66,12 @@ func _refresh_lists() -> void:
 
 func _on_client_message_received(message) -> void:
 	print(message)
-	
 	if message == "start_auction":
-		_on_auction_control_auction()
+		timer.set_player(active_player)
+		timer.popup_centered()
+	elif message == "start_timer":
+		timer.trigger_toggle()
+
+
+func _on_timer_toggle() -> void:
+	client.send("start_timer")

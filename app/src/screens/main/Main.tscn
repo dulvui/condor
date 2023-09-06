@@ -92,5 +92,6 @@ text = "MENU"
 [connection signal="previous" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_previous"]
 [connection signal="player_removed" from="MarginContainer/HSplitContainer/VBoxContainer/TeamOverview" to="." method="_on_team_overview_player_removed"]
 [connection signal="assigned" from="AssignPlayer" to="." method="_on_assign_player_assigned"]
+[connection signal="toggle" from="Timer" to="." method="_on_timer_toggle"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
 [connection signal="message_received" from="Client" to="." method="_on_client_message_received"]

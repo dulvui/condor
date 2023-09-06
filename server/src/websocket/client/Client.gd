@@ -42,10 +42,6 @@ var peers: Dictionary
 func _process(delta):
 	poll()
 
-@rpc("any_peer")
-func start_session(id) -> void:
-	print("session starts ", id)
-
 func listen(port: int) -> int:
 	assert(not tcp_server.is_listening())
 	return tcp_server.listen(port)
@@ -56,7 +52,7 @@ func stop():
 	pending_peers.clear()
 	peers.clear()
 
-func send_all(peer_id, message) -> int:
+func send_others(peer_id, message) -> int:
 	for peer in peers:
 		if peer != peer_id:
 			send(peer, message)
