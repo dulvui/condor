@@ -104,6 +104,19 @@ func previous_player() -> Player:
 func get_next_team_id():
 	next_team_id += 1
 	return next_team_id
+	
+
+func get_player_by_id(id:int) -> Player:
+	for player in players:
+		if player.id == id:
+			return player
+	return
+			
+func get_team_by_id(id:int) -> Team:
+	for team in teams:
+		if team.id == id:
+			return team
+	return
 
 func _get_default_teams() -> Array:
 	var default_teams:Array = []

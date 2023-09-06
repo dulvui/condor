@@ -31,12 +31,17 @@ func _on_auction_control_assign() -> void:
 	assign_player.popup_centered()
 
 func _on_assign_player_assigned() -> void:
+	_assign_player()
+	if Config.is_admin:
+		var latest_transfer = Config.history[-1]
+		client.send("assign_player:" + str(latest_transfer.player.id) + ":" + str(latest_transfer.team.id) + ":" + str(latest_transfer.price))
+
+func _assign_player() -> void:
 	_refresh_lists()
 	var latest_transfer = Config.history[-1]
 	team_overview.add_player(latest_transfer.player, latest_transfer.team)
 	active_player = Config.next_player()
 	auction_control.set_player(active_player)
-
 
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
@@ -81,6 +86,16 @@ func _on_client_message_received(message:String) -> void:
 		var timestamp:int  = int(message.split(":")[1])
 		var current_timestamp:int = Time.get_unix_time_from_system()
 		timer.trigger_toggle(current_timestamp - timestamp + 100)
+	elif "assign_player" in message:
+		var player_id:int = int(message.split(":")[1])
+		var team_id:int = int(message.split(":")[2])
+		var price:int = int(message.split(":")[3])
+		
+		var player:Player = Config.get_player_by_id(player_id)
+		var team:Team = Config.get_team_by_id(team_id)
+		player.price = price
+		Config.add_to_history(player, team, price)
+		_assign_player()
 	elif message == "next_player":
 		_next_player()
 	elif message == "previous_player":

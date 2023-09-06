@@ -38,7 +38,7 @@ func _on_export_pressed() -> void:
 		file.store_csv_line(team_line)
 		for player in team.players:
 			var player_line:PackedStringArray = PackedStringArray()
-			player_line.append_array([team.name, player.id, player.price])
+			player_line.append_array([team.name, player.fanta_id, player.price])
 			file.store_csv_line(player_line)
 		
 		
