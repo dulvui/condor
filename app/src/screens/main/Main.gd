@@ -42,12 +42,20 @@ func _on_menu_pressed() -> void:
 
 
 func _on_auction_control_next() -> void:
+	client.send("next_player")
+	_next_player()
+	
+func _next_player() -> void:
 	active_player = Config.next_player()
 	auction_control.set_player(active_player)
 	player_list.update()
 
 
 func _on_auction_control_previous() -> void:
+	client.send("previous_player")
+	_previous_player()
+	
+func _previous_player() -> void:
 	active_player = Config.previous_player()
 	auction_control.set_player(active_player)
 	player_list.update()
@@ -65,7 +73,6 @@ func _refresh_lists() -> void:
 	history.update()
 
 func _on_client_message_received(message:String) -> void:
-	print(message)
 	if message == "start_auction":
 		timer.set_player(active_player)
 		timer.popup_centered()
@@ -73,6 +80,10 @@ func _on_client_message_received(message:String) -> void:
 		var timestamp:int  = int(message.split(":")[1])
 		var current_timestamp:int = Time.get_unix_time_from_system()
 		timer.trigger_toggle(current_timestamp - timestamp + 100)
+	elif message == "next_player":
+		_next_player()
+	elif message == "previous_player":
+		_previous_player()
 
 
 func _on_timer_toggle() -> void:
