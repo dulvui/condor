@@ -21,7 +21,8 @@ func _ready() -> void:
 	client.connect_to_server()
 
 func _on_auction_control_auction() -> void:
-	client.send("start_auction")
+	if Config.is_admin:
+		client.send("start_auction")
 	timer.set_player(active_player)
 	timer.popup_centered()
 

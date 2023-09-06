@@ -17,6 +17,7 @@ const DEFAULT_TIME:int = 10
 @onready var big_button:TextureButton = $VBoxContainer/BigButton
 @onready var sound:Node2D = $Sound
 @onready var name_label:Label = $VBoxContainer/Name
+@onready var time_control:HBoxContainer = $VBoxContainer/TimeControl
 
 
 var finished:bool = false
@@ -26,6 +27,9 @@ var active_player:Player
 func _ready() -> void:
 	timer.wait_time = Config.active_time
 	time_label.text = "%2.2f"%timer.time_left
+	
+	if not Config.is_admin:
+		time_control.hide()
 	
 
 func _process(delta: float) -> void:

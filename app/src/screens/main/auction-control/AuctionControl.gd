@@ -15,6 +15,14 @@ const AuctionTimer:PackedScene = preload("res://src/ui-components/timer/Timer.ts
 
 @onready var player_lablel:Label = $Labels/Player
 @onready var team_lablel:Label = $Labels/Team
+@onready var buttons:HBoxContainer = $Buttons
+
+
+func _ready() -> void:
+	if not Config.is_admin:
+		$Buttons/Previous.hide()
+		$Buttons/Assign.hide()
+		$Buttons/Next.hide()
 
 func set_player(player:Player) -> void:
 	player_lablel.text = player.name

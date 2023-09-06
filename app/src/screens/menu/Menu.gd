@@ -42,3 +42,7 @@ func _on_export_pressed() -> void:
 			file.store_csv_line(player_line)
 		
 		
+
+
+func _on_admin_pressed() -> void:
+	Config.is_admin = not Config.is_admin 

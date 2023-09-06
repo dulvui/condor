@@ -56,6 +56,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "INFO"
 
+[node name="Admin" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ADMIN"
+
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
 layout_mode = 1
@@ -81,3 +86,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="VBoxContainer/Teams" to="." method="_on_teams_pressed"]
 [connection signal="pressed" from="VBoxContainer/Export" to="." method="_on_export_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Admin" to="." method="_on_admin_pressed"]

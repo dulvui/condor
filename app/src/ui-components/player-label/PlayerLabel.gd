@@ -20,6 +20,9 @@ var player:Player
 
 func _ready() -> void:
 	set_process(false)
+	
+	if not Config.is_admin:
+		action_button.disabled = true
 
 
 func set_up(_player:Player) -> void:
