@@ -57,6 +57,7 @@ theme_override_font_sizes/font_size = 32
 text = "INFO"
 
 [node name="Admin" type="Button" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "ADMIN"

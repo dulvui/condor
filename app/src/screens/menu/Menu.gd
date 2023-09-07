@@ -4,6 +4,8 @@
 
 extends Control
 
+func _ready() -> void:
+	$VBoxContainer/Teams.visible = Config.is_admin
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/main/Main.tscn")
