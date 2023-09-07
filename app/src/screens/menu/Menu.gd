@@ -8,7 +8,7 @@ func _ready() -> void:
 	$VBoxContainer/Teams.visible = Config.is_admin
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/main/Main.tscn")
+	get_tree().change_scene_to_file("res://src/screens/teams/Teams.tscn")
 
 func _on_credits_pressed() -> void:
 	pass # Replace with function body.
@@ -48,3 +48,4 @@ func _on_export_pressed() -> void:
 
 func _on_admin_pressed() -> void:
 	Config.is_admin = not Config.is_admin 
+	$VBoxContainer/Teams.visible = Config.is_admin

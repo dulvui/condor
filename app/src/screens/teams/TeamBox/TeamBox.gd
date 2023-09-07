@@ -33,3 +33,4 @@ func _on_edit_pressed() -> void:
 
 func _on_active_pressed() -> void:
 	Config.active_team_id = team.id
+	get_tree().change_scene_to_file("res://src/screens/main/Main.tscn")
