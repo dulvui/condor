@@ -20,9 +20,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Search" type="LineEdit" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "SEARCH"
+
+[node name="Positions" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -33,4 +40,5 @@ follow_focus = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="text_changed" from="VBoxContainer/Search" to="." method="_on_search_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/Search" to="." method="_on_search_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/Positions" to="." method="_on_positions_item_selected"]

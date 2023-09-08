@@ -10,14 +10,20 @@ const PlayerLabel:PackedScene = preload("res://src/ui-components/player-label/Pl
 
 @onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
 @onready var scroll:ScrollContainer = $VBoxContainer/ScrollContainer
+@onready var positions:OptionButton = $VBoxContainer/HBoxContainer/Positions
 
 var filters:Dictionary = {
 	"name" : "",
-	"positions" : ""
+	"position" : ""
 }
 
 func _ready() -> void:
 	set_up_list()
+	
+	positions.add_item(tr("ALL"))
+	for pos in Player.Position.keys():
+		positions.add_item(pos)
+	
 	
 func set_up_list():
 	for child in list.get_children():
@@ -56,12 +62,23 @@ func _set_active_player(player:Player) -> void:
 
 func _on_search_text_changed(new_text: String) -> void:
 	filters.name = new_text.to_lower()
-	for player_label in list.get_children():
-		player_label.visible = _filter(player_label.player)
+	_apply_filter()
+
+func _on_positions_item_selected(index: int) -> void:
+	if index == 0:
+		filters.position = ""
+	else:
+		filters.position = str(index - 1)
+	_apply_filter()
 
 func _filter(player:Player) -> bool:
 	for key in filters.keys():
 		if not filters[key].is_empty():
-			if not filters[key] in player[key].to_lower():
+			if not filters[key] in str(player[key]).to_lower():
 				return false
 	return true
+
+func _apply_filter() -> void:
+	for player_label in list.get_children():
+		player_label.visible = _filter(player_label.player)
+
