@@ -34,7 +34,11 @@ func _ready() -> void:
 	Client.player_previous.connect(_on_client_player_previous)
 	Client.player_active.connect(_on_client_player_active)
 	
-	Client.connect_to_server()
+	if Client.last_state == WebSocketPeer.STATE_OPEN:
+		server_status.color = Color.GREEN
+		connect_button.visible = false
+	else:
+		Client.connect_to_server()
 
 	
 func _on_auction_control_auction() -> void:

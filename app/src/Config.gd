@@ -23,8 +23,12 @@ var is_admin:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# use id to have different config settings ons same device
+	# only for development
+	var id:int = Time.get_unix_time_from_system()
+	
 	config = ConfigFile.new()
-	config.load("user://settings.cfg")
+	config.load("user://settings" + str(id) + ".cfg")
 	active_time = config.get_value("settings", "active_time", 30)
 	is_admin = config.get_value("settings", "is_admin", false)
 	# try saving teams and players as dictionary to save space
