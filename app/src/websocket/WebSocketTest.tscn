@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl073m5of6plt"]
+[gd_scene load_steps=3 format=3 uid="uid://cip2t24n181ww"]
 
 [ext_resource type="PackedScene" uid="uid://dk7f0r01ryorp" path="res://src/websocket/client/Client.tscn" id="1_ee08y"]
 
@@ -96,6 +96,5 @@ text = "SEND"
 
 [connection signal="connected_to_server" from="Client" to="." method="_on_client_connected_to_server"]
 [connection signal="connection_closed" from="Client" to="." method="_on_client_connection_closed"]
-[connection signal="message_received" from="Client" to="." method="_on_client_message_received"]
 [connection signal="toggled" from="VBoxContainer/Connect" to="." method="_on_connect_toggled"]
 [connection signal="pressed" from="VBoxContainer/Send" to="." method="_on_send_pressed"]

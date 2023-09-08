@@ -10,7 +10,6 @@ extends Control
 @onready var player_list:Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
 @onready var history:Control = $MarginContainer/HSplitContainer/VSplitContainer/History
 @onready var timer:AuctionTimer = $Timer
-@onready var client:Client = $Client
 @onready var server_status:ColorRect = $Status/ServerStatus
 @onready var connect_button:Button = $Status/Connect
 
@@ -20,13 +19,29 @@ func _ready() -> void:
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 	
-	client.connect_to_server()
+	Client.connected_to_server.connect(_on_client_connected_to_server)
+	Client.connection_closed.connect(_on_client_connection_closed)
+	
+	Client.timer_toggle.connect(_on_client_timer_toggle)
+	Client.auction_start.connect(_on_client_auction_start)
+	Client.timer_start.connect(_on_client_timer_start)
+	Client.timer_change.connect(_on_client_timer_change)
+	Client.timer_pause.connect(_on_client_timer_pause)
+	Client.timer_restart.connect(_on_client_timer_restart)
+	Client.timer_reset.connect(_on_client_timer_reset)
+	Client.player_assign.connect(_on_client_player_assign)
+	Client.player_next.connect(_on_client_player_next)
+	Client.player_previous.connect(_on_client_player_previous)
+	Client.player_active.connect(_on_client_player_active)
+	
+	Client.connect_to_server()
 
+	
 func _on_auction_control_auction() -> void:
 	if Config.is_admin:
-		client.send("start_auction")
+		Client.send(Client.auction_start.get_name())
 	timer.set_player(active_player)
-	timer.popup_centered()
+	timer.show()
 
 func _on_auction_control_assign() -> void:
 	assign_player.set_player(active_player)
@@ -36,7 +51,7 @@ func _on_assign_player_assigned() -> void:
 	_assign_player()
 	if Config.is_admin:
 		var latest_transfer = Config.history[-1]
-		client.send("assign_player:" + str(latest_transfer.player.id) + ":" + str(latest_transfer.team.id) + ":" + str(latest_transfer.price))
+		Client.send(Client.player_assign.get_name() + ":" + str(latest_transfer.player.id) + ":" + str(latest_transfer.team.id) + ":" + str(latest_transfer.price))
 
 func _assign_player() -> void:
 	_refresh_lists()
@@ -50,7 +65,7 @@ func _on_menu_pressed() -> void:
 
 
 func _on_auction_control_next() -> void:
-	client.send("next_player")
+	Client.send(Client.player_next.get_name())
 	_next_player()
 	
 func _next_player() -> void:
@@ -60,7 +75,7 @@ func _next_player() -> void:
 
 
 func _on_auction_control_previous() -> void:
-	client.send("previous_player")
+	Client.send(Client.player_previous.get_name())
 	_previous_player()
 	
 func _previous_player() -> void:
@@ -80,33 +95,9 @@ func _refresh_lists() -> void:
 	player_list.update()
 	history.update()
 
-func _on_client_message_received(message:String) -> void:
-	if message == "start_auction":
-		timer.set_player(active_player)
-		timer.popup_centered()
-	elif "start_timer" in message:
-		var timestamp:int  = int(message.split(":")[1])
-		var current_timestamp:int = Time.get_unix_time_from_system()
-		timer.trigger_toggle(current_timestamp - timestamp + 100)
-	elif "assign_player" in message:
-		var player_id:int = int(message.split(":")[1])
-		var team_id:int = int(message.split(":")[2])
-		var price:int = int(message.split(":")[3])
-		
-		var player:Player = Config.get_player_by_id(player_id)
-		var team:Team = Config.get_team_by_id(team_id)
-		player.price = price
-		Config.add_to_history(player, team, price)
-		_assign_player()
-	elif message == "next_player":
-		_next_player()
-	elif message == "previous_player":
-		_previous_player()
-
-
 func _on_timer_toggle() -> void:
 	var timestamp:int = Time.get_unix_time_from_system()
-	client.send("start_timer:" + str(timestamp))
+	Client.send(Client.timer_start.get_name() + ":" + str(timestamp))
 
 
 func _on_client_connection_closed() -> void:
@@ -119,4 +110,53 @@ func _on_client_connected_to_server() -> void:
 	connect_button.visible = false
 
 func _on_connect_pressed() -> void:
-	client.connect_to_server()
+	Client.connect_to_server()
+
+func _on_timer_time_changed(time) -> void:
+	Client.send(Client.timer_change.get_name() + ":" + str(time))
+
+
+func _on_timer_paused() -> void:
+	Client.send(Client.timer_pause.get_name())
+
+func _on_timer_restarted() -> void:
+	Client.send(Client.timer_restarted.get_name())
+	
+func _on_timer_reseted() -> void:
+	Client.send(Client.timer_reset.get_name())
+
+
+func _on_client_timer_toggle() -> void:
+	timer.trigger_toggle()
+
+func _on_client_auction_start() -> void:
+	timer.set_player(active_player)
+	timer.show()
+
+func _on_client_timer_start(delta:float) -> void:
+	timer.trigger_toggle(delta)
+
+func _on_client_timer_change(time:int) -> void:
+	timer.change_time(time)
+
+func _on_client_timer_pause() -> void:
+	timer.pause()
+
+func _on_client_timer_restart() -> void:
+	timer.restart()
+
+func _on_client_timer_reset() -> void:
+	timer.reset()
+
+func _on_client_player_assign(player:Player, team:Team, price:int) -> void:
+	Config.add_to_history(player, team, price)
+	_assign_player()
+
+func _on_client_player_next() -> void:
+	_next_player()
+
+func _on_client_player_previous() -> void:
+	_previous_player()
+
+func _on_client_player_active() -> void:
+	print("_on_client_player_active not implemented yet")

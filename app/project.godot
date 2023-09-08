@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 Config="*res://src/Config.gd"
 Utils="*res://src/Utils.gd"
+Client="*res://src/websocket/client/Client.gd"
 
 [display]
 

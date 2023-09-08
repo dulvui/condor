@@ -4,9 +4,13 @@
 
 class_name AuctionTimer
 
-extends PopupPanel
+extends PanelContainer
 
 signal toggle
+signal time_change(time:int)
+signal paused
+signal restarted
+signal reseted
 
 const MIN_TIME:int = 5
 const MAX_TIME:int = 60
@@ -41,9 +45,9 @@ func _process(delta: float) -> void:
 	if not timer.is_stopped() and not finished:
 		sound.countdown(timer.time_left)
 
-func trigger_toggle(delta:int = 0) -> void:
+func trigger_toggle(delta:float = 0) -> void:
 	if delta > 0:
-		timer.wait_time -= delta
+		timer.wait_time -= delta * 0.001
 	else:
 		timer.wait_time = DEFAULT_TIME
 	if timer.paused:
@@ -52,7 +56,7 @@ func trigger_toggle(delta:int = 0) -> void:
 		timer.stop()
 		timer.start()
 	else:
-		_restart() 
+		restart() 
 
 func set_player(player:Player):
 	active_player = player
@@ -65,10 +69,6 @@ func _on_start_pressed() -> void:
 	else:
 		timer.paused = not timer.paused
 
-
-func _on_restart_pressed() -> void:
-	_restart()
-
 func _on_timer_timeout() -> void:
 	finished = true
 	sound.final()
@@ -79,25 +79,34 @@ func _on_back_pressed() -> void:
 
 
 func _on_bug_button_pressed() -> void:
-	toggle.emit()
-	if timer.paused:
-		timer.paused = false
-	elif not finished:
-		timer.stop()
-		timer.start()
-	else:
-		_restart() 
+	if Config.is_admin:
+		toggle.emit()
+		if timer.paused:
+			timer.paused = false
+		elif not finished:
+			timer.stop()
+			timer.start()
+		else:
+			restart() 
 
 
 func _on_pause_pressed() -> void:
+	pause()
+	paused.emit()
+	
+func pause() -> void:
 	timer.paused = true
 
-func _restart() ->void:
+func _on_restart_pressed() -> void:
+	restart()
+	reseted.emit()
+
+func restart() -> void:
 	finished = false
 	timer.stop()
 	timer.paused = false
-
-func _set_time(time:float) -> void:
+	
+func change_time(time:float) -> void:
 	if Config.active_time + time <= MIN_TIME:
 		Config.active_time = MIN_TIME
 	elif Config.active_time + time > MAX_TIME:
@@ -108,6 +117,10 @@ func _set_time(time:float) -> void:
 	Config.save_all_data()
 
 	timer.wait_time = Config.active_time
+
+func _set_time(time:float) -> void:
+	change_time(time)
+	time_change.emit(time)
 
 func _on_minus_minutes_pressed() -> void:
 	_set_time(-10)
@@ -129,6 +142,10 @@ func _on_plus_minutes_pressed() -> void:
 	_set_time(+10)
 
 func _on_reset_pressed() -> void:
+	reset()
+	reseted.emit()
+	
+func reset() -> void:
 	Config.active_time = DEFAULT_TIME
 	Config.save_all_data()
 	timer.wait_time = Config.active_time
