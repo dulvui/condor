@@ -85,6 +85,32 @@ text = "MENU"
 
 [node name="Client" parent="." instance=ExtResource("9_aa6gw")]
 
+[node name="Status" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.905896
+anchor_top = 0.015
+anchor_right = 0.992
+anchor_bottom = 0.052
+offset_left = -0.320068
+offset_top = -0.200001
+offset_right = -0.640137
+offset_bottom = -0.16
+metadata/_edit_use_anchors_ = true
+
+[node name="Connect" type="Button" parent="Status"]
+layout_mode = 2
+text = "CONNECT"
+
+[node name="VSeparator" type="VSeparator" parent="Status"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ServerStatus" type="ColorRect" parent="Status"]
+custom_minimum_size = Vector2(42, 32)
+layout_mode = 2
+
 [connection signal="active_player_change" from="MarginContainer/HSplitContainer/VSplitContainer/PlayerList" to="." method="_on_player_list_active_player_change"]
 [connection signal="assign" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_assign"]
 [connection signal="auction" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_auction"]
@@ -94,4 +120,7 @@ text = "MENU"
 [connection signal="assigned" from="AssignPlayer" to="." method="_on_assign_player_assigned"]
 [connection signal="toggle" from="Timer" to="." method="_on_timer_toggle"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
+[connection signal="connected_to_server" from="Client" to="." method="_on_client_connected_to_server"]
+[connection signal="connection_closed" from="Client" to="." method="_on_client_connection_closed"]
 [connection signal="message_received" from="Client" to="." method="_on_client_message_received"]
+[connection signal="pressed" from="Status/Connect" to="." method="_on_connect_pressed"]

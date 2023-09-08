@@ -11,6 +11,8 @@ extends Control
 @onready var history:Control = $MarginContainer/HSplitContainer/VSplitContainer/History
 @onready var timer:AuctionTimer = $Timer
 @onready var client:Client = $Client
+@onready var server_status:ColorRect = $Status/ServerStatus
+@onready var connect_button:Button = $Status/Connect
 
 var active_player:Player
 
@@ -105,3 +107,16 @@ func _on_client_message_received(message:String) -> void:
 func _on_timer_toggle() -> void:
 	var timestamp:int = Time.get_unix_time_from_system()
 	client.send("start_timer:" + str(timestamp))
+
+
+func _on_client_connection_closed() -> void:
+	server_status.color = Color.RED
+	connect_button.visible = true
+	
+
+func _on_client_connected_to_server() -> void:
+	server_status.color = Color.GREEN
+	connect_button.visible = false
+
+func _on_connect_pressed() -> void:
+	client.connect_to_server()
