@@ -4,16 +4,17 @@
 
 class_name  PlayerLabel
 
-extends HBoxContainer
+extends Control
 
 signal action
 
-@onready var active_label:Label = $Active
-@onready var position_label:Label = $Position
-@onready var name_label:Label = $Name
-@onready var team_name_label:Label = $TeamName
-@onready var price_label:Label = $Price
-@onready var action_button:Button = $Action
+@onready var active_label:Label = $HBoxContainer/Active
+@onready var position_label:Label = $HBoxContainer/Position
+@onready var name_label:Label = $HBoxContainer/Name
+@onready var team_name_label:Label = $HBoxContainer/TeamName
+@onready var price_label:Label = $HBoxContainer/Price
+@onready var action_button:Button = $HBoxContainer/Action
+@onready var color_rect:ColorRect = $ColorRect
 
 
 var player:Player 
@@ -23,6 +24,9 @@ func _ready() -> void:
 	
 	if not Config.is_admin:
 		action_button.disabled = true
+	else:
+		action_button.text = "A"
+	
 
 
 func set_up(_player:Player) -> void:
@@ -46,12 +50,16 @@ func set_up(_player:Player) -> void:
 
 	match player.position:
 		Player.Position.P:
+			color_rect.color = Color.DARK_BLUE
 			label_settings.font_color = Color.YELLOW
 		Player.Position.D:
+			color_rect.color = Color.DARK_GREEN
 			label_settings.font_color = Color.GREEN
 		Player.Position.C:
+			color_rect.color = Color.DARK_BLUE
 			label_settings.font_color = Color.BLUE
 		Player.Position.A:
+			color_rect.color = Color.DARK_GREEN
 			label_settings.font_color = Color.RED
 	
 	position_label.label_settings = label_settings
@@ -73,6 +81,12 @@ func disable_player() -> void:
 
 func set_button_text(text:String) -> void:
 	action_button.text = text
+	
+func activate() -> void:
+	color_rect.color = Color.MEDIUM_AQUAMARINE
+	
+func deactivate() -> void:
+	color_rect.color = Color.DARK_BLUE
 	
 func _on_action_pressed() -> void:
 	action.emit()
