@@ -6,15 +6,17 @@ extends Control
 
 const TeamBox:PackedScene = preload("res://src/screens/teams/TeamBox/TeamBox.tscn")
 
+@onready var add_player:HBoxContainer = $HBoxContainer
 @onready var add_button:Button = $HBoxContainer/Add
 @onready var name_edit:LineEdit = $HBoxContainer/Name
-@onready var team_list:VBoxContainer = $List
+@onready var team_list:VBoxContainer = $ScrollContainer/List
 
 var team_to_delte:Team
 
 func _ready() -> void:
 	for team in Config.teams:
 		_add_team(team)
+	add_player.visible = Config.is_admin
 
 	
 func _add_team(team:Team):

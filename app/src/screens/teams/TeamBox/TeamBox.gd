@@ -14,6 +14,9 @@ signal deleted
 
 var team:Team
 
+func _ready() -> void:
+	$Delete.visible = Config.is_admin
+
 func set_up(team:Team) -> void:
 	self.team = team
 	name_label.text = team.name
