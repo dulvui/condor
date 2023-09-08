@@ -39,3 +39,5 @@ app/android/build/.gradle/
 # screenshots
 screenshots/
 
+# linux builds
+*.x86_64
