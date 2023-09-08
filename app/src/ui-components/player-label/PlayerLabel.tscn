@@ -37,8 +37,13 @@ text_overrun_behavior = 3
 layout_mode = 2
 text = "12 M"
 
+[node name="Link" type="Button" parent="."]
+layout_mode = 2
+text = "L"
+
 [node name="Action" type="Button" parent="."]
 layout_mode = 2
-text = "-"
+text = "R"
 
+[connection signal="pressed" from="Link" to="." method="_on_link_pressed"]
 [connection signal="pressed" from="Action" to="." method="_on_action_pressed"]

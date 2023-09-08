@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Config="*res://src/Config.gd"
+Utils="*res://src/Utils.gd"
 
 [display]
 

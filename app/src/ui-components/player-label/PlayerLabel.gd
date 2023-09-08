@@ -76,3 +76,7 @@ func set_button_text(text:String) -> void:
 	
 func _on_action_pressed() -> void:
 	action.emit()
+
+
+func _on_link_pressed():
+	OS.shell_open(Utils.get_player_link(player))
