@@ -37,30 +37,24 @@ alignment = 1
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "START"
 
 [node name="Teams" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "TEAMS"
 
 [node name="Export" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "EXPORT"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "INFO"
-
-[node name="Admin" type="Button" parent="VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "ADMIN"
 
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
@@ -83,8 +77,34 @@ uri = "https://simondalvai.org"
 structured_text_bidi_override = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Admin" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+anchor_left = 0.029
+anchor_top = 0.83
+anchor_right = 0.258
+anchor_bottom = 0.933
+offset_left = -7.68
+offset_top = -8.40002
+offset_right = 0.639954
+offset_bottom = 9.35999
+theme_override_font_sizes/font_size = 32
+text = "ADMIN"
+
+[node name="AdminActive" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.770833
+anchor_top = 0.916667
+anchor_right = 0.954333
+anchor_bottom = 0.948444
+offset_right = -0.320007
+offset_bottom = -0.32
+text = "ADMIN"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Teams" to="." method="_on_teams_pressed"]
 [connection signal="pressed" from="VBoxContainer/Export" to="." method="_on_export_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="VBoxContainer/Admin" to="." method="_on_admin_pressed"]
+[connection signal="pressed" from="Admin" to="." method="_on_admin_pressed"]
