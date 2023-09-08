@@ -5,7 +5,7 @@
 extends Node
 
 const BUDGET:int = 500
-const FILE_PATH:String = "res://assets/players/players_05082023.list"
+const FILE_PATH:String = "res://assets/players/players.list"
 
 var config:ConfigFile
 
@@ -165,7 +165,9 @@ func _init_players() -> Array:
 		if not line[0]:
 			break
 		var pos:String = line[1]
-		temp_list[pos].append(_get_player(line))
+		var player:Player =  _get_player(line)
+		if player:
+			temp_list[pos].append(player)
 	
 	for position in Player.Position.keys():
 		temp_list[position].sort_custom(func(a, b): return a.name < b.name)
@@ -176,15 +178,18 @@ func _init_players() -> Array:
 func _get_player(line:Array) -> Player:
 	var id:int = int(line[0])
 	var position:int = Player.Position.keys().find(line[1])
-	var name:String = line[2]
+	var player_name:String = line[2]
 	var real_team:String = line[3]
 	var mfv:float = float(line[4])
 	var price_initial:int = int(line[5])
 	var price_current:int = int(line[6])
 	var price:int = 0
 	
+	if "*" in player_name:
+		return
+	
 	var player = Player.new()
-	return player.set_up(id, position, name,real_team, mfv, price, price_initial, price_current)
+	return player.set_up(id, position, player_name,real_team, mfv, price, price_initial, price_current)
 
 func toogle_admin() -> bool:
 	is_admin = not is_admin
