@@ -22,7 +22,11 @@ signal player_next()
 signal player_previous()
 signal player_active(player_id:int)
 
-const HOST:String = "ws://localhost:8000/"
+signal reset_state
+
+
+#const HOST:String = "ws://localhost:8000/"
+const HOST:String = "ws://sandbox.s9i.org:8000/"
 
 
 @export var handshake_headers: PackedStringArray
@@ -77,7 +81,6 @@ func poll() -> void:
 	if socket.get_ready_state() != socket.STATE_CLOSED:
 		socket.poll()
 	var state = socket.get_ready_state()
-	print(state)
 	if last_state != state:
 		last_state = state
 		if state == socket.STATE_OPEN:
@@ -132,4 +135,24 @@ func _on_client_message_received(message:String) -> void:
 	elif player_active.get_name() in message:
 		var player_id:int = int(message.split(":")[1])
 		player_active.emit(player_id)
+#	elif reset_state.get_name() in message:
+#		if Config.is_admin:
+#			var data:Dictionary = {}
+#			data.players = JSON.stringify(Config.players)
+#			data.teams = JSON.stringify(str(Config.teams))
+#			data.history = JSON.stringify(Config.history)
+#			data.active_player_index = Config.active_player_index
+#			data.active_time = Config.active_time
+#			send(reset_state.get_name() + ":" + JSON.stringify(data))
+#		else:
+#			var data:Dictionary = JSON.parse_string(message.split(":")[1])
+#
+#			var players:Array = data.players
+#			var teams:Array = data.teams
+#			var history:Array = data.history
+#			var active_player_index:int = data.active_player_index
+#			var active_time:int = data.active_time
+#
+#			Config.reset_state(teams, players,history, active_player_index, active_time)
+#			reset_state.emit()
 	print(message)

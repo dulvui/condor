@@ -35,6 +35,7 @@ func _ready() -> void:
 	Client.player_next.connect(_on_client_player_next)
 	Client.player_previous.connect(_on_client_player_previous)
 	Client.player_active.connect(_on_client_player_active)
+	Client.reset_state.connect(_on_client_reset_state)
 	
 	if Client.last_state == WebSocketPeer.STATE_OPEN:
 		server_status.color = Color.GREEN
@@ -116,6 +117,7 @@ func _on_client_connection_closed() -> void:
 func _on_client_connected_to_server() -> void:
 	server_status.color = Color.GREEN
 	connect_button.visible = false
+	
 
 func _on_connect_pressed() -> void:
 	Client.connect_to_server()
@@ -181,3 +183,5 @@ func _on_client_player_active(player_id:int) -> void:
 	player_list.update()
 
 
+func _on_client_reset_state() -> void:
+	_refresh_lists()

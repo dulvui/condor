@@ -35,8 +35,6 @@ func _ready() -> void:
 	players = config.get_value("data", "players", _init_players())
 	active_player_index = config.get_value("data", "active_player_index", 0)
 	history = config.get_value("data", "history", [])
-	
-	
 
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
@@ -48,15 +46,14 @@ func save_all_data() -> void:
 	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
-func reset() -> void:
-	next_team_id = 0
-	teams = _get_default_teams()
-	players = _init_players()
-	active_player_index = 0
-	history = []
 	
-func restore(history:Array) -> void:
-#	for transfer in history:
+func reset_state(teams:Array, players:Array,history:Array, active_player_index:int, active_time:int) -> void:
+#	self.teams = teams
+#	self.players = players
+#	self.history = history
+#	self.active_player_index = active_player_index
+#	self.active_time = active_time
+#	save_all_data()
 	pass
 
 func add_player_to_team(team:Team, player:Player, price:int) -> String:
