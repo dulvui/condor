@@ -21,7 +21,7 @@ layout_mode = 2
 [node name="RemoveDialog" type="ConfirmationDialog" parent="."]
 title = "REMOVE"
 position = Vector2i(336, 79)
-size = Vector2i(400, 134)
+size = Vector2i(400, 150)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="RemoveDialog"]
 offset_left = 8.0

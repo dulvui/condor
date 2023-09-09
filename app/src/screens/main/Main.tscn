@@ -48,7 +48,7 @@ custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
 [node name="PlayerList" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("2_o4m2h")]
-custom_minimum_size = Vector2(300, 800)
+custom_minimum_size = Vector2(300, 700)
 layout_mode = 2
 
 [node name="History" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("4_in5of")]

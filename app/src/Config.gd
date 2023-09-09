@@ -65,7 +65,6 @@ func remove_player_from_team(player:Player, team:Team) -> void:
 	
 	Config.save_all_data()
 
-
 func add_to_history(player:Player, team:Team, price:int):
 	var transfer = {
 		"player" : player,
