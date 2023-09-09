@@ -5,12 +5,13 @@
 [node name="PlayerLabel" type="Control"]
 custom_minimum_size = Vector2(400, 42)
 layout_mode = 3
-anchor_right = 0.258
+anchor_right = 0.26
 anchor_bottom = 0.039
-offset_right = 4.63995
+offset_right = 0.799896
 offset_bottom = -12.12
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("1_myfyj")
 
 [node name="ColorRect" type="ColorRect" parent="."]

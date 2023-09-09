@@ -8,7 +8,7 @@ signal active_player_change
 
 const PlayerLabel:PackedScene = preload("res://src/ui-components/player-label/PlayerLabel.tscn")
 
-@onready var list:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
+@onready var list:VBoxContainer = $VBoxContainer/ScrollContainer/VBoxContainer
 @onready var scroll:ScrollContainer = $VBoxContainer/ScrollContainer
 @onready var positions:OptionButton = $VBoxContainer/HBoxContainer/Positions
 

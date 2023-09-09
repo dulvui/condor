@@ -33,6 +33,10 @@ window/stretch/mode="viewport"
 
 theme/custom="res://fanta_theme.tres"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
