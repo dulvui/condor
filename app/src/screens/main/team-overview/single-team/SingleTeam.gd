@@ -38,11 +38,18 @@ func _append_player_label(player:Player) -> void:
 	scrool.ensure_control_visible(player_box)
 
 func _on_player_removed(player:Player) -> void:
-	Config.add_to_history(player, team, player.price)
+	Config.add_to_history(player, team, -player.price)
 	Config.remove_player_from_team(player, team)
+	
+	if Config.is_admin:
+		Client.send(Client.player_remove.get_name() + ":" + str(player.id) + ":" + str(player.team_id))
 	
 	for player_label in player_list.get_children():
 		if player_label.player.id == player.id:
 			player_label.queue_free()
 	budget_label.text = " %d M"%team.budget
 	player_removed.emit()
+	
+func update_budget() -> void:
+	budget_label.text = " %d M"%team.budget
+

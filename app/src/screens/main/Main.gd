@@ -30,6 +30,7 @@ func _ready() -> void:
 	Client.timer_restart.connect(_on_client_timer_restart)
 	Client.timer_reset.connect(_on_client_timer_reset)
 	Client.player_assign.connect(_on_client_player_assign)
+	Client.player_remove.connect(_on_client_player_remove)
 	Client.player_next.connect(_on_client_player_next)
 	Client.player_previous.connect(_on_client_player_previous)
 	Client.player_active.connect(_on_client_player_active)
@@ -154,7 +155,15 @@ func _on_client_timer_reset() -> void:
 
 func _on_client_player_assign(player:Player, team:Team, price:int) -> void:
 	Config.add_to_history(player, team, price)
+	Config.add_player_to_team(team, player, int(price))
 	_assign_player()
+	team_overview.update_teams_budget()
+
+	
+func _on_client_player_remove(player:Player, team:Team) -> void:
+	Config.add_to_history(player, team, -player.price)
+	Config.remove_player_from_team(player, team)
+	team_overview.update_teams_budget()
 
 func _on_client_player_next() -> void:
 	_next_player()

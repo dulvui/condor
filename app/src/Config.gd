@@ -60,7 +60,6 @@ func add_player_to_team(team:Team, player:Player, price:int) -> String:
 	
 func remove_player_from_team(player:Player, team:Team) -> void:
 	team.remove_player(player)
-	
 	player.price = 0
 	player.team_id = -1
 	

@@ -37,6 +37,11 @@ func add_player(player:Player, team:Team) -> void:
 	
 func _on_player_removed():
 	player_removed.emit()
+	
+func update_teams_budget() -> void:
+	active_team.update_budget()
+	for single_team in team_list.get_children():
+		single_team.update_budget()
 
 
 func _on_active_team_player_removed() -> void:
