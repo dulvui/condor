@@ -72,12 +72,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.844958
 anchor_top = 0.015
-anchor_right = 1.00733
-anchor_bottom = 0.0834074
+anchor_right = 0.99
+anchor_bottom = 0.08
 offset_left = -0.320068
 offset_top = -0.200001
-offset_right = -30.0802
-offset_bottom = -8.08
+offset_right = 3.19971
+offset_bottom = -4.40001
 metadata/_edit_use_anchors_ = true
 
 [node name="Connect" type="Button" parent="Status"]
@@ -95,14 +95,14 @@ layout_mode = 2
 
 [node name="Menu" type="Button" parent="."]
 layout_mode = 2
-anchor_left = 0.912
-anchor_top = 0.943
-anchor_right = 0.954
-anchor_bottom = 0.981
-offset_left = -23.0399
-offset_top = -42.44
-offset_right = 30.3202
-offset_bottom = -17.48
+anchor_left = 0.9
+anchor_top = 0.904
+anchor_right = 0.97
+anchor_bottom = 0.965
+offset_left = 39.9998
+offset_top = 23.6799
+offset_right = 39.5999
+offset_bottom = 23.7999
 text = "MENU"
 
 [node name="Timer" parent="." instance=ExtResource("8_nny5i")]
