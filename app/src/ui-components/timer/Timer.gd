@@ -79,14 +79,14 @@ func _on_back_pressed() -> void:
 
 
 func _on_bug_button_pressed() -> void:
-	if Config.is_admin:
+	if Config.is_admin or (not timer.is_stopped() and not timer.paused):
 		toggle.emit()
 		if timer.paused:
 			timer.paused = false
 		elif not finished:
 			timer.stop()
 			timer.start()
-		else:
+		elif Config.is_admin:
 			restart() 
 
 
