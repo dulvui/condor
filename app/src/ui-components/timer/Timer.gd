@@ -9,7 +9,6 @@ extends PanelContainer
 signal toggle
 signal time_change
 signal paused
-signal restarted
 signal reseted
 
 const MIN_TIME:int = 5
@@ -110,6 +109,7 @@ func restart() -> void:
 	finished = false
 	timer.stop()
 	timer.paused = false
+	timer.wait_time = Config.active_time
 	
 func change_time(time:float) -> void:
 	if Config.active_time + time <= MIN_TIME:
@@ -145,13 +145,3 @@ func _on_plus_5_pressed() -> void:
 
 func _on_plus_minutes_pressed() -> void:
 	_set_time(+10)
-
-func _on_reset_pressed() -> void:
-	reset()
-	reseted.emit()
-	
-func reset() -> void:
-	Config.active_time = DEFAULT_TIME
-	Config.save_all_data()
-	timer.wait_time = Config.active_time
-

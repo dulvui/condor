@@ -27,7 +27,6 @@ func _ready() -> void:
 	Client.timer_start.connect(_on_client_timer_start)
 	Client.timer_change.connect(_on_client_timer_change)
 	Client.timer_pause.connect(_on_client_timer_pause)
-	Client.timer_restart.connect(_on_client_timer_restart)
 	Client.timer_reset.connect(_on_client_timer_reset)
 	Client.player_assign.connect(_on_client_player_assign)
 	Client.player_remove.connect(_on_client_player_remove)
@@ -125,9 +124,6 @@ func _on_timer_time_changed(time) -> void:
 func _on_timer_paused() -> void:
 	Client.send(Client.timer_pause.get_name())
 
-func _on_timer_restarted() -> void:
-	Client.send(Client.timer_restarted.get_name())
-	
 func _on_timer_reseted() -> void:
 	Client.send(Client.timer_reset.get_name())
 
@@ -152,11 +148,8 @@ func _on_timer_time_change() -> void:
 func _on_client_timer_pause() -> void:
 	timer.pause()
 
-func _on_client_timer_restart() -> void:
-	timer.restart()
-
 func _on_client_timer_reset() -> void:
-	timer.reset()
+	timer.restart()
 
 func _on_client_player_assign(player:Player, team:Team, price:int) -> void:
 	Config.add_to_history(player, team, price)

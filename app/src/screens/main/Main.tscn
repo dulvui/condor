@@ -122,6 +122,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
 [connection signal="paused" from="Timer" to="." method="_on_timer_paused"]
 [connection signal="reseted" from="Timer" to="." method="_on_timer_reseted"]
-[connection signal="restarted" from="Timer" to="." method="_on_timer_restarted"]
 [connection signal="time_change" from="Timer" to="." method="_on_timer_time_change"]
 [connection signal="toggle" from="Timer" to="." method="_on_timer_toggle"]

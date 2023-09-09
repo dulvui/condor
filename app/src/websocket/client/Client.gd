@@ -15,7 +15,6 @@ signal auction_start()
 signal timer_start(delta:float)
 signal timer_change(time:int)
 signal timer_pause()
-signal timer_restart()
 signal timer_reset()
 signal player_assign(player:Player, team:Team, price:int)
 signal player_remove(player:Player, team:Team)
@@ -103,8 +102,8 @@ func _on_client_message_received(message:String) -> void:
 		timer_change.emit(time)
 	elif message == timer_pause.get_name():
 		timer_pause.emit()
-	elif message == timer_restart.get_name() :
-		timer_restart.emit()
+	elif message == timer_reset.get_name() :
+		timer_reset.emit()
 	elif message == timer_reset.get_name() :
 		timer_reset.emit()
 	elif player_assign.get_name() in message:
