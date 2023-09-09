@@ -142,8 +142,12 @@ func _on_client_auction_start() -> void:
 func _on_client_timer_start(delta:float) -> void:
 	timer.trigger_toggle(delta)
 
+
 func _on_client_timer_change(time:int) -> void:
-	timer.change_time(time)
+	timer.set_time(time)
+
+func _on_timer_time_change() -> void:
+	Client.send(Client.timer_change.get_name() + ":" + str(Config.active_time))
 
 func _on_client_timer_pause() -> void:
 	timer.pause()
@@ -179,3 +183,5 @@ func _on_client_player_active(player_id:int) -> void:
 	active_player = Config.set_active_player(player)
 	auction_control.set_player(player)
 	player_list.update()
+
+

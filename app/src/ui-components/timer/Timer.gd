@@ -7,7 +7,7 @@ class_name AuctionTimer
 extends PanelContainer
 
 signal toggle
-signal time_change(time:int)
+signal time_change
 signal paused
 signal restarted
 signal reseted
@@ -56,7 +56,12 @@ func trigger_toggle(delta:float = 0) -> void:
 		timer.stop()
 		timer.start()
 	else:
-		restart() 
+		restart()
+
+func set_time(time:int) -> void:
+	Config.active_time = time
+	Config.save_all_data()
+	timer.wait_time = Config.active_time
 
 func set_player(player:Player):
 	active_player = player
@@ -120,7 +125,7 @@ func change_time(time:float) -> void:
 
 func _set_time(time:float) -> void:
 	change_time(time)
-	time_change.emit(time)
+	time_change.emit()
 
 func _on_minus_minutes_pressed() -> void:
 	_set_time(-10)

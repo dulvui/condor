@@ -98,7 +98,7 @@ func _on_client_message_received(message:String) -> void:
 	elif timer_toggle.get_name() in message:
 		# todo: add delta also to toggle
 		timer_toggle.emit()
-	elif message == timer_change.get_name():
+	elif timer_change.get_name() in message:
 		var time:int = int(message.split(":")[1])
 		timer_change.emit(time)
 	elif message == timer_pause.get_name():
@@ -131,3 +131,4 @@ func _on_client_message_received(message:String) -> void:
 	elif player_active.get_name() in message:
 		var player_id:int = int(message.split(":")[1])
 		player_active.emit(player_id)
+	print(message)
