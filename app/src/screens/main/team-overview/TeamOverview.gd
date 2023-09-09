@@ -34,6 +34,15 @@ func add_player(player:Player, team:Team) -> void:
 			if single_team.team.id == team.id:
 				single_team.add_player(player)
 				break
+				
+func remove_player(player:Player, team:Team) -> void:
+	if team.id == Config.active_team_id:
+		active_team.remove_player(player)
+	else:
+		for single_team in team_list.get_children():
+			if single_team.team.id == team.id:
+				single_team.remove_player(player)
+				break
 	
 func _on_player_removed():
 	player_removed.emit()

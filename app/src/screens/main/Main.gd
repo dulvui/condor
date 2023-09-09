@@ -163,6 +163,7 @@ func _on_client_player_assign(player:Player, team:Team, price:int) -> void:
 func _on_client_player_remove(player:Player, team:Team) -> void:
 	Config.add_to_history(player, team, -player.price)
 	Config.remove_player_from_team(player, team)
+	team_overview.remove_player(player, team)
 	team_overview.update_teams_budget()
 
 func _on_client_player_next() -> void:
