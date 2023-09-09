@@ -5,7 +5,7 @@
 extends Node
 
 const BUDGET:int = 500
-const FILE_PATH:String = "res://assets/players/players.list"
+const FILE_PATH:String = "res://assets/players/players.json"
 
 var config:ConfigFile
 
@@ -151,8 +151,12 @@ func _init_players() -> Array:
 	
 	for position in Player.Position.keys():
 		temp_list[position] = []
-	
+		
 	var file:FileAccess = FileAccess.open(FILE_PATH, FileAccess.READ)
+	
+	if file == null:
+		print("error readin file: %s"%str(FileAccess.get_open_error()))
+		return []
 	# skip header lines
 	while not file.eof_reached():
 		var line:Array = file.get_csv_line()
@@ -162,7 +166,7 @@ func _init_players() -> Array:
 	while not file.eof_reached():
 		var line:Array = file.get_csv_line()
 		# check if not empty
-		if not line[0]:
+		if str(line[0]).is_empty():
 			break
 		var pos:String = line[1]
 		var player:Player =  _get_player(line)
@@ -173,6 +177,7 @@ func _init_players() -> Array:
 		temp_list[position].sort_custom(func(a, b): return a.name < b.name)
 		list.append_array(temp_list[position])
 	
+	file.close()
 	return list
 		
 func _get_player(line:Array) -> Player:
