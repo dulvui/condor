@@ -92,6 +92,7 @@ func _on_player_list_active_player_change() -> void:
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 	player_list.update()
+	Client.send(Client.player_active.get_name() + ":" + str(active_player.id))
 
 func _on_team_overview_player_removed() -> void:
 	_refresh_lists()
@@ -173,5 +174,8 @@ func _on_client_player_next() -> void:
 func _on_client_player_previous() -> void:
 	_previous_player()
 
-func _on_client_player_active() -> void:
-	print("_on_client_player_active not implemented yet")
+func _on_client_player_active(player_id:int) -> void:
+	var player:Player = Config.get_player_by_id(player_id)
+	active_player = Config.set_active_player(player)
+	auction_control.set_player(player)
+	player_list.update()

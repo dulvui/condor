@@ -18,25 +18,12 @@ signal timer_pause()
 signal timer_restart()
 signal timer_reset()
 signal player_assign(player:Player, team:Team, price:int)
+signal player_remove(player:Player, team:Team)
 signal player_next()
 signal player_previous()
 signal player_active(player_id:int)
 
 const HOST:String = "ws://localhost:8000/"
-
-
-
-enum MESSAGE {
-	SETUP,
-	TEAM_PICK,
-	UPDATE_ACTIVE_PLAYER,
-	TRANSFER,
-	AUCTION_START,
-	AUCTION_END,
-	AUCTION_BID,
-	AUCTION_PAUSE,
-	AUCTION_RESET,
-}
 
 @export var handshake_headers: PackedStringArray
 @export var supported_protocols: PackedStringArray
@@ -129,6 +116,14 @@ func _on_client_message_received(message:String) -> void:
 		var team:Team = Config.get_team_by_id(team_id)
 		player.price = price
 		player_assign.emit(player, team, price)
+	elif player_remove.get_name() in message:
+		var player_id:int = int(message.split(":")[1])
+		var team_id:int = int(message.split(":")[2])
+
+		var player:Player = Config.get_player_by_id(player_id)
+		var team:Team = Config.get_team_by_id(team_id)
+		
+		player_remove.emit(player, team)
 	elif message == player_next.get_name():
 		player_next.emit()
 	elif message == player_previous.get_name():
