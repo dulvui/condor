@@ -44,11 +44,11 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/HSplitContainer"]
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
 [node name="PlayerList" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("2_o4m2h")]
-custom_minimum_size = Vector2(300, 600)
+custom_minimum_size = Vector2(300, 800)
 layout_mode = 2
 
 [node name="History" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("4_in5of")]
@@ -70,14 +70,14 @@ visible = false
 [node name="Status" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.905896
+anchor_left = 0.844958
 anchor_top = 0.015
-anchor_right = 0.992
-anchor_bottom = 0.052
+anchor_right = 1.00733
+anchor_bottom = 0.0834074
 offset_left = -0.320068
 offset_top = -0.200001
-offset_right = -0.640137
-offset_bottom = -0.16
+offset_right = -30.0802
+offset_bottom = -8.08
 metadata/_edit_use_anchors_ = true
 
 [node name="Connect" type="Button" parent="Status"]
@@ -90,7 +90,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ServerStatus" type="ColorRect" parent="Status"]
-custom_minimum_size = Vector2(42, 32)
+custom_minimum_size = Vector2(62, 42)
 layout_mode = 2
 
 [node name="Menu" type="Button" parent="."]
@@ -99,10 +99,10 @@ anchor_left = 0.912
 anchor_top = 0.943
 anchor_right = 0.954
 anchor_bottom = 0.981
-offset_left = -0.0401611
-offset_top = -0.440002
-offset_right = -0.680054
-offset_bottom = 0.519897
+offset_left = -23.0399
+offset_top = -42.44
+offset_right = 30.3202
+offset_bottom = -17.48
 text = "MENU"
 
 [node name="Timer" parent="." instance=ExtResource("8_nny5i")]

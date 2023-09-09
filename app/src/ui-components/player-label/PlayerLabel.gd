@@ -14,6 +14,7 @@ signal action
 @onready var team_name_label:Label = $HBoxContainer/TeamName
 @onready var price_label:Label = $HBoxContainer/Price
 @onready var action_button:Button = $HBoxContainer/Action
+@onready var link_button:Button = $HBoxContainer/Link
 @onready var color_rect:ColorRect = $ColorRect
 
 
@@ -21,11 +22,8 @@ var player:Player
 
 func _ready() -> void:
 	set_process(false)
-	
-	if not Config.is_admin:
-		action_button.disabled = true
-	else:
-		action_button.text = "A"
+	action_button.visible = Config.is_admin
+	link_button.visible = Config.is_admin
 	
 
 
