@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 func set_player(_player:Player) -> void:
 	player = _player
-	price.clear()
+	price.text = "1"
 
 
 func _on_assign_pressed(team:Team) -> void:
