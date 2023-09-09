@@ -12,6 +12,8 @@ extends Control
 @onready var timer:AuctionTimer = $Timer
 @onready var server_status:ColorRect = $Status/ServerStatus
 @onready var connect_button:Button = $Status/Connect
+@onready var connection_lost_alert:AcceptDialog = $ConnectionLost
+
 
 var active_player:Player
 
@@ -108,6 +110,7 @@ func _on_timer_toggle() -> void:
 func _on_client_connection_closed() -> void:
 	server_status.color = Color.RED
 	connect_button.visible = true
+	connection_lost_alert.popup_centered()
 	
 
 func _on_client_connected_to_server() -> void:

@@ -24,6 +24,7 @@ signal player_active(player_id:int)
 
 const HOST:String = "ws://localhost:8000/"
 
+
 @export var handshake_headers: PackedStringArray
 @export var supported_protocols: PackedStringArray
 var tls_options: TLSOptions = null
@@ -76,6 +77,7 @@ func poll() -> void:
 	if socket.get_ready_state() != socket.STATE_CLOSED:
 		socket.poll()
 	var state = socket.get_ready_state()
+	print(state)
 	if last_state != state:
 		last_state = state
 		if state == socket.STATE_OPEN:

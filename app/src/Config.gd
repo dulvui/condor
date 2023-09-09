@@ -48,6 +48,17 @@ func save_all_data() -> void:
 	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
+func reset() -> void:
+	next_team_id = 0
+	teams = _get_default_teams()
+	players = _init_players()
+	active_player_index = 0
+	history = []
+	
+func restore(history:Array) -> void:
+#	for transfer in history:
+	pass
+
 func add_player_to_team(team:Team, player:Player, price:int) -> String:
 	var error_message:String = team.add_player(player, price)
 	if not error_message.is_empty():

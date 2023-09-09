@@ -111,6 +111,17 @@ visible = false
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="ConnectionLost" type="AcceptDialog" parent="."]
+title = "CONNECTION LOST"
+size = Vector2i(600, 200)
+
+[node name="Label" type="Label" parent="ConnectionLost"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 116.0
+text = "PLEASE RECONNECT"
+
 [connection signal="active_player_change" from="MarginContainer/HSplitContainer/VSplitContainer/PlayerList" to="." method="_on_player_list_active_player_change"]
 [connection signal="assign" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_assign"]
 [connection signal="auction" from="MarginContainer/HSplitContainer/VBoxContainer/AuctionControl" to="." method="_on_auction_control_auction"]
