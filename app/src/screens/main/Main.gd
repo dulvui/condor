@@ -64,8 +64,6 @@ func _assign_player() -> void:
 	_refresh_lists()
 	var latest_transfer = Config.history[-1]
 	team_overview.add_player(latest_transfer.player, latest_transfer.team)
-	active_player = Config.next_player()
-	auction_control.set_player(active_player)
 
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
