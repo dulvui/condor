@@ -33,24 +33,29 @@ func set_up_list():
 		var player_label = PlayerLabel.instantiate()
 		list.add_child(player_label)
 		player_label.set_up(player)
+		player_label.action.connect(_set_active_player.bind(player))
 		if player.id == Config.active_player().id:
 			player_label.activate()
-			player_label.action.connect(_set_active_player.bind(player))
 		elif player.team_id < 0:
 			player_label.deactivate()
-			# todo make active player on click
-			player_label.action.connect(_set_active_player.bind(player))
 		else:
 			player_label.deactivate()
 			player_label.disable_player()
+		
 
 func update() -> void:
 	for player_label in list.get_children():
 		if player_label.player.id == Config.active_player().id:
 			player_label.activate()
 			scroll.ensure_control_visible(player_label)
+		elif player_label.player.team_id < 0:
+			player_label.deactivate()
 		else:
 			player_label.deactivate()
+			player_label.disable_player()
+			
+
+			
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")

@@ -4,7 +4,7 @@
 
 extends Node
 
-const BUDGET:int = 500
+const BUDGET:int = 325
 const FILE_PATH:String = "res://assets/players/players.json"
 
 var config:ConfigFile
@@ -127,14 +127,15 @@ func get_team_by_id(id:int) -> Team:
 func _get_default_teams() -> Array:
 	var default_teams:Array = []
 	const desp_league_names = [
-		"Fc Messi Male",
-		"ASD Obergoller",
-		"Fc. MAINZ NA GIOIA",
-		"Lokomotiv Loska",
-		"Longobarda",
-		"FC MANCHESTER SINTY",
-		"TIRANA RAGLIA",
-		"Oscugnizzzzz",
+		"Real Linus",
+		"Knight JR FC",
+		"Gratlamsee",
+		"Real Tibia",
+		"Antica Distilleria Brase Cuerte",
+		"Zukunft Suedtirol",
+		"Robysauron",
+		"Coppa Del Nonno",
+		"Rooney Tunes",
 	]
 	
 	var id:int = 0

@@ -23,8 +23,7 @@ var player:Player
 func _ready() -> void:
 	set_process(false)
 	action_button.visible = Config.is_admin
-	link_button.visible = Config.is_admin
-	
+	link_button.visible = Config.is_admin or OS.get_name() == "Linux" or OS.get_name() == "Windows"
 
 
 func set_up(_player:Player) -> void:
@@ -64,17 +63,16 @@ func set_up(_player:Player) -> void:
 
 func disable_player() -> void:
 	# set position label color
-	var label_settings = LabelSettings.new()
-	label_settings.font_size = get_theme_default_font_size()
+#	var label_settings = LabelSettings.new()
+#	label_settings.font_size = get_theme_default_font_size()
+#
+#	label_settings.font_color = Color.GRAY
+#	name_label.label_settings = label_settings
+#	team_name_label.label_settings = label_settings
+#	price_label.label_settings = label_settings
+#	position_label.label_settings = label_settings
 	
-	label_settings.font_color = Color.GRAY
-	name_label.label_settings = label_settings
-	team_name_label.label_settings = label_settings
-	price_label.label_settings = label_settings
-	position_label.label_settings = label_settings
-
-	action_button.disabled = true
-	
+	color_rect.color = Color.DARK_SLATE_GRAY
 
 
 func set_button_text(text:String) -> void:

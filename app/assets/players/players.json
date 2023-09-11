@@ -1,5 +1,5 @@
-Lista Svincolati desp-league,,,,,,
-s,,,,,,
+Lista Svincolati fanta-idm,,,,,,
+https://leghe.fantacalcio.it/fanta-idm,,,,,,
 ,,,,,,
 Id,Ruolo,Calciatore,Squadra,M. FV,Qt. In.,Qt. At.
 3,P,Radunovic,CAG,5.67,8,8
@@ -501,6 +501,7 @@ Id,Ruolo,Calciatore,Squadra,M. FV,Qt. In.,Qt. At.
 505,A,Bonazzoli,VER,6.17,7,8
 507,A,Muriel,ATA,6,14,13
 531,A,Berardi,SAS,8,30,30
+537,A,Sansone,LEC,0,7,7
 608,A,Zapata D.,TOR,6,19,19
 643,A,Defrel,SAS,6,9,9
 785,A,Immobile,LAZ,5.83,32,31
@@ -574,7 +575,7 @@ Id,Ruolo,Calciatore,Squadra,M. FV,Qt. In.,Qt. At.
 5837,A,Voelkerling Persson *,LEC,0,1,1
 5839,A,Kvaratskhelia,NAP,6.25,31,30
 5842,A,Botheim,SAL,5.33,8,7
-5843,A,Valencia D.,SAL,0,1,1
+5843,A,Valencia D. *,SAL,0,1,1
 5845,A,Alvarez A.,SAS,0,5,4
 5874,A,Rodriguez P. *,LEC,0,1,1
 5882,A,Mota,MON,5.5,11,10
