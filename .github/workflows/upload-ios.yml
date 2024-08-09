@@ -7,7 +7,7 @@ name: iOS upload
 on:
   push:
     paths:
-      - "version-ios"
+      - "version"
       - ".github/workflows/upload-ios.yml"
       - "exportOptions.plist"
 
@@ -55,7 +55,7 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
       - name: Set version and short version
-        run: echo "VERSION=$(cat version-ios)" >> $GITHUB_ENV
+        run: echo "VERSION=$(cat version | cut -f1 -d-)" >> $GITHUB_ENV
 
       - name: Change driver to GLES3
         run: echo 'quality/driver/driver_name="GLES3"' >> game/project.godot
