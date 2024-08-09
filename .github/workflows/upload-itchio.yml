@@ -12,7 +12,7 @@ on:
       - ".github/workflows/upload-itchio.yml"
 
 env:
-  WORKING_DIRECTORY: game
+  WORKING_DIRECTORY: app
 
 jobs:
   deploy:
