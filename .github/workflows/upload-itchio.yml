@@ -31,7 +31,8 @@ jobs:
         uses: dulvui/godot-4-html-export@v0.0.3
         with:
           working-directory: $WORKING_DIRECTORY
-          godot-version: 4.3-rc3
+          godot-version: 4.3
+          godot-channel: rc3
 
       - name: Upload to itch.io
         uses: dulvui/itchio-butler-upload@v0.0.1
