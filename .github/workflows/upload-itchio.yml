@@ -17,7 +17,7 @@ env:
 jobs:
   deploy:
     if: github.ref == 'refs/heads/prod'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -29,9 +29,10 @@ jobs:
         run: mkdir html5
 
       - name: Godot HTML5 export
-        uses: dulvui/godot-html-export@v0.0.2
+        uses: dulvui/godot-html-export@v0.0.3
         with:
           working-directory: $WORKING_DIRECTORY
+          godot-version: 4.3-rc3
 
       - name: Upload to itch.io
         uses: dulvui/itchio-butler-upload@v0.0.1
