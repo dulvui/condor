@@ -27,6 +27,9 @@ jobs:
       - name: Create export directory
         run: mkdir html5
 
+      - name: Create export_presets.cfg
+        run: cp $WORKING_DIRECTORY/export_presets.html.example $WORKING_DIRECTORY/export_presets.cfg
+
       - name: Godot HTML5 export
         uses: dulvui/godot-4-html-export@v0.0.3
         with:
