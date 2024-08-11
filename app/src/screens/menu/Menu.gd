@@ -44,8 +44,6 @@ func _on_export_pressed() -> void:
 			var player_line:PackedStringArray = PackedStringArray()
 			player_line.append_array([team.name, player.id, player.price])
 			file.store_csv_line(player_line)
-		
-		
 
 
 func _on_admin_pressed() -> void:

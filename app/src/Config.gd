@@ -4,12 +4,12 @@
 
 extends Node
 
-const BUDGET:int = 325
-const FILE_PATH:String = "res://assets/players/players.json"
+const BUDGET: int = 500
+const FILE_PATH: String = "res://assets/players/players.csv"
 
-var config:ConfigFile
+var config: ConfigFile
 
-var active_time:int
+var active_time: int
 
 var teams:Array
 var active_team_id:int
@@ -190,11 +190,11 @@ func _init_players() -> Array:
 func _get_player(line:Array) -> Player:
 	var id:int = int(line[0])
 	var position:int = Player.Position.keys().find(line[1])
-	var player_name:String = line[2]
-	var real_team:String = line[3]
-	var mfv:float = float(line[4])
-	var price_initial:int = int(line[5])
-	var price_current:int = int(line[6])
+	var player_name:String = line[3]
+	var real_team:String = line[4]
+	var mfv:float = float(line[11])
+	var price_initial:int = int(line[6])
+	var price_current:int = int(line[5])
 	var price:int = 0
 	
 	if "*" in player_name:

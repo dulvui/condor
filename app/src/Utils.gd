@@ -8,10 +8,10 @@ extends Node
 const TEAM_MAPPING = {
 	"ata" : "atalanta",
 	"bol" : "bologna",
+	"com" : "como",
 	"cag" : "cagliari",
 	"emp" : "empoli",
 	"fio" : "fiorentina",
-	"fro" : "frosinone",
 	"gen" : "genoa",
 	"int" : "inter",
 	"juv" : "juventus",
@@ -20,16 +20,17 @@ const TEAM_MAPPING = {
 	"mil" : "milan",
 	"mon" : "monza",
 	"nap" : "napoli",
+	"par" : "parma",
 	"rom" : "roma",
-	"sal" : "salernitana",
-	"sas" : "sassuolo",
 	"tor" : "torino",
 	"udi" : "udinese",
+	"ven" : "venezia",
 	"ver" : "verona",
 }
 
 func get_player_link(player:Player) -> String:
-	var team = TEAM_MAPPING[player.real_team.to_lower()]
-	var player_name = player.name.replace(".","").replace(" ","-")
-	var id = player.id
+	#var team = TEAM_MAPPING[player.real_team.to_lower()]
+	var team: String = player.real_team.to_lower()
+	var player_name: String = player.name.replace(".","").replace(" ","-")
+	var id: int = player.id
 	return "https://www.fantacalcio.it/serie-a/squadre/%s/%s/%s/2023-24"%[team,player_name, id]
