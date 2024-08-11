@@ -15,7 +15,7 @@ env:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/prod'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout source code
@@ -34,8 +34,8 @@ jobs:
         uses: dulvui/godot-4-html-export@v0.0.3
         with:
           working-directory: $WORKING_DIRECTORY
-          godot-version: 4.3
-          godot-channel: rc3
+          godot-version: 4.2.2
+          godot-channel: stable
 
       - name: Upload to itch.io
         uses: dulvui/itchio-butler-upload@v0.0.1
