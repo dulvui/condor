@@ -34,7 +34,7 @@ func set_up(_player:Player) -> void:
 	
 	position_label.text = player.get_position_string()
 	name_label.text = player.name
-	team_name_label.text = player.real_team
+	team_name_label.text = player.real_team_short
 	if player.price != 0:
 		price_label.text = "%d M"%player.price
 	else:
@@ -88,5 +88,12 @@ func _on_action_pressed() -> void:
 	action.emit()
 
 
+func get_player_link(player:Player) -> String:
+	var team: String = player.real_team.to_lower()
+	var player_name: String = player.name.replace(".","").replace(" ","-")
+	var id: int = player.id
+	return "https://www.fantacalcio.it/serie-a/squadre/%s/%s/%s/2023-24"%[team,player_name, id]
+
+
 func _on_link_pressed():
-	OS.shell_open(Utils.get_player_link(player))
+	OS.shell_open(get_player_link(player))

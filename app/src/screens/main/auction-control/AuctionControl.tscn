@@ -6,8 +6,8 @@
 anchors_preset = -1
 anchor_right = 0.271
 anchor_bottom = 0.197
-offset_right = -520.32
-offset_bottom = -212.76
+offset_right = 2.67999
+offset_bottom = 21.24
 theme_override_constants/separation = 80
 script = ExtResource("1_1ofna")
 
@@ -38,6 +38,7 @@ layout_mode = 2
 text = "<<"
 
 [node name="Auction" type="Button" parent="Buttons"]
+visible = false
 layout_mode = 2
 text = "AUCTION"
 

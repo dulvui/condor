@@ -12,22 +12,33 @@ enum Position {
 	A
 }
 
-var id:int
-var position:int
-var name:String
-var team_id:int = -1
-var real_team:String
-var mfv:float
-var price:int
-var price_initial:int
-var price_current:int
-var was_active:bool = false
+var id: int
+var position: int
+var name: String
+var team_id: int = -1
+var real_team: String
+var real_team_short: String
+var mfv: float
+var price: int
+var price_initial: int
+var price_current: int
+var was_active: bool = false
 
-func set_up(id:int, position:Position, name:String, real_team:String, mfv:float, price:int, price_initial:int, price_current:int) -> Player:
+func set_up(
+		id: int,
+		position: Position,
+		name: String,
+		real_team: String,
+		mfv: float,
+		price: int,
+		price_initial: int,
+		price_current: int
+	) -> Player:
 	self.id = id
 	self.position = position
 	self.name = name
 	self.real_team = real_team
+	self.real_team_short = real_team.substr(0, 3).to_upper()
 	self.mfv = mfv
 	self.price = price
 	self.price_initial = price_initial

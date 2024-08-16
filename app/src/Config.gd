@@ -136,6 +136,8 @@ func _get_default_teams() -> Array:
 		"Robysauron",
 		"Coppa Del Nonno",
 		"Rooney Tunes",
+		"Longbarda",
+		"Longobarda B",
 	]
 	
 	var id:int = 0
