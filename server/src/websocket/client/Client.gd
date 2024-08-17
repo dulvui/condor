@@ -39,8 +39,9 @@ var pending_peers: Array[PendingPeer] = []
 var peers: Dictionary
 
 
-func _process(delta):
+func _process(_delta: float):
 	poll()
+
 
 func listen(port: int) -> int:
 	assert(not tcp_server.is_listening())
@@ -52,14 +53,16 @@ func stop():
 	pending_peers.clear()
 	peers.clear()
 
-func send_others(peer_id, message) -> int:
+
+func send_others(peer_id: int, message: Variant) -> int:
 	for peer in peers:
 		if peer != peer_id:
 			send(peer, message)
 	return 0
 
-func send(peer_id:int, message) -> int:
-	var type = typeof(message)
+
+func send(peer_id: int, message: Variant) -> int:
+	var type: int = typeof(message)
 	if peer_id <= 0:
 		# Send to multiple peers, (zero = brodcast, negative = exclude one)
 		for id in peers:
@@ -89,7 +92,7 @@ func get_message(peer_id) -> Variant:
 	return bytes_to_var(pkt)
 
 
-func has_message(peer_id) -> bool:
+func has_message(peer_id: int) -> bool:
 	assert(peers.has(peer_id))
 	return peers[peer_id].get_available_packet_count() > 0
 
@@ -169,4 +172,3 @@ func _connect_pending(p: PendingPeer) -> bool:
 		if status != StreamPeerTLS.STATUS_HANDSHAKING:
 			return true # Failure.
 		return false
-
