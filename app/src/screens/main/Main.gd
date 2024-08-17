@@ -14,8 +14,8 @@ extends Control
 @onready var connect_button: Button = $Status/Connect
 @onready var connection_lost_alert: AcceptDialog = $ConnectionLost
 
-
 var active_player:Player
+
 
 func _ready() -> void:
 	active_player = Config.active_player()
@@ -35,7 +35,7 @@ func _ready() -> void:
 	Client.player_next.connect(_on_client_player_next)
 	Client.player_previous.connect(_on_client_player_previous)
 	Client.player_active.connect(_on_client_player_active)
-	Client.reset_state.connect(_on_client_reset_state)
+	Client.reconnect.connect(_on_client_reconnect)
 	
 	if Client.last_state == WebSocketPeer.STATE_OPEN:
 		server_status.color = Color.GREEN
@@ -43,16 +43,18 @@ func _ready() -> void:
 	else:
 		Client.connect_to_server()
 
-	
+
 func _on_auction_control_auction() -> void:
 	if Config.is_admin:
 		Client.send(Client.auction_start.get_name())
 	timer.set_player(active_player)
 	timer.show()
 
+
 func _on_auction_control_assign() -> void:
 	assign_player.set_player(active_player)
 	assign_player.popup_centered()
+
 
 func _on_assign_player_assigned() -> void:
 	_assign_player()
@@ -60,10 +62,12 @@ func _on_assign_player_assigned() -> void:
 		var latest_transfer = Config.history[-1]
 		Client.send(Client.player_assign.get_name() + ":" + str(latest_transfer.player.id) + ":" + str(latest_transfer.team.id) + ":" + str(latest_transfer.price))
 
+
 func _assign_player() -> void:
 	_refresh_lists()
 	var latest_transfer = Config.history[-1]
 	team_overview.add_player(latest_transfer.player, latest_transfer.team)
+
 
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
@@ -72,7 +76,8 @@ func _on_menu_pressed() -> void:
 func _on_auction_control_next() -> void:
 	Client.send(Client.player_next.get_name())
 	_next_player()
-	
+
+
 func _next_player() -> void:
 	active_player = Config.next_player()
 	auction_control.set_player(active_player)
@@ -82,11 +87,13 @@ func _next_player() -> void:
 func _on_auction_control_previous() -> void:
 	Client.send(Client.player_previous.get_name())
 	_previous_player()
-	
+
+
 func _previous_player() -> void:
 	active_player = Config.previous_player()
 	auction_control.set_player(active_player)
 	player_list.update()
+
 
 func _on_player_list_active_player_change() -> void:
 	active_player = Config.active_player()
@@ -94,12 +101,15 @@ func _on_player_list_active_player_change() -> void:
 	player_list.update()
 	Client.send(Client.player_active.get_name() + ":" + str(active_player.id))
 
+
 func _on_team_overview_player_removed() -> void:
 	_refresh_lists()
-	
+
+
 func _refresh_lists() -> void:
 	player_list.update()
 	history.update()
+
 
 func _on_timer_toggle() -> void:
 	var timestamp:int = Time.get_unix_time_from_system()
@@ -110,15 +120,16 @@ func _on_client_connection_closed() -> void:
 	server_status.color = Color.RED
 	connect_button.visible = true
 	connection_lost_alert.popup_centered()
-	
+
 
 func _on_client_connected_to_server() -> void:
 	server_status.color = Color.GREEN
 	connect_button.visible = false
-	
+
 
 func _on_connect_pressed() -> void:
 	Client.connect_to_server()
+
 
 func _on_timer_time_changed(time) -> void:
 	Client.send(Client.timer_change.get_name() + ":" + str(time))
@@ -127,6 +138,7 @@ func _on_timer_time_changed(time) -> void:
 func _on_timer_paused() -> void:
 	Client.send(Client.timer_pause.get_name())
 
+
 func _on_timer_reseted() -> void:
 	Client.send(Client.timer_reset.get_name())
 
@@ -134,9 +146,11 @@ func _on_timer_reseted() -> void:
 func _on_client_timer_toggle() -> void:
 	timer.trigger_toggle()
 
+
 func _on_client_auction_start() -> void:
 	timer.set_player(active_player)
 	timer.show()
+
 
 func _on_client_timer_start(delta:float) -> void:
 	timer.trigger_toggle(delta)
@@ -145,14 +159,18 @@ func _on_client_timer_start(delta:float) -> void:
 func _on_client_timer_change(time:int) -> void:
 	timer.set_time(time)
 
+
 func _on_timer_time_change() -> void:
 	Client.send(Client.timer_change.get_name() + ":" + str(Config.active_time))
+
 
 func _on_client_timer_pause() -> void:
 	timer.pause()
 
+
 func _on_client_timer_reset() -> void:
 	timer.restart()
+
 
 func _on_client_player_assign(player:Player, team:Team, price:int) -> void:
 	Config.add_to_history(player, team, price)
@@ -160,7 +178,7 @@ func _on_client_player_assign(player:Player, team:Team, price:int) -> void:
 	_assign_player()
 	team_overview.update_teams_budget()
 
-	
+
 func _on_client_player_remove(player:Player, team:Team) -> void:
 	Config.add_to_history(player, team, -player.price)
 	history.update()
@@ -168,11 +186,14 @@ func _on_client_player_remove(player:Player, team:Team) -> void:
 	team_overview.remove_player(player, team)
 	team_overview.update_teams_budget()
 
+
 func _on_client_player_next() -> void:
 	_next_player()
 
+
 func _on_client_player_previous() -> void:
 	_previous_player()
+
 
 func _on_client_player_active(player_id:int) -> void:
 	var player:Player = Config.get_player_by_id(player_id)
@@ -181,5 +202,5 @@ func _on_client_player_active(player_id:int) -> void:
 	player_list.update()
 
 
-func _on_client_reset_state() -> void:
+func _on_client_reconnect(s) -> void:
 	_refresh_lists()

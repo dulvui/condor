@@ -11,11 +11,11 @@ var config: ConfigFile
 
 var active_time: int
 
-var teams: Array
 var active_team_id: int
 var next_team_id: int
 var players: Array
 
+var teams: Array
 var active_player_index: int
 var history: Array
 
@@ -46,15 +46,13 @@ func save_all_data() -> void:
 	config.set_value("data","history",history)
 	config.save("user://settings.cfg")
 
-	
-func reset_state(teams:Array, players:Array,history:Array, active_player_index:int, active_time:int) -> void:
-#	self.teams = teams
-#	self.players = players
-#	self.history = history
-#	self.active_player_index = active_player_index
-#	self.active_time = active_time
-#	save_all_data()
-	pass
+
+func reset_state(p_active_player_index: int, p_active_time: float, p_history: Array, p_teams: Array) -> void:
+	self.active_player_index = p_active_player_index
+	self.active_time = p_active_time
+	self.history = p_history
+	self.teams = p_teams
+
 
 func add_player_to_team(team:Team, player:Player, price:int) -> String:
 	var error_message:String = team.add_player(player, price)
@@ -65,13 +63,15 @@ func add_player_to_team(team:Team, player:Player, price:int) -> String:
 	Config.save_all_data()
 	
 	return ""
-	
+
+
 func remove_player_from_team(player:Player, team:Team) -> void:
 	team.remove_player(player)
 	player.price = 0
 	player.team_id = -1
 	
 	Config.save_all_data()
+
 
 func add_to_history(player:Player, team:Team, price:int):
 	var transfer = {
@@ -81,14 +81,17 @@ func add_to_history(player:Player, team:Team, price:int):
 	}
 	history.append(transfer)
 
+
 func active_player() -> Player:
 	players[active_player_index].was_active = true
 	return players[active_player_index]
 
+
 func set_active_player(player:Player) -> Player:
 	active_player_index = players.find(player)
 	return active_player()
-	
+
+
 func next_player() -> Player:
 	var next_player_index:int = active_player_index
 	while next_player_index + 1  < players.size():
@@ -98,6 +101,7 @@ func next_player() -> Player:
 			return active_player()
 	return active_player()
 
+
 func previous_player() -> Player:
 	var next_player_index:int = active_player_index
 	while next_player_index - 1  >= 0:
@@ -106,6 +110,7 @@ func previous_player() -> Player:
 			active_player_index = next_player_index
 			return active_player()
 	return active_player()
+
 
 func get_next_team_id():
 	next_team_id += 1
@@ -123,6 +128,7 @@ func get_team_by_id(id:int) -> Team:
 		if team.id == id:
 			return team
 	return
+
 
 func _get_default_teams() -> Array:
 	var default_teams:Array = []
@@ -205,9 +211,11 @@ func _get_player(line:Array) -> Player:
 	var player = Player.new()
 	return player.set_up(id, position, player_name,real_team, mfv, price, price_initial, price_current)
 
+
 func toogle_admin() -> bool:
 	is_admin = not is_admin
 	return is_admin
+
 
 # save on quit on mobile
 func _notification(what) -> void:

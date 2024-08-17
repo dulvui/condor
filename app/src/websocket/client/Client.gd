@@ -13,16 +13,16 @@ signal connection_closed()
 signal timer_toggle()
 signal auction_start()
 signal timer_start(delta:float)
-signal timer_change(time:int)
+signal timer_change(time: int)
 signal timer_pause()
 signal timer_reset()
-signal player_assign(player:Player, team:Team, price:int)
+signal player_assign(player:Player, team:Team, price: int)
 signal player_remove(player:Player, team:Team)
 signal player_next()
 signal player_previous()
-signal player_active(player_id:int)
+signal player_active(player_id: int)
 
-signal reset_state
+signal reconnect()
 
 
 const HOST:String = "ws://localhost:8000/"
@@ -99,15 +99,15 @@ func _on_client_message_received(message:String) -> void:
 	if message == auction_start.get_name():
 		auction_start.emit()
 	elif timer_start.get_name() in message:
-		var timestamp:int  = int(message.split(":")[1])
-		var current_timestamp:int = Time.get_unix_time_from_system()
+		var timestamp: int  = int(message.split(":")[1])
+		var current_timestamp: int = Time.get_unix_time_from_system()
 		var delta:float = current_timestamp - timestamp + 100
 		timer_start.emit(delta)
 	elif timer_toggle.get_name() in message:
 		# todo: add delta also to toggle
 		timer_toggle.emit()
 	elif timer_change.get_name() in message:
-		var time:int = int(message.split(":")[1])
+		var time: int = int(message.split(":")[1])
 		timer_change.emit(time)
 	elif message == timer_pause.get_name():
 		timer_pause.emit()
@@ -116,18 +116,17 @@ func _on_client_message_received(message:String) -> void:
 	elif message == timer_reset.get_name() :
 		timer_reset.emit()
 	elif player_assign.get_name() in message:
-		var player_id:int = int(message.split(":")[1])
-		var team_id:int = int(message.split(":")[2])
-		var price:int = int(message.split(":")[3])
+		var player_id: int = int(message.split(":")[1])
+		var team_id: int = int(message.split(":")[2])
+		var price: int = int(message.split(":")[3])
 
 		var player:Player = Config.get_player_by_id(player_id)
 		var team:Team = Config.get_team_by_id(team_id)
 		player.price = price
 		player_assign.emit(player, team, price)
 	elif player_remove.get_name() in message:
-		var player_id:int = int(message.split(":")[1])
-		var team_id:int = int(message.split(":")[2])
-
+		var player_id: int = int(message.split(":")[1])
+		var team_id: int = int(message.split(":")[2])
 		var player:Player = Config.get_player_by_id(player_id)
 		var team:Team = Config.get_team_by_id(team_id)
 		
@@ -137,26 +136,23 @@ func _on_client_message_received(message:String) -> void:
 	elif message == player_previous.get_name():
 		player_previous.emit()
 	elif player_active.get_name() in message:
-		var player_id:int = int(message.split(":")[1])
+		var player_id: int = int(message.split(":")[1])
 		player_active.emit(player_id)
-#	elif reset_state.get_name() in message:
-#		if Config.is_admin:
-#			var data:Dictionary = {}
-#			data.players = JSON.stringify(Config.players)
-#			data.teams = JSON.stringify(str(Config.teams))
-#			data.history = JSON.stringify(Config.history)
-#			data.active_player_index = Config.active_player_index
-#			data.active_time = Config.active_time
-#			send(reset_state.get_name() + ":" + JSON.stringify(data))
-#		else:
-#			var data:Dictionary = JSON.parse_string(message.split(":")[1])
-#
-#			var players:Array = data.players
-#			var teams:Array = data.teams
-#			var history:Array = data.history
-#			var active_player_index:int = data.active_player_index
-#			var active_time:int = data.active_time
-#
-#			Config.reset_state(teams, players,history, active_player_index, active_time)
-#			reset_state.emit()
+	elif reconnect.get_name() in message:
+		if Config.is_admin:
+			var data:Dictionary = {}
+			data.active_player_index = Config.active_player_index
+			data.active_time = Config.active_time
+			data.history = JSON.stringify(Config.history)
+			data.teams = JSON.stringify(Config.teams)
+			send(reconnect.get_name() + ":" + JSON.stringify(data))
+		else:
+			var data: Dictionary = JSON.parse_string(message.split(":")[1])
+			var active_player_index: int = data.active_player_index
+			var active_time: int = data.active_time
+			var history: Array = data.history
+			var teams: Array = data.teams
+
+			Config.reset_state(active_player_index, active_time, history, teams)
+			reconnect.emit()
 	print(message)
