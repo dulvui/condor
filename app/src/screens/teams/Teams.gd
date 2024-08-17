@@ -55,4 +55,3 @@ func _on_add_pressed() -> void:
 	
 	name_edit.text = ""
 	_update_list()
-

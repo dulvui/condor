@@ -10,7 +10,7 @@ const PlayerLabel:PackedScene = preload("res://src/ui-components/player-label/Pl
 
 @onready var list:VBoxContainer = $VBoxContainer/ScrollContainer/VBoxContainer
 @onready var scroll:ScrollContainer = $VBoxContainer/ScrollContainer
-@onready var positions:OptionButton = $VBoxContainer/HBoxContainer/Positions
+@onready var positions:OptionButton = $VBoxContainer/Filter/Positions
 
 var filters:Dictionary = {
 	"name" : "",
@@ -86,4 +86,3 @@ func _filter(player:Player) -> bool:
 func _apply_filter() -> void:
 	for player_label in list.get_children():
 		player_label.visible = _filter(player_label.player)
-

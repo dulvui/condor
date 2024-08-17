@@ -25,8 +25,8 @@ signal player_active(player_id:int)
 signal reset_state
 
 
-#const HOST:String = "ws://localhost:8000/"
-const HOST:String = "ws://sandbox.s9i.org:8000/"
+const HOST:String = "ws://localhost:8000/"
+#const HOST:String = "ws://sandbox.s9i.org:8000/"
 
 
 @export var handshake_headers: PackedStringArray
@@ -34,13 +34,14 @@ const HOST:String = "ws://sandbox.s9i.org:8000/"
 var tls_options: TLSOptions = null
 
 
-var socket = WebSocketPeer.new()
-var last_state = WebSocketPeer.STATE_CLOSED
+var socket: WebSocketPeer = WebSocketPeer.new()
+var last_state: int = WebSocketPeer.STATE_CLOSED
 
 func _process(delta):
 	poll()
 
-func send(message) -> int:
+
+func send(message: Variant) -> int:
 	if typeof(message) == TYPE_STRING:
 		return socket.send_text(message)
 	return socket.send(var_to_bytes(message))
@@ -54,6 +55,7 @@ func get_message() -> Variant:
 		return pkt.get_string_from_utf8()
 	return bytes_to_var(pkt)
 
+
 func connect_to_server() -> int:
 	socket.supported_protocols = supported_protocols
 	socket.handshake_headers = handshake_headers
@@ -62,6 +64,7 @@ func connect_to_server() -> int:
 		return err
 	last_state = socket.get_ready_state()
 	return OK
+
 
 func close(code := 1000, reason := "") -> void:
 	socket.close(code, reason)
@@ -90,6 +93,7 @@ func poll() -> void:
 	while socket.get_ready_state() == socket.STATE_OPEN and socket.get_available_packet_count():
 		_on_client_message_received(get_message())
 #		message_received.emit(get_message())
+
 
 func _on_client_message_received(message:String) -> void:
 	if message == auction_start.get_name():

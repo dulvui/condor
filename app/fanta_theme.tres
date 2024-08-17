@@ -4,5 +4,4 @@
 bg_color = Color(0.134586, 0.470461, 0.74826, 1)
 
 [resource]
-default_font_size = 42
 Panel/styles/panel = SubResource("StyleBoxFlat_ckpab")

@@ -11,15 +11,15 @@ var config: ConfigFile
 
 var active_time: int
 
-var teams:Array
-var active_team_id:int
-var next_team_id:int
-var players:Array
+var teams: Array
+var active_team_id: int
+var next_team_id: int
+var players: Array
 
-var active_player_index:int
-var history:Array
+var active_player_index: int
+var history: Array
 
-var is_admin:bool
+var is_admin: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://src/ui-components/player-label/PlayerLabel.gd" id="1_myfyj"]
 
 [node name="PlayerLabel" type="Control"]
-custom_minimum_size = Vector2(400, 42)
+custom_minimum_size = Vector2(300, 42)
 layout_mode = 3
-anchor_right = 0.26
+anchor_right = 0.156
 anchor_bottom = 0.039
-offset_right = 0.799896
-offset_bottom = -12.12
+offset_right = -30.52
+offset_bottom = -0.120003
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
@@ -55,7 +55,7 @@ layout_mode = 2
 text = "SAS"
 
 [node name="Price" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "12 M"
 horizontal_alignment = 2

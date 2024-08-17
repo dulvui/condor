@@ -53,4 +53,3 @@ func remove_player(player:Player) -> void:
 	
 func update_budget() -> void:
 	budget_label.text = " %d M"%team.budget
-

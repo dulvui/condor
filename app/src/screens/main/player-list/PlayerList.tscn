@@ -20,16 +20,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Filter" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Search" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="Search" type="LineEdit" parent="VBoxContainer/Filter"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "SEARCH"
 
-[node name="Positions" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="Positions" type="OptionButton" parent="VBoxContainer/Filter"]
 layout_mode = 2
+
+[node name="Order" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Button" parent="VBoxContainer/Order"]
+layout_mode = 2
+text = "NAME"
+
+[node name="Team" type="Button" parent="VBoxContainer/Order"]
+layout_mode = 2
+text = "TEAM"
+
+[node name="Price" type="Button" parent="VBoxContainer/Order"]
+layout_mode = 2
+text = "PRICE"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -41,5 +56,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[connection signal="text_changed" from="VBoxContainer/HBoxContainer/Search" to="." method="_on_search_text_changed"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/Positions" to="." method="_on_positions_item_selected"]
+[connection signal="text_changed" from="VBoxContainer/Filter/Search" to="." method="_on_search_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/Filter/Positions" to="." method="_on_positions_item_selected"]
+[connection signal="pressed" from="VBoxContainer/Order/Name" to="." method="_on_name_pressed"]
