@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqr46eapnnw57"]
+
+[ext_resource type="Script" path="res://src/screens/main/assign_player/assign_player.gd" id="1_8u85o"]
+
+[node name="AssignPlayer" type="PopupPanel"]
+mode = 3
+size = Vector2i(600, 400)
+visible = true
+script = ExtResource("1_8u85o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 596.0
+offset_bottom = 396.0
+
+[node name="Player" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Price" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "PRICE"
+
+[node name="FastPrices" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Add1" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "+1"
+
+[node name="Remove1" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "-1"
+
+[node name="Price1" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "1"
+
+[node name="Price2" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "2"
+
+[node name="Price3" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "3"
+
+[node name="Price4" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "4"
+
+[node name="Price5" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "5"
+
+[node name="Price10" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "10"
+
+[node name="Price50" type="Button" parent="VBoxContainer/FastPrices"]
+layout_mode = 2
+text = "50"
+
+[node name="Teams" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Assign" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "DONE"
+
+[node name="Error" type="AcceptDialog" parent="."]
+size = Vector2i(206, 105)
+
+[node name="Label" type="Label" parent="Error"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 198.0
+offset_bottom = 45.0
+text = "ERROR MESSAGE"
+
+[connection signal="pressed" from="VBoxContainer/Assign" to="." method="_on_assign_pressed"]

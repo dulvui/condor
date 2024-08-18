@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Condor"
-run/main_scene="res://src/screens/menu/Menu.tscn"
+run/main_scene="res://src/screens/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://icon.png"
@@ -19,8 +19,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Config="*res://src/Config.gd"
-Client="*res://src/websocket/client/Client.gd"
+Config="*res://src/config.gd"
+Client="*res://src/websocket/client/client.gd"
 
 [display]
 

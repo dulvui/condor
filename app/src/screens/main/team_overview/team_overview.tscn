@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy6ujws16sijb"]
+
+[ext_resource type="Script" path="res://src/screens/main/team_overview/team_overview.gd" id="1_7hu2m"]
+[ext_resource type="PackedScene" uid="uid://dj8ttgc8rkpxf" path="res://src/screens/main/team_overview/single_team/single_team.tscn" id="2_lsvij"]
+
+[node name="TeamOverview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7hu2m")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="ActiveTeam" parent="HSplitContainer" instance=ExtResource("2_lsvij")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TeamList" type="HBoxContainer" parent="HSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[connection signal="player_removed" from="HSplitContainer/ActiveTeam" to="." method="_on_active_team_player_removed"]
