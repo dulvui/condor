@@ -8,9 +8,9 @@ extends HBoxContainer
 
 signal player_removed
 
-@onready var player_label:PlayerLabel = $PlayerLabel
-@onready var price_edit:LineEdit = $RemoveDialog/HBoxContainer/Price
-@onready var remove_dialog:ConfirmationDialog = $RemoveDialog
+@onready var player_label: PlayerLabel = $PlayerLabel
+@onready var price_edit: LineEdit = $RemoveDialog/HBoxContainer/Price
+@onready var remove_dialog: ConfirmationDialog = $RemoveDialog
 
 var player: Player 
 

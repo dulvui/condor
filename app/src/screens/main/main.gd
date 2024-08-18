@@ -70,7 +70,7 @@ func _assign_player() -> void:
 
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
 func _on_auction_control_next() -> void:

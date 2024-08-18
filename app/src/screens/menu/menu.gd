@@ -10,13 +10,13 @@ func _ready() -> void:
 	
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/teams/Teams.tscn")
+	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
 
 func _on_credits_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_teams_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/teams/Teams.tscn")
+	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
 
 
 func _on_export_pressed() -> void:

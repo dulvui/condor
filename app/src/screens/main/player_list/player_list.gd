@@ -56,7 +56,7 @@ func update() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/menu/menu.tscn")
 
 
 func _set_active_player(player: Player) -> void:

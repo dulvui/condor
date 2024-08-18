@@ -41,7 +41,7 @@ func _update_list() -> void:
 		_add_team(team)
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
 func _on_add_pressed() -> void:
