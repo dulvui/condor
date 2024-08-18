@@ -39,66 +39,72 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer"]
+[node name="Dashboard" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/HSplitContainer"]
+[node name="Left" type="VBoxContainer" parent="MarginContainer/Dashboard"]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 
-[node name="PlayerList" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("3_w4uhl")]
-custom_minimum_size = Vector2(300, 700)
+[node name="PlayerList" parent="MarginContainer/Dashboard/Left" instance=ExtResource("3_w4uhl")]
+custom_minimum_size = Vector2(300, 800)
 layout_mode = 2
 
-[node name="History" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("4_46i6t")]
+[node name="History" parent="MarginContainer/Dashboard/Left" instance=ExtResource("4_46i6t")]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Dashboard"]
 layout_mode = 2
-theme_override_constants/separation = 60
 
-[node name="Header" type="HBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer"]
+[node name="Right" type="VBoxContainer" parent="MarginContainer/Dashboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/Dashboard/Right"]
 layout_mode = 2
 theme_override_constants/separation = 10
 metadata/_edit_use_anchors_ = true
 
-[node name="VSeparator3" type="VSeparator" parent="MarginContainer/HSplitContainer/VBoxContainer/Header"]
+[node name="VSeparator3" type="VSeparator" parent="MarginContainer/Dashboard/Right/Header"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AuctionControl" parent="MarginContainer/HSplitContainer/VBoxContainer/Header" instance=ExtResource("5_iadvp")]
+[node name="AuctionControl" parent="MarginContainer/Dashboard/Right/Header" instance=ExtResource("5_iadvp")]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/HSplitContainer/VBoxContainer/Header"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Dashboard/Right/Header"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Connect" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/Header"]
+[node name="Connect" type="Button" parent="MarginContainer/Dashboard/Right/Header"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "CONNECT"
 
-[node name="ServerStatus" type="ColorRect" parent="MarginContainer/HSplitContainer/VBoxContainer/Header"]
+[node name="ServerStatus" type="ColorRect" parent="MarginContainer/Dashboard/Right/Header"]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VSeparator2" type="VSeparator" parent="MarginContainer/HSplitContainer/VBoxContainer/Header"]
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/Dashboard/Right/Header"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="Menu" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/Header"]
+[node name="Menu" type="Button" parent="MarginContainer/Dashboard/Right/Header"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "MENU"
 
-[node name="TeamOverview" parent="MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("6_8armv")]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Dashboard/Right"]
+layout_mode = 2
+
+[node name="TeamOverview" parent="MarginContainer/Dashboard/Right" instance=ExtResource("6_8armv")]
 layout_mode = 2
 
 [node name="AssignPlayer" parent="." instance=ExtResource("7_0ly00")]
@@ -120,14 +126,14 @@ offset_right = 592.0
 offset_bottom = 116.0
 text = "PLEASE RECONNECT"
 
-[connection signal="active_player_change" from="MarginContainer/HSplitContainer/VSplitContainer/PlayerList" to="." method="_on_player_list_active_player_change"]
-[connection signal="assign" from="MarginContainer/HSplitContainer/VBoxContainer/Header/AuctionControl" to="." method="_on_auction_control_assign"]
-[connection signal="auction" from="MarginContainer/HSplitContainer/VBoxContainer/Header/AuctionControl" to="." method="_on_auction_control_auction"]
-[connection signal="next" from="MarginContainer/HSplitContainer/VBoxContainer/Header/AuctionControl" to="." method="_on_auction_control_next"]
-[connection signal="previous" from="MarginContainer/HSplitContainer/VBoxContainer/Header/AuctionControl" to="." method="_on_auction_control_previous"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/Header/Connect" to="." method="_on_connect_pressed"]
-[connection signal="pressed" from="MarginContainer/HSplitContainer/VBoxContainer/Header/Menu" to="." method="_on_menu_pressed"]
-[connection signal="player_removed" from="MarginContainer/HSplitContainer/VBoxContainer/TeamOverview" to="." method="_on_team_overview_player_removed"]
+[connection signal="active_player_change" from="MarginContainer/Dashboard/Left/PlayerList" to="." method="_on_player_list_active_player_change"]
+[connection signal="assign" from="MarginContainer/Dashboard/Right/Header/AuctionControl" to="." method="_on_auction_control_assign"]
+[connection signal="auction" from="MarginContainer/Dashboard/Right/Header/AuctionControl" to="." method="_on_auction_control_auction"]
+[connection signal="next" from="MarginContainer/Dashboard/Right/Header/AuctionControl" to="." method="_on_auction_control_next"]
+[connection signal="previous" from="MarginContainer/Dashboard/Right/Header/AuctionControl" to="." method="_on_auction_control_previous"]
+[connection signal="pressed" from="MarginContainer/Dashboard/Right/Header/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="MarginContainer/Dashboard/Right/Header/Menu" to="." method="_on_menu_pressed"]
+[connection signal="player_removed" from="MarginContainer/Dashboard/Right/TeamOverview" to="." method="_on_team_overview_player_removed"]
 [connection signal="assigned" from="AssignPlayer" to="." method="_on_assign_player_assigned"]
 [connection signal="paused" from="Timer" to="." method="_on_timer_paused"]
 [connection signal="reseted" from="Timer" to="." method="_on_timer_reseted"]

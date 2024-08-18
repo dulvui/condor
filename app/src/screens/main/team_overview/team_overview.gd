@@ -2,14 +2,14 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
+extends HBoxContainer
 
 signal player_removed
 
 const SingleTeam:PackedScene = preload("res://src/screens/main/team_overview/single_team/single_team.tscn")
 
-@onready var team_list:HBoxContainer = $HSplitContainer/ScrollContainer/TeamList
-@onready var active_team:SingleTeam = $HSplitContainer/ActiveTeam
+@onready var team_list:HBoxContainer = $ScrollContainer/TeamList
+@onready var active_team:SingleTeam = $ActiveTeam
 
 func _ready() -> void:
 	set_process(false)
@@ -23,9 +23,11 @@ func set_up() -> void:
 		else:
 			var single_team:SingleTeam = SingleTeam.instantiate()
 			team_list.add_child(single_team)
+			team_list.add_child(VSeparator.new())
 			single_team.set_up(team)
 			single_team.player_removed.connect(_on_player_removed)
-		
+
+
 func add_player(player: Player, team: Team) -> void:
 	if team.id == Config.active_team_id:
 		active_team.add_player(player)
@@ -34,7 +36,8 @@ func add_player(player: Player, team: Team) -> void:
 			if single_team.team.id == team.id:
 				single_team.add_player(player)
 				break
-				
+
+
 func remove_player(player: Player, team: Team) -> void:
 	if team.id == Config.active_team_id:
 		active_team.remove_player(player)
@@ -43,10 +46,12 @@ func remove_player(player: Player, team: Team) -> void:
 			if single_team.team.id == team.id:
 				single_team.remove_player(player)
 				break
-	
-func _on_player_removed():
+
+
+func _on_player_removed() -> void:
 	player_removed.emit()
-	
+
+
 func update_teams_budget() -> void:
 	active_team.update_budget()
 	for single_team in team_list.get_children():
