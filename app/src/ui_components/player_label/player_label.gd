@@ -75,7 +75,7 @@ func disable_player() -> void:
 	color_rect.color = Color.DARK_SLATE_GRAY
 
 
-func set_button_text(text:String) -> void:
+func set_button_text(text: String) -> void:
 	action_button.text = text
 	
 func activate() -> void:

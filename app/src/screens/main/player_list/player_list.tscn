@@ -32,6 +32,7 @@ placeholder_text = "SEARCH"
 layout_mode = 2
 
 [node name="Order" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Name" type="Button" parent="VBoxContainer/Order"]

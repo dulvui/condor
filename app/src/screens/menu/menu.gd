@@ -8,12 +8,12 @@ func _ready() -> void:
 	$VBoxContainer/Teams.visible = Config.is_admin
 	$AdminActive.visible = Config.is_admin
 	
+	# always close client in menu
+	Client.close()
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
 
-func _on_credits_pressed() -> void:
-	pass # Replace with function body.
 
 func _on_teams_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
@@ -23,7 +23,7 @@ func _on_export_pressed() -> void:
 	var timestamp:float = Time.get_unix_time_from_system()
 	var file:FileAccess = FileAccess.open("user://players-%d.csv"%timestamp, FileAccess.WRITE)
 	
-	var content:String = "";
+	var content: String = "";
 	
 	var export_teams:Dictionary = {}
 	for team in Config.teams:
@@ -48,5 +48,12 @@ func _on_export_pressed() -> void:
 
 func _on_admin_pressed() -> void:
 	Config.is_admin = not Config.is_admin 
+	$VBoxContainer/Teams.visible = Config.is_admin
+	$AdminActive.visible = Config.is_admin
+
+
+func _on_reset_pressed() -> void:
+	# TODO asck confirm
+	Config.reset_data()
 	$VBoxContainer/Teams.visible = Config.is_admin
 	$AdminActive.visible = Config.is_admin

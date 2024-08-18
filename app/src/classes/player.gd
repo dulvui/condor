@@ -24,6 +24,7 @@ var price_initial: int
 var price_current: int
 var was_active: bool = false
 
+
 func set_up(
 		id: int,
 		position: Position,

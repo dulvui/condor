@@ -26,7 +26,7 @@ func set_player(_player: Player) -> void:
 
 
 func _on_assign_pressed(team: Team) -> void:
-	var error_message:String =  Config.add_player_to_team(team, player, int(price.text))
+	var error_message: String =  Config.add_player_to_team(team, player, int(price.text))
 	if error_message.is_empty():
 		hide()
 		Config.add_to_history(player, team, player.price)

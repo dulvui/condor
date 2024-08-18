@@ -15,11 +15,14 @@ var active_team_id: int
 var next_team_id: int
 var players: Array
 
-var teams: Array
+var teams: Array[Team]
 var active_player_index: int
 var history: Array
 
 var is_admin: bool
+
+var player_messages: Array
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,6 +38,8 @@ func _ready() -> void:
 	players = config.get_value("data", "players", _init_players())
 	active_player_index = config.get_value("data", "active_player_index", 0)
 	history = config.get_value("data", "history", [])
+	player_messages = config.get_value("data", "player_messages", [])
+
 
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
@@ -44,18 +49,24 @@ func save_all_data() -> void:
 	config.set_value("data","active_team_id",active_team_id)
 	config.set_value("data","active_player_index",active_player_index)
 	config.set_value("data","history",history)
+	config.set_value("data","player_messages",player_messages)
 	config.save("user://settings.cfg")
 
 
-func reset_state(p_active_player_index: int, p_active_time: float, p_history: Array, p_teams: Array) -> void:
-	self.active_player_index = p_active_player_index
-	self.active_time = p_active_time
-	self.history = p_history
-	self.teams = p_teams
+func reset_data() -> void:
+	active_time = 30
+	is_admin = false
+	teams = _get_default_teams()
+	active_team_id = -1
+	next_team_id = 0
+	players = _init_players()
+	active_player_index = 0
+	history = []
+	player_messages = []
 
 
 func add_player_to_team(team: Team, player: Player, price:int) -> String:
-	var error_message:String = team.add_player(player, price)
+	var error_message: String = team.add_player(player, price)
 	if not error_message.is_empty():
 		return error_message
 	player.price = price
@@ -122,7 +133,8 @@ func get_player_by_id(id:int) -> Player:
 		if player.id == id:
 			return player
 	return
-			
+
+
 func get_team_by_id(id:int) -> Team:
 	for team in teams:
 		if team.id == id:
@@ -130,9 +142,9 @@ func get_team_by_id(id:int) -> Team:
 	return
 
 
-func _get_default_teams() -> Array:
-	var default_teams:Array = []
-	const desp_league_names = [
+func _get_default_teams() -> Array[Team]:
+	var default_teams: Array[Team] = []
+	const team_names = [
 		"Real Linus",
 		"Knight JR FC",
 		"Gratlamsee",
@@ -146,19 +158,21 @@ func _get_default_teams() -> Array:
 		"Longobarda B",
 	]
 	
-	var id:int = 0
-	for name in desp_league_names:
-		var team = Team.new()
-		default_teams.append(team.set_up(name, id))
+	var id: int = 0
+	for team_name in team_names:
+		var team: Team = Team.new()
+		default_teams.append(team.set_up(team_name, id))
 		id += 1
 		
 	return default_teams
+
 
 func delete_team(team: Team) -> void:
 	teams.erase(team)
 	for player in players:
 		if player.team_id == team.id:
 			player.team_id = -1
+
 
 func _init_players() -> Array:
 	var list:Array = []
@@ -183,7 +197,7 @@ func _init_players() -> Array:
 		# check if not empty
 		if str(line[0]).is_empty():
 			break
-		var pos:String = line[1]
+		var pos: String = line[1]
 		var player: Player =  _get_player(line)
 		if player:
 			temp_list[pos].append(player)
@@ -194,12 +208,13 @@ func _init_players() -> Array:
 	
 	file.close()
 	return list
-		
+
+
 func _get_player(line:Array) -> Player:
 	var id:int = int(line[0])
 	var position:int = Player.Position.keys().find(line[1])
-	var player_name:String = line[3]
-	var real_team:String = line[4]
+	var player_name: String = line[3]
+	var real_team: String = line[4]
 	var mfv:float = float(line[11])
 	var price_initial:int = int(line[6])
 	var price_current:int = int(line[5])

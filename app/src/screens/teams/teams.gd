@@ -27,7 +27,7 @@ func _add_team(team: Team):
 	Config.save_all_data()
 
 
-func _create_team(team_name:String) -> Team:
+func _create_team(team_name: String) -> Team:
 	var team: Team = Team.new()
 	# todo use global incremetnal id
 	team.set_up(team_name, 0)

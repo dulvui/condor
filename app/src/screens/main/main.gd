@@ -35,13 +35,14 @@ func _ready() -> void:
 	Client.player_next.connect(_on_client_player_next)
 	Client.player_previous.connect(_on_client_player_previous)
 	Client.player_active.connect(_on_client_player_active)
-	Client.reconnect.connect(_on_client_reconnect)
 	
 	if Client.last_state == WebSocketPeer.STATE_OPEN:
 		server_status.color = Color.GREEN
 		connect_button.visible = false
 	else:
 		Client.connect_to_server()
+
+	_refresh_lists()
 
 
 func _on_auction_control_auction() -> void:
@@ -60,7 +61,10 @@ func _on_assign_player_assigned() -> void:
 	_assign_player()
 	if Config.is_admin:
 		var latest_transfer = Config.history[-1]
-		Client.send(Client.player_assign.get_name() + ":" + str(latest_transfer.player.id) + ":" + str(latest_transfer.team.id) + ":" + str(latest_transfer.price))
+		Client.send(Client.player_assign.get_name() + \
+		 	Client.DATA_DELIMETER + str(latest_transfer.player.id) + \
+			Client.DATA_DELIMETER + str(latest_transfer.team.id) + \
+			Client.DATA_DELIMETER + str(latest_transfer.price))
 
 
 func _assign_player() -> void:
@@ -99,7 +103,7 @@ func _on_player_list_active_player_change() -> void:
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 	player_list.update()
-	Client.send(Client.player_active.get_name() + ":" + str(active_player.id))
+	Client.send(Client.player_active.get_name() + Client.DATA_DELIMETER + str(active_player.id))
 
 
 func _on_team_overview_player_removed() -> void:
@@ -113,7 +117,7 @@ func _refresh_lists() -> void:
 
 func _on_timer_toggle() -> void:
 	var timestamp:int = Time.get_unix_time_from_system()
-	Client.send(Client.timer_start.get_name() + ":" + str(timestamp))
+	Client.send(Client.timer_start.get_name() + Client.DATA_DELIMETER + str(timestamp))
 
 
 func _on_client_connection_closed() -> void:
@@ -125,6 +129,7 @@ func _on_client_connection_closed() -> void:
 func _on_client_connected_to_server() -> void:
 	server_status.color = Color.GREEN
 	connect_button.visible = false
+	_reconnect()
 
 
 func _on_connect_pressed() -> void:
@@ -132,7 +137,7 @@ func _on_connect_pressed() -> void:
 
 
 func _on_timer_time_changed(time) -> void:
-	Client.send(Client.timer_change.get_name() + ":" + str(time))
+	Client.send(Client.timer_change.get_name() + Client.DATA_DELIMETER + str(time))
 
 
 func _on_timer_paused() -> void:
@@ -161,7 +166,7 @@ func _on_client_timer_change(time:int) -> void:
 
 
 func _on_timer_time_change() -> void:
-	Client.send(Client.timer_change.get_name() + ":" + str(Config.active_time))
+	Client.send(Client.timer_change.get_name() + Client.DATA_DELIMETER + str(Config.active_time))
 
 
 func _on_client_timer_pause() -> void:
@@ -202,5 +207,7 @@ func _on_client_player_active(player_id:int) -> void:
 	player_list.update()
 
 
-func _on_client_reconnect(s) -> void:
-	_refresh_lists()
+func _reconnect() -> void:
+	if not Config.is_admin:
+		print("CLIENT RECONNECTING....")
+		Client.send(Client.reconnect.get_name())

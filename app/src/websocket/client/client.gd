@@ -16,6 +16,7 @@ signal timer_start(delta:float)
 signal timer_change(time: int)
 signal timer_pause()
 signal timer_reset()
+
 signal player_assign(player: Player, team: Team, price: int)
 signal player_remove(player: Player, team: Team)
 signal player_next()
@@ -25,9 +26,10 @@ signal player_active(player_id: int)
 signal reconnect()
 
 
-const HOST:String = "ws://localhost:8000/"
-#const HOST:String = "ws://sandbox.s9i.org:8000/"
-
+#const HOST: String = "ws://localhost:8000/"
+const HOST: String = "ws://simondalvai.org:8000/"
+const DATA_DELIMETER: String = ";"
+const ID_DELIMETER: String = "|"
 
 @export var handshake_headers: PackedStringArray
 @export var supported_protocols: PackedStringArray
@@ -37,14 +39,23 @@ var tls_options: TLSOptions = null
 var socket: WebSocketPeer = WebSocketPeer.new()
 var last_state: int = WebSocketPeer.STATE_CLOSED
 
+
 func _process(delta):
 	poll()
 
 
-func send(message: Variant) -> int:
-	if typeof(message) == TYPE_STRING:
-		return socket.send_text(message)
-	return socket.send(var_to_bytes(message))
+func send(message: String, save_player_message: bool = true) -> int:
+	# only save player messages
+	if save_player_message and message.contains("player"):
+		Config.player_messages.append(message)
+	# always put player message id to message start
+	message = str(Config.player_messages.size()) + ID_DELIMETER + message
+	return socket.send_text(message)
+	
+	# to send also bytes, not only strings
+	#if typeof(message) == TYPE_STRING:
+		#return socket.send_text(message)
+	#return socket.send(var_to_bytes(message))
 
 
 func get_message() -> Variant:
@@ -95,11 +106,26 @@ func poll() -> void:
 #		message_received.emit(get_message())
 
 
-func _on_client_message_received(message:String) -> void:
+func _on_client_message_received(message: String) -> void:
+	# extract message id
+	var message_id: int = -1
+	var id_message_parts: Array = message.split(ID_DELIMETER)
+	if id_message_parts.size() > 1:
+		message_id = int(id_message_parts[0])
+	
+	# skip replay message, if not necessary 
+	if not Config.is_admin and message_id <= Config.player_messages.size():
+		print("skip player message with id " + str(message_id))
+		return
+	
+	# save player messages
+	if "player" in message:
+		Config.player_messages.append(message)
+	
 	if message == auction_start.get_name():
 		auction_start.emit()
 	elif timer_start.get_name() in message:
-		var timestamp: int  = int(message.split(":")[1])
+		var timestamp: int  = int(message.split(DATA_DELIMETER)[1])
 		var current_timestamp: int = Time.get_unix_time_from_system()
 		var delta:float = current_timestamp - timestamp + 100
 		timer_start.emit(delta)
@@ -107,7 +133,7 @@ func _on_client_message_received(message:String) -> void:
 		# todo: add delta also to toggle
 		timer_toggle.emit()
 	elif timer_change.get_name() in message:
-		var time: int = int(message.split(":")[1])
+		var time: int = int(message.split(DATA_DELIMETER)[1])
 		timer_change.emit(time)
 	elif message == timer_pause.get_name():
 		timer_pause.emit()
@@ -116,43 +142,34 @@ func _on_client_message_received(message:String) -> void:
 	elif message == timer_reset.get_name() :
 		timer_reset.emit()
 	elif player_assign.get_name() in message:
-		var player_id: int = int(message.split(":")[1])
-		var team_id: int = int(message.split(":")[2])
-		var price: int = int(message.split(":")[3])
-
+		var player_id: int = int(message.split(DATA_DELIMETER)[1])
+		var team_id: int = int(message.split(DATA_DELIMETER)[2])
+		var price: int = int(message.split(DATA_DELIMETER)[3])
 		var player: Player = Config.get_player_by_id(player_id)
 		var team: Team = Config.get_team_by_id(team_id)
 		player.price = price
 		player_assign.emit(player, team, price)
 	elif player_remove.get_name() in message:
-		var player_id: int = int(message.split(":")[1])
-		var team_id: int = int(message.split(":")[2])
+		var player_id: int = int(message.split(DATA_DELIMETER)[1])
+		var team_id: int = int(message.split(DATA_DELIMETER)[2])
 		var player: Player = Config.get_player_by_id(player_id)
 		var team: Team = Config.get_team_by_id(team_id)
-		
 		player_remove.emit(player, team)
-	elif message == player_next.get_name():
+	elif player_next.get_name() in message:
 		player_next.emit()
-	elif message == player_previous.get_name():
+	elif player_previous.get_name() in message:
 		player_previous.emit()
 	elif player_active.get_name() in message:
-		var player_id: int = int(message.split(":")[1])
+		var player_id: int = int(message.split(DATA_DELIMETER)[1])
 		player_active.emit(player_id)
 	elif reconnect.get_name() in message:
 		if Config.is_admin:
-			var data:Dictionary = {}
-			data.active_player_index = Config.active_player_index
-			data.active_time = Config.active_time
-			data.history = JSON.stringify(Config.history)
-			data.teams = JSON.stringify(Config.teams)
-			send(reconnect.get_name() + ":" + JSON.stringify(data))
-		else:
-			var data: Dictionary = JSON.parse_string(message.split(":")[1])
-			var active_player_index: int = data.active_player_index
-			var active_time: int = data.active_time
-			var history: Array = data.history
-			var teams: Array = data.teams
+			print("ADMIN RECONNECT")
+			if message_id < Config.player_messages.size():
+				var missing_messages: Array = Config.player_messages.slice(message_id)
+				print("replay missing player messages size " + str(missing_messages.size()))
+				print("replay messages id " + str(message_id))
+				for missing_message in missing_messages:
+					Client.send(missing_message, false)
 
-			Config.reset_state(active_player_index, active_time, history, teams)
-			reconnect.emit()
 	print(message)

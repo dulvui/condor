@@ -5,7 +5,7 @@
 extends Node2D
 
 @onready var bip_sound:AudioStreamPlayer = $Bip
-@onready var final_sound:AudioStreamPlayer = $Final
+#@onready var final_sound:AudioStreamPlayer = $Final
 
 var counter:int = 3
 var playing:bool = false
@@ -15,12 +15,13 @@ func countdown(time_left:float) -> void:
 		if time_left < counter:
 			counter -= 1
 			playing = true
-			bip_sound.play()
+			#bip_sound.play()
 		elif time_left > 4:
 			counter = 3
 
 func final() -> void:
-	final_sound.play()
+	pass
+	#final_sound.play()
 
 func _on_bip_finished() -> void:
 	playing = false

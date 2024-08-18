@@ -41,7 +41,9 @@ func _append_player_label(player: Player) -> void:
 
 func _on_player_removed(player: Player) -> void:
 	if Config.is_admin:
-		Client.send(Client.player_remove.get_name() + ":" + str(player.id) + ":" + str(player.team_id))
+		Client.send(Client.player_remove.get_name() + \
+			Client.DATA_DELIMETER + str(player.id) + \
+			Client.DATA_DELIMETER + str(player.team_id))
 	Config.add_to_history(player, team, -player.price)
 	Config.remove_player_from_team(player, team)
 	remove_player(player)
