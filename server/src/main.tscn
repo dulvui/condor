@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://088jkysn3jn"]
 
-[ext_resource type="Script" path="res://src/Main.gd" id="1_6jfwt"]
-[ext_resource type="PackedScene" uid="uid://dc2xstdblwn06" path="res://src/websocket/client/Client.tscn" id="1_83kkq"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_t305y"]
+[ext_resource type="PackedScene" uid="uid://dc2xstdblwn06" path="res://src/websocket/client/client.tscn" id="2_sbuyw"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_6jfwt")
+script = ExtResource("1_t305y")
 
-[node name="Client" parent="." instance=ExtResource("1_83kkq")]
+[node name="Client" parent="." instance=ExtResource("2_sbuyw")]
 
 [connection signal="client_connected" from="Client" to="." method="_on_client_client_connected"]
 [connection signal="client_disconnected" from="Client" to="." method="_on_client_client_disconnected"]
