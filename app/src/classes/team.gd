@@ -4,7 +4,7 @@
 
 class_name Team
 
-var slots:Dictionary = {
+var slots: Dictionary = {
 	"P" : 3,
 	"D" : 8,
 	"C" : 8,

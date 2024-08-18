@@ -4,12 +4,15 @@
 
 extends Control
 
+@onready var admin_section: VBoxContainer = $Buttons/AdminSection
+@onready var reset_dialog: ConfirmationDialog = $ResetDialog
+
+
 func _ready() -> void:
-	$VBoxContainer/Teams.visible = Config.is_admin
-	$AdminActive.visible = Config.is_admin
-	
-	# always close client in menu
+	admin_section.visible = Config.is_admin
+	# always close server connection in menu
 	Client.close()
+
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
@@ -20,12 +23,12 @@ func _on_teams_pressed() -> void:
 
 
 func _on_export_pressed() -> void:
-	var timestamp:float = Time.get_unix_time_from_system()
-	var file:FileAccess = FileAccess.open("user://players-%d.csv"%timestamp, FileAccess.WRITE)
+	var timestamp: float = Time.get_unix_time_from_system()
+	var file: FileAccess = FileAccess.open("user://players-%d.csv"%timestamp, FileAccess.WRITE)
 	
 	var content: String = "";
 	
-	var export_teams:Dictionary = {}
+	var export_teams: Dictionary = {}
 	for team in Config.teams:
 		export_teams[team.id] = {
 			"name": team.name,
@@ -37,23 +40,24 @@ func _on_export_pressed() -> void:
 			export_teams[player.team_id].players.append(player)
 	
 	for team in export_teams.values():
-		var team_line:PackedStringArray = PackedStringArray()
+		var team_line: PackedStringArray = PackedStringArray()
 		team_line.append_array(["$", "$", "$"])
 		file.store_csv_line(team_line)
 		for player in team.players:
-			var player_line:PackedStringArray = PackedStringArray()
+			var player_line: PackedStringArray = PackedStringArray()
 			player_line.append_array([team.name, player.id, player.price])
 			file.store_csv_line(player_line)
 
 
-func _on_admin_pressed() -> void:
-	Config.is_admin = not Config.is_admin 
-	$VBoxContainer/Teams.visible = Config.is_admin
-	$AdminActive.visible = Config.is_admin
-
-
 func _on_reset_pressed() -> void:
-	# TODO asck confirm
+	reset_dialog.popup_centered()
+
+
+func _on_reset_dialog_confirmed() -> void:
 	Config.reset_data()
-	$VBoxContainer/Teams.visible = Config.is_admin
-	$AdminActive.visible = Config.is_admin
+	admin_section.visible = Config.is_admin
+
+
+func _on_admin_button_pressed() -> void:
+	Config.is_admin = not Config.is_admin 
+	admin_section.visible = Config.is_admin

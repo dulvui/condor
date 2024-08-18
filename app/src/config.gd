@@ -55,7 +55,6 @@ func save_all_data() -> void:
 
 func reset_data() -> void:
 	active_time = 30
-	is_admin = false
 	teams = _get_default_teams()
 	active_team_id = -1
 	next_team_id = 0

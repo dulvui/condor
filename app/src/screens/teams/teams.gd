@@ -6,10 +6,11 @@ extends Control
 
 const TeamBox: PackedScene = preload("res://src/screens/teams/team_box/team_box.tscn")
 
-@onready var add_player:HBoxContainer = $HBoxContainer
-@onready var add_button:Button = $HBoxContainer/Add
-@onready var name_edit:LineEdit = $HBoxContainer/Name
-@onready var team_list:VBoxContainer = $ScrollContainer/List
+@onready var add_player:HBoxContainer = $VBoxContainer/TeamAdd
+@onready var add_button:Button = $VBoxContainer/TeamAdd/Add
+@onready var name_edit:LineEdit = $VBoxContainer/TeamAdd/Name
+@onready var team_list:VBoxContainer = $VBoxContainer/ScrollContainer/List
+
 
 var team_to_delte:Team
 
