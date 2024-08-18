@@ -233,7 +233,11 @@ func toogle_admin() -> bool:
 
 
 # save on quit on mobile
-func _notification(what) -> void:
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_all_data()
 		get_tree().quit() # default behavior
+	elif what == NOTIFICATION_PAUSED:
+		Client.close()
+	elif what == NOTIFICATION_UNPAUSED:
+		Client.connect_to_server()

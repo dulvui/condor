@@ -59,6 +59,8 @@ func _on_auction_control_assign() -> void:
 
 func _on_assign_player_assigned() -> void:
 	_assign_player()
+	# to disable assign/auction button
+	auction_control.set_player(active_player)
 	if Config.is_admin:
 		var latest_transfer = Config.history[-1]
 		Client.send(Client.player_assign.get_name() + \

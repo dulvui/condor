@@ -15,8 +15,8 @@ signal player_removed
 var player: Player 
 
 
-func set_player(player: Player) -> void:
-	self.player = player
+func set_player(p_player: Player) -> void:
+	player = p_player
 	player_label.set_up(player)
 
 

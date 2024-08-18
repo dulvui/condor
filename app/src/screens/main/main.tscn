@@ -43,7 +43,7 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/HSplitContainer"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 
 [node name="PlayerList" parent="MarginContainer/HSplitContainer/VSplitContainer" instance=ExtResource("3_w4uhl")]
