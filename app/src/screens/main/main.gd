@@ -4,14 +4,14 @@
 
 extends Control
 
-@onready var auction_control: AuctionControl = $MarginContainer/HSplitContainer/VBoxContainer/AuctionControl
+@onready var auction_control: AuctionControl = $MarginContainer/HSplitContainer/VBoxContainer/Header/AuctionControl
 @onready var assign_player: PopupPanel = $AssignPlayer
 @onready var team_overview: Control = $MarginContainer/HSplitContainer/VBoxContainer/TeamOverview
 @onready var player_list: Control = $MarginContainer/HSplitContainer/VSplitContainer/PlayerList
 @onready var history: Control = $MarginContainer/HSplitContainer/VSplitContainer/History
 @onready var timer: AuctionTimer = $Timer
-@onready var server_status: ColorRect = $Status/ServerStatus
-@onready var connect_button: Button = $Status/Connect
+@onready var server_status: ColorRect = $MarginContainer/HSplitContainer/VBoxContainer/Header/ServerStatus
+@onready var connect_button: Button = $MarginContainer/HSplitContainer/VBoxContainer/Header/Connect
 @onready var connection_lost_alert: AcceptDialog = $ConnectionLost
 
 var active_player: Player
