@@ -52,6 +52,7 @@ func stop():
 	tcp_server.stop()
 	pending_peers.clear()
 	peers.clear()
+	print("STOP")
 
 
 func send_others(peer_id: int, message: Variant) -> int:
