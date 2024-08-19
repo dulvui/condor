@@ -31,10 +31,10 @@ jobs:
         run: cp $WORKING_DIRECTORY/export_presets.html.example $WORKING_DIRECTORY/export_presets.cfg
 
       - name: Godot HTML5 export
-        uses: dulvui/godot-4-html-export@v0.0.3
+        uses: dulvui/godot-4-html-export@v1
         with:
           working-directory: $WORKING_DIRECTORY
-          godot-version: 4.2.2
+          godot-version: 4.3
           godot-channel: stable
 
       - name: Upload to itch.io
