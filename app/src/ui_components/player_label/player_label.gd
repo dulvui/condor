@@ -8,13 +8,13 @@ extends Control
 
 signal action
 
-@onready var active_label:Label = $HBoxContainer/Active
-@onready var position_label:Label = $HBoxContainer/Position
-@onready var name_label:Label = $HBoxContainer/Name
-@onready var team_name_label:Label = $HBoxContainer/TeamName
-@onready var price_label:Label = $HBoxContainer/Price
-@onready var action_button:Button = $HBoxContainer/Action
-@onready var link_button:Button = $HBoxContainer/Link
+@onready var active_label:Label = $MarginContainer/HBoxContainer/Active
+@onready var position_label:Label = $MarginContainer/HBoxContainer/Position
+@onready var name_label:Label = $MarginContainer/HBoxContainer/Name
+@onready var team_name_label:Label = $MarginContainer/HBoxContainer/TeamName
+@onready var price_label:Label = $MarginContainer/HBoxContainer/Price
+@onready var action_button:Button = $MarginContainer/HBoxContainer/Action
+@onready var link_button:Button = $MarginContainer/HBoxContainer/Link
 @onready var color_rect:ColorRect = $ColorRect
 
 
@@ -23,7 +23,7 @@ var player: Player
 func _ready() -> void:
 	set_process(false)
 	action_button.visible = Config.is_admin
-	link_button.visible = Config.is_admin or OS.get_name() == "Linux" or OS.get_name() == "Windows"
+	#link_button.visible = Config.is_admin or OS.get_name() == "Linux" or OS.get_name() == "Windows"
 
 
 func set_up(_player: Player) -> void:

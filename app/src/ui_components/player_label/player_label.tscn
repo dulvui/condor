@@ -7,7 +7,7 @@ custom_minimum_size = Vector2(300, 42)
 layout_mode = 3
 anchor_right = 0.156
 anchor_bottom = 0.039
-offset_right = -30.52
+offset_right = 0.47998
 offset_bottom = -0.120003
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -15,58 +15,63 @@ mouse_filter = 1
 script = ExtResource("1_myfyj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1.08294e-07, 0.274881, 0.21271, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
 
-[node name="Active" type="Label" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Active" type="Label" parent="MarginContainer/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "-"
 horizontal_alignment = 1
 
-[node name="Position" type="Label" parent="HBoxContainer"]
+[node name="Position" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "P"
 horizontal_alignment = 1
 
-[node name="Name" type="Label" parent="HBoxContainer"]
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cragno"
 text_overrun_behavior = 3
 
-[node name="TeamName" type="Label" parent="HBoxContainer"]
+[node name="TeamName" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "SAS"
 
-[node name="Price" type="Label" parent="HBoxContainer"]
+[node name="Price" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "12 M"
 horizontal_alignment = 2
 
-[node name="Link" type="Button" parent="HBoxContainer"]
+[node name="Link" type="Button" parent="MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "L"
 
-[node name="Action" type="Button" parent="HBoxContainer"]
+[node name="Action" type="Button" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "R"
 
-[connection signal="pressed" from="HBoxContainer/Link" to="." method="_on_link_pressed"]
-[connection signal="pressed" from="HBoxContainer/Action" to="." method="_on_action_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Link" to="." method="_on_link_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Action" to="." method="_on_action_pressed"]
