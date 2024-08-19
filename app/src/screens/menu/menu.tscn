@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cce4r3em5m283"]
+[gd_scene load_steps=3 format=3 uid="uid://cce4r3em5m283"]
 
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="1_lsxx0"]
+[ext_resource type="PackedScene" uid="uid://h78og16kspcj" path="res://src/screens/teams/teams.tscn" id="2_ygfth"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -12,67 +13,55 @@ grow_vertical = 2
 script = ExtResource("1_lsxx0")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -104.5
-offset_top = -101.0
-offset_right = 104.5
-offset_bottom = 101.0
+offset_left = -438.0
+offset_top = -492.0
+offset_right = 431.0
+offset_bottom = 464.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="DefaultSection" type="VBoxContainer" parent="Buttons"]
+[node name="Teams" parent="VBoxContainer" instance=ExtResource("2_ygfth")]
 layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
+size_flags_vertical = 3
 
-[node name="Start" type="Button" parent="Buttons/DefaultSection"]
-layout_mode = 2
-text = "START"
-
-[node name="Reset" type="Button" parent="Buttons/DefaultSection"]
-layout_mode = 2
-text = "RESET"
-
-[node name="AdminSection" type="VBoxContainer" parent="Buttons"]
+[node name="AdminSection" type="VBoxContainer" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="AdminActive" type="Label" parent="Buttons/AdminSection"]
+[node name="AdminActive" type="Label" parent="VBoxContainer/AdminSection"]
 layout_mode = 2
 text = "ADMIN"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Teams" type="Button" parent="Buttons/AdminSection"]
-layout_mode = 2
-text = "TEAMS"
-
-[node name="Export" type="Button" parent="Buttons/AdminSection"]
+[node name="Export" type="Button" parent="VBoxContainer/AdminSection"]
 layout_mode = 2
 text = "EXPORT"
 
+[node name="Reset" type="Button" parent="VBoxContainer/AdminSection"]
+layout_mode = 2
+text = "RESET"
+
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.324729
 anchor_top = 0.81663
 anchor_right = 0.683604
@@ -93,14 +82,10 @@ metadata/_edit_use_anchors_ = true
 [node name="AdminButton" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-anchor_left = 0.029
-anchor_top = 0.83
-anchor_right = 0.258
-anchor_bottom = 0.933
-offset_left = -7.68
-offset_top = -8.40002
-offset_right = 0.639954
-offset_bottom = 9.35999
+anchor_right = 0.15
+anchor_bottom = 0.131
+offset_right = 4.0
+offset_bottom = -14.48
 theme_override_font_sizes/font_size = 32
 text = "ADMIN"
 
@@ -110,9 +95,7 @@ title = "DELETE_TEAM"
 size = Vector2i(200, 102)
 dialog_text = "DELETE ALL DATA?"
 
-[connection signal="pressed" from="Buttons/DefaultSection/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Buttons/DefaultSection/Reset" to="." method="_on_reset_pressed"]
-[connection signal="pressed" from="Buttons/AdminSection/Teams" to="." method="_on_teams_pressed"]
-[connection signal="pressed" from="Buttons/AdminSection/Export" to="." method="_on_export_pressed"]
+[connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
+[connection signal="pressed" from="VBoxContainer/AdminSection/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="AdminButton" to="." method="_on_admin_button_pressed"]
 [connection signal="confirmed" from="ResetDialog" to="." method="_on_reset_dialog_confirmed"]

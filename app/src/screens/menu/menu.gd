@@ -4,7 +4,7 @@
 
 extends Control
 
-@onready var admin_section: VBoxContainer = $Buttons/AdminSection
+@onready var admin_section: VBoxContainer = $VBoxContainer/AdminSection
 @onready var reset_dialog: ConfirmationDialog = $ResetDialog
 
 
@@ -12,14 +12,6 @@ func _ready() -> void:
 	admin_section.visible = Config.is_admin
 	# always close server connection in menu
 	Client.close()
-
-
-func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
-
-
-func _on_teams_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/teams/teams.tscn")
 
 
 func _on_export_pressed() -> void:

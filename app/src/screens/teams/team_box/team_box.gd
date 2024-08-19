@@ -26,6 +26,7 @@ func set_up(team: Team) -> void:
 func _on_delete_pressed() -> void:
 	delete_dialog.popup_centered()
 
+
 func _on_delete_dialog_confirmed() -> void:
 	Config.delete_team(team)
 	deleted.emit()
