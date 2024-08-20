@@ -26,6 +26,7 @@ func set_up(team: Team) -> void:
 		if player.team_id == team.id:
 			_append_player_label(player)
 
+
 func add_player(player: Player) -> void:
 	_append_player_label(player)
 	budget_label.text = " %d M"%team.budget

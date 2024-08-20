@@ -116,7 +116,10 @@ func _on_client_message_received(message: String) -> void:
 		message_id = int(id_message_parts[0])
 	
 	# skip replay message, if not necessary 
-	if not Config.is_admin and "player" in message  and message_id <= Config.player_messages.size():
+	if "player" in message and not Config.ready_for_player_messages:
+		print("not ready for player message with id " + str(message_id))
+		return
+	if not Config.is_admin and "player" in message and message_id <= Config.player_messages.size():
 		print("skip player message with id " + str(message_id))
 		return
 	

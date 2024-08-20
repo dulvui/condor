@@ -18,6 +18,8 @@ var active_player: Player
 
 
 func _ready() -> void:
+	Config.ready_for_player_messages = true
+
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 	
@@ -39,6 +41,7 @@ func _ready() -> void:
 	if Client.last_state == WebSocketPeer.STATE_OPEN:
 		server_status.color = Color.GREEN
 		connect_button.visible = false
+		_reconnect()
 	else:
 		Client.connect_to_server()
 

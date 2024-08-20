@@ -10,9 +10,12 @@ extends Control
 
 
 func _ready() -> void:
+	Config.ready_for_player_messages = false
 	admin_section.visible = Config.is_admin
 	# always close server connection in menu
-	Client.connect_to_server()
+	if Client.last_state != WebSocketPeer.STATE_OPEN:
+		Client.connect_to_server()
+	
 	Client.get_teams.connect(func() -> void: teams.update_list())
 
 

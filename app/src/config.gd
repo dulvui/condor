@@ -21,6 +21,8 @@ var history: Array
 
 var is_admin: bool
 
+var ready_for_player_messages: bool = false
+
 var player_messages: Array
 
 
