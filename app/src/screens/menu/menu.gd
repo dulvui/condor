@@ -6,12 +6,14 @@ extends Control
 
 @onready var admin_section: VBoxContainer = $VBoxContainer/AdminSection
 @onready var reset_dialog: ConfirmationDialog = $ResetDialog
+@onready var teams: VBoxContainer = $VBoxContainer/Teams
 
 
 func _ready() -> void:
 	admin_section.visible = Config.is_admin
 	# always close server connection in menu
-	Client.close()
+	Client.connect_to_server()
+	Client.get_teams.connect(func() -> void: teams.update_list())
 
 
 func _on_export_pressed() -> void:
@@ -47,9 +49,11 @@ func _on_reset_pressed() -> void:
 
 func _on_reset_dialog_confirmed() -> void:
 	Config.reset_data()
+	Client.send(Client.get_teams.get_name())
 	admin_section.visible = Config.is_admin
 
 
 func _on_admin_button_pressed() -> void:
 	Config.is_admin = not Config.is_admin 
 	admin_section.visible = Config.is_admin
+	teams.update_list()

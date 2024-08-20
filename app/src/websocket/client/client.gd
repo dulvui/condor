@@ -23,11 +23,13 @@ signal player_next()
 signal player_previous()
 signal player_active(player_id: int)
 
+signal get_teams()
+
 signal reconnect()
 
 
 #const HOST: String = "ws://localhost:8000/"
-const HOST: String = "ws://simondalvai.org:8000/"
+const HOST: String = "wss://playground.h11s.org/ws/"
 const DATA_DELIMETER: String = ";"
 const ID_DELIMETER: String = "|"
 
@@ -114,7 +116,7 @@ func _on_client_message_received(message: String) -> void:
 		message_id = int(id_message_parts[0])
 	
 	# skip replay message, if not necessary 
-	if not Config.is_admin and message_id <= Config.player_messages.size():
+	if not Config.is_admin and "player" in message  and message_id <= Config.player_messages.size():
 		print("skip player message with id " + str(message_id))
 		return
 	
@@ -171,5 +173,25 @@ func _on_client_message_received(message: String) -> void:
 				print("replay messages id " + str(message_id))
 				for missing_message in missing_messages:
 					Client.send(missing_message, false)
-
+	elif get_teams.get_name() in message:
+		if Config.is_admin:
+			print("Sending teams...")
+			var teams_message: String =  Client.get_teams.get_name()
+			for team: Team in Config.teams:
+				teams_message += Client.DATA_DELIMETER + team.name
+			Client.send(teams_message)
+		else:
+			print("Receving teams...")
+			var team_names: PackedStringArray = message.split(DATA_DELIMETER)
+			if team_names.size() > 1:
+				team_names.remove_at(0) # remove signal name
+				Config.teams = []
+				for team_name: String in team_names:
+					var team: Team = Team.new()
+					print(team_name)
+					team.set_up(team_name)
+					Config.teams.append(team)
+				get_teams.emit()
+			else:
+				print("No teams...")
 	print(message)

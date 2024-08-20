@@ -32,7 +32,7 @@ func _ready() -> void:
 	is_admin = config.get_value("settings", "is_admin", false)
 	# try saving teams and players as dictionary to save space
 	# construct/deconstruct methods
-	teams = config.get_value("data", "teams", _get_default_teams())
+	teams = config.get_value("data", "teams", [])
 	active_team_id = config.get_value("data", "active_team_id", -1)
 	next_team_id = config.get_value("data", "next_team_id", 0)
 	players = config.get_value("data", "players", _init_players())
@@ -55,7 +55,7 @@ func save_all_data() -> void:
 
 func reset_data() -> void:
 	active_time = 30
-	teams = _get_default_teams()
+	teams = []
 	active_team_id = -1
 	next_team_id = 0
 	players = _init_players()
@@ -139,31 +139,6 @@ func get_team_by_id(id:int) -> Team:
 		if team.id == id:
 			return team
 	return
-
-
-func _get_default_teams() -> Array[Team]:
-	var default_teams: Array[Team] = []
-	const team_names = [
-		"Real Linus",
-		"Knight JR FC",
-		"Gratlamsee",
-		"Real Tibia",
-		"Antica Distilleria Brase Cuerte",
-		"Zukunft Suedtirol",
-		"Robysauron",
-		"Coppa Del Nonno",
-		"Rooney Tunes",
-		"Longbarda",
-		"Longobarda B",
-	]
-	
-	var id: int = 0
-	for team_name in team_names:
-		var team: Team = Team.new()
-		default_teams.append(team.set_up(team_name, id))
-		id += 1
-		
-	return default_teams
 
 
 func delete_team(team: Team) -> void:

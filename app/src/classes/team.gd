@@ -17,7 +17,7 @@ var id:int
 var budget:int
 
 
-func set_up(name: String, id:int) -> Team:
+func set_up(name: String) -> Team:
 	self.name = name
 	self.id = Config.get_next_team_id()
 	self.budget = Config.BUDGET

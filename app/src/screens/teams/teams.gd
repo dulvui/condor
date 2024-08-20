@@ -17,27 +17,27 @@ func _ready() -> void:
 	add_player.visible = Config.is_admin
 
 
+func update_list() -> void:
+	for team_box in team_list.get_children():
+		team_box.queue_free()
+	
+	for team in Config.teams:
+		_add_team(team)
+
+
 func _add_team(team: Team):
 	var team_box: TeamBox = TeamBox.instantiate()
 	team_list.add_child(team_box)
 	team_box.set_up(team)
-	team_box.deleted.connect(_update_list)
+	team_box.deleted.connect(update_list)
 	Config.save_all_data()
 
 
 func _create_team(team_name: String) -> Team:
 	var team: Team = Team.new()
 	# todo use global incremetnal id
-	team.set_up(team_name, 0)
+	team.set_up(team_name)
 	return team
-
-
-func _update_list() -> void:
-	for team_box in team_list.get_children():
-		team_box.queue_free()
-	
-	for team in Config.teams:
-		_add_team(team)
 
 
 func _on_add_pressed() -> void:
@@ -50,4 +50,4 @@ func _on_add_pressed() -> void:
 	_add_team(team)
 	
 	name_edit.text = ""
-	_update_list()
+	update_list()

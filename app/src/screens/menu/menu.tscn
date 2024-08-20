@@ -39,6 +39,10 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Reset" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "RESET"
+
 [node name="AdminSection" type="VBoxContainer" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -54,10 +58,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Export" type="Button" parent="VBoxContainer/AdminSection"]
 layout_mode = 2
 text = "EXPORT"
-
-[node name="Reset" type="Button" parent="VBoxContainer/AdminSection"]
-layout_mode = 2
-text = "RESET"
 
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
@@ -95,7 +95,7 @@ title = "DELETE_TEAM"
 size = Vector2i(200, 102)
 dialog_text = "DELETE ALL DATA?"
 
+[connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
-[connection signal="pressed" from="VBoxContainer/AdminSection/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="AdminButton" to="." method="_on_admin_button_pressed"]
 [connection signal="confirmed" from="ResetDialog" to="." method="_on_reset_dialog_confirmed"]
