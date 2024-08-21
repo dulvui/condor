@@ -53,10 +53,12 @@ func _on_reset_pressed() -> void:
 func _on_reset_dialog_confirmed() -> void:
 	Config.reset_data()
 	Client.send(Client.get_teams.get_name())
+	teams.update_list()
 	admin_section.visible = Config.is_admin
 
 
 func _on_admin_button_pressed() -> void:
 	Config.is_admin = not Config.is_admin 
 	admin_section.visible = Config.is_admin
+	# update list again, to show new fetched teams
 	teams.update_list()
