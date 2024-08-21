@@ -4,10 +4,10 @@
 
 [node name="TeamBox" type="HBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.317
-anchor_bottom = 0.059
-offset_right = 7.35999
-offset_bottom = 0.279995
+anchor_right = 0.321
+anchor_bottom = 0.036
+offset_right = -0.320007
+offset_bottom = 0.119999
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20

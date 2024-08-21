@@ -20,6 +20,26 @@ text = "TEAM	"
 text_overrun_behavior = 3
 uppercase = true
 
+[node name="PlayerAmount" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="P" type="Label" parent="PlayerAmount"]
+layout_mode = 2
+text = "P 1/3"
+
+[node name="D" type="Label" parent="PlayerAmount"]
+layout_mode = 2
+text = "D 1/8"
+
+[node name="C" type="Label" parent="PlayerAmount"]
+layout_mode = 2
+text = "C 2/8"
+
+[node name="A" type="Label" parent="PlayerAmount"]
+layout_mode = 2
+text = "A 2/6"
+
 [node name="Budget" type="Label" parent="."]
 layout_mode = 2
 text = "999999"

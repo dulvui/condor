@@ -8,6 +8,12 @@ extends Control
 @onready var reset_dialog: ConfirmationDialog = $ResetDialog
 @onready var teams: VBoxContainer = $VBoxContainer/Teams
 
+@onready var budget_spinner: SpinBox = $VBoxContainer/AdminSection/Options/BudgetSpinner
+@onready var goalkeeper_spinner: SpinBox = $VBoxContainer/AdminSection/Options/GoalkeeperSpinner
+@onready var defender_spinner: SpinBox = $VBoxContainer/AdminSection/Options/DefenderSpinner
+@onready var middlefield_spinner: SpinBox = $VBoxContainer/AdminSection/Options/MiddlefieldSpinner
+@onready var attacker_spinner: SpinBox = $VBoxContainer/AdminSection/Options/AttackerSpinner
+
 
 func _ready() -> void:
 	Config.ready_for_player_messages = false
@@ -17,6 +23,15 @@ func _ready() -> void:
 		Client.connect_to_server()
 	
 	Client.get_teams.connect(func() -> void: teams.update_list())
+	
+	budget_spinner.value = Config.budget
+	
+	goalkeeper_spinner.value = Config.p_amount
+	defender_spinner.value = Config.d_amount
+	middlefield_spinner.value = Config.c_amount
+	attacker_spinner.value = Config.a_amount
+	
+	
 
 
 func _on_export_pressed() -> void:
@@ -62,3 +77,23 @@ func _on_admin_button_pressed() -> void:
 	admin_section.visible = Config.is_admin
 	# update list again, to show new fetched teams
 	teams.update_list()
+
+
+func _on_budget_spinner_value_changed(value: float) -> void:
+	Config.budget = value
+
+
+func _on_goalkeeper_spinner_value_changed(value: float) -> void:
+	Config.p_amount = value
+
+
+func _on_defender_spinner_value_changed(value: float) -> void:
+	Config.d_amount = value
+
+
+func _on_middlefield_spinner_value_changed(value: float) -> void:
+	Config.c_amount = value
+
+
+func _on_attacker_spinner_value_changed(value: float) -> void:
+	Config.a_amount = value

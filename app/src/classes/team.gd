@@ -17,10 +17,16 @@ var id:int
 var budget:int
 
 
-func set_up(name: String) -> Team:
-	self.name = name
-	self.id = Config.get_next_team_id()
-	self.budget = Config.BUDGET
+func set_up(p_name: String) -> Team:
+	name = p_name
+	id = Config.get_next_team_id()
+	budget = Config.budget
+	slots["P"] = Config.p_amount
+	slots["D"] = Config.d_amount
+	slots["C"] = Config.c_amount
+	slots["A"] = Config.a_amount
+	slots["total"] = Config.p_amount + Config.d_amount + Config.c_amount + Config.p_amount
+	
 	return self
 
 
