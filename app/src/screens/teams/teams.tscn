@@ -35,9 +35,4 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "ADD"
 
-[node name="VSeparator" type="VSeparator" parent="TeamAdd"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
 [connection signal="pressed" from="TeamAdd/Add" to="." method="_on_add_pressed"]

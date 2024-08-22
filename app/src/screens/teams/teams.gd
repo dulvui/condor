@@ -11,6 +11,7 @@ const TeamBox: PackedScene = preload("res://src/screens/teams/team_box/team_box.
 @onready var name_edit:LineEdit = $TeamAdd/Name
 @onready var team_list:VBoxContainer = $ScrollContainer/List
 
+
 func _ready() -> void:
 	for team in Config.teams:
 		_add_team(team)
@@ -18,6 +19,8 @@ func _ready() -> void:
 
 
 func update_list() -> void:
+	add_player.visible = Config.is_admin
+	
 	for team_box in team_list.get_children():
 		team_box.queue_free()
 	

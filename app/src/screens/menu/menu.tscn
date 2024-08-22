@@ -64,16 +64,16 @@ allow_greater = true
 prefix = "BUDGET"
 
 [node name="GoalkeeperSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 min_value = 1.0
 max_value = 9.0
 value = 3.0
 allow_greater = true
-prefix = "G"
+prefix = "P"
 
 [node name="DefenderSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 min_value = 1.0
 max_value = 9.0
@@ -82,7 +82,7 @@ allow_greater = true
 prefix = "D"
 
 [node name="MiddlefieldSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 min_value = 1.0
 max_value = 9.0
@@ -91,16 +91,13 @@ allow_greater = true
 prefix = "C"
 
 [node name="AttackerSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 min_value = 1.0
 max_value = 9.0
 value = 6.0
 allow_greater = true
 prefix = "A"
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
 
 [node name="Teams" parent="VBoxContainer" instance=ExtResource("2_ygfth")]
 layout_mode = 2
