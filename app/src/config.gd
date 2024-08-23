@@ -67,14 +67,18 @@ func save_all_data() -> void:
 
 
 func reset_data() -> void:
+	next_team_id = 0
 	active_time = 30
 	teams = []
 	active_team_id = -1
 	next_team_id = 0
-	players = _init_players()
 	active_player_index = 0
 	history = []
 	player_messages = []
+	
+	#players = _init_players()
+	for player: Player in Config.players:
+		player.reset()
 
 
 func add_player_to_team(team: Team, player: Player, price:int) -> String:

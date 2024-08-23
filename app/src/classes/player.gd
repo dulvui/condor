@@ -46,7 +46,12 @@ func set_up(
 	self.price_current = price_current
 	
 	return self
-	
+
+
 func get_position_string() -> String:
 	return Position.keys()[position]
-	
+
+
+func reset() -> void:
+	price = price_current
+	team_id = -1
