@@ -4,7 +4,7 @@
 
 class_name AuctionControl
 
-extends VBoxContainer
+extends HBoxContainer
 
 signal auction
 signal assign
@@ -14,6 +14,7 @@ signal previous
 const AuctionTimer: PackedScene = preload("res://src/ui_components/timer/timer.tscn")
 
 @onready var player_lablel: Label = $Labels/Player
+@onready var price: Label = $Labels/Price
 @onready var team_lablel: Label = $Labels/Team
 @onready var buttons: HBoxContainer = $Buttons
 
@@ -21,6 +22,7 @@ const AuctionTimer: PackedScene = preload("res://src/ui_components/timer/timer.t
 @onready var auction_button: Button = $Buttons/Auction
 @onready var next_button: Button = $Buttons/Next
 @onready var previous_button: Button = $Buttons/Previous
+
 
 func _ready() -> void:
 	if not Config.is_admin:
@@ -31,7 +33,8 @@ func _ready() -> void:
 
 func set_player(player: Player) -> void:
 	player_lablel.text = player.name
-	team_lablel.text = player.real_team
+	team_lablel.text = player.real_team.to_upper().substr(0, 3)
+	price.text = str(player.price_initial) + "M"
 	
 	auction_button.disabled = player.team_id > -1
 	assign_button.disabled = player.team_id > -1

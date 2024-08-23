@@ -44,7 +44,8 @@ func update() -> void:
 	for player_label in list.get_children():
 		if player_label.player.id == Config.active_player().id:
 			player_label.activate()
-			scroll.ensure_control_visible(player_label)
+			if Config.follow_auction_in_player_list:
+				scroll.ensure_control_visible(player_label)
 		elif player_label.player.team_id < 0:
 			player_label.deactivate()
 		else:

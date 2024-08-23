@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/screens/main/main.gd" id="2_t4dvb"]
 [ext_resource type="PackedScene" uid="uid://cmxee5ywoanvl" path="res://src/screens/main/player_list/player_list.tscn" id="3_w4uhl"]
 [ext_resource type="PackedScene" uid="uid://ddxmw2r05sce7" path="res://src/screens/main/history/history.tscn" id="4_46i6t"]
-[ext_resource type="PackedScene" uid="uid://by5xqkpdiio2o" path="res://src/screens/main/auction_control/action_control.tscn" id="5_iadvp"]
+[ext_resource type="PackedScene" uid="uid://by5xqkpdiio2o" path="res://src/screens/main/auction_control/auction_control.tscn" id="5_iadvp"]
 [ext_resource type="PackedScene" uid="uid://cy6ujws16sijb" path="res://src/screens/main/team_overview/team_overview.tscn" id="6_8armv"]
 [ext_resource type="PackedScene" uid="uid://dqr46eapnnw57" path="res://src/screens/main/assign_player/assign_player.tscn" id="7_0ly00"]
 [ext_resource type="PackedScene" uid="uid://cbv4v5l8m8s18" path="res://src/ui_components/timer/timer.tscn" id="8_drged"]
@@ -100,6 +100,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "MENU"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/Dashboard/Right"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Dashboard/Right"]
 layout_mode = 2

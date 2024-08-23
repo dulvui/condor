@@ -32,6 +32,10 @@ func _ready() -> void:
 	middlefield_spinner.value = Config.c_amount
 	attacker_spinner.value = Config.a_amount
 	total_spinner.value = Config.total_amount
+	
+	# fetch teams on first start
+	if Config.teams.size() == 0:
+		Client.send(Client.get_teams.get_name())
 
 
 func _on_export_pressed() -> void:

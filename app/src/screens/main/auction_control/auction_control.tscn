@@ -2,33 +2,40 @@
 
 [ext_resource type="Script" path="res://src/screens/main/auction_control/auction_control.gd" id="1_1ofna"]
 
-[node name="AuctionControl" type="VBoxContainer"]
+[node name="AuctionControl" type="HBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.221
-anchor_bottom = 0.069
-offset_right = 15.68
-offset_bottom = -0.520004
-theme_override_constants/separation = 20
+anchor_right = 0.355
+anchor_bottom = 0.036
+offset_right = 0.399963
+offset_bottom = 0.119999
+theme_override_constants/separation = 60
 script = ExtResource("1_1ofna")
 
 [node name="Labels" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_constants/separation = 40
-alignment = 1
+theme_override_constants/separation = 15
 
 [node name="Player" type="Label" parent="Labels"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Consigli"
+
+[node name="Price" type="Label" parent="Labels"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "1M"
 horizontal_alignment = 1
 
 [node name="Team" type="Label" parent="Labels"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "SAS"
 horizontal_alignment = 1
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 80
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="Previous" type="Button" parent="Buttons"]

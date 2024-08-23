@@ -18,6 +18,7 @@ var total_amount: int = 25
 
 var budget: int = 500
 
+var follow_auction_in_player_list: bool
 
 var config: ConfigFile
 
@@ -36,13 +37,12 @@ var ready_for_player_messages: bool = false
 var player_messages: Array
 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	config = ConfigFile.new()
 	config.load("user://settings.cfg")
 	active_time = config.get_value("settings", "active_time", 30)
 	is_admin = config.get_value("settings", "is_admin", false)
+	follow_auction_in_player_list = config.get_value("settings", "follow_auction_in_player_list", true)
 	# try saving teams and players as dictionary to save space
 	# construct/deconstruct methods
 	teams = config.get_value("data", "teams", [])
@@ -57,6 +57,7 @@ func _ready() -> void:
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("settings","is_admin",is_admin)
+	config.set_value("settings","is_admin",follow_auction_in_player_list)
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
 	config.set_value("data","active_team_id",active_team_id)
@@ -86,8 +87,6 @@ func add_player_to_team(team: Team, player: Player, price:int) -> String:
 		return error_message
 	player.price = price
 	player.team_id = team.id
-	Config.save_all_data()
-	
 	return ""
 
 
@@ -95,8 +94,6 @@ func remove_player_from_team(player: Player, team: Team) -> void:
 	team.remove_player(player)
 	player.price = 0
 	player.team_id = -1
-	
-	Config.save_all_data()
 
 
 func add_to_history(player: Player, team: Team, price:int):
@@ -106,6 +103,7 @@ func add_to_history(player: Player, team: Team, price:int):
 		"price" : price,
 	}
 	history.append(transfer)
+	save_all_data()
 
 
 func active_player() -> Player:
@@ -114,6 +112,7 @@ func active_player() -> Player:
 
 func set_active_player(player: Player) -> Player:
 	active_player_index = players.find(player)
+	save_all_data()
 	return active_player()
 
 
@@ -123,7 +122,9 @@ func next_player() -> Player:
 		next_player_index += 1
 		if players[next_player_index].team_id == -1:
 			active_player_index = next_player_index
+			save_all_data()
 			return active_player()
+	save_all_data()
 	return active_player()
 
 
@@ -133,7 +134,9 @@ func previous_player() -> Player:
 		next_player_index -= 1
 		if players[next_player_index].team_id == -1:
 			active_player_index = next_player_index
+			save_all_data()
 			return active_player()
+	save_all_data()
 	return active_player()
 
 
