@@ -67,18 +67,14 @@ layout_mode = 2
 theme_override_constants/separation = 10
 metadata/_edit_use_anchors_ = true
 
-[node name="VSeparator3" type="VSeparator" parent="MarginContainer/Dashboard/Right/Header"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="AuctionControl" parent="MarginContainer/Dashboard/Right/Header" instance=ExtResource("5_iadvp")]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Dashboard/Right/Header"]
 modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Connect" type="Button" parent="MarginContainer/Dashboard/Right/Header"]
 layout_mode = 2

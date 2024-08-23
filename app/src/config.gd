@@ -57,7 +57,7 @@ func _ready() -> void:
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
 	config.set_value("settings","is_admin",is_admin)
-	config.set_value("settings","is_admin",follow_auction_in_player_list)
+	config.set_value("settings","follow_auction_in_player_list",follow_auction_in_player_list)
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
 	config.set_value("data","active_team_id",active_team_id)

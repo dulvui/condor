@@ -22,6 +22,7 @@ const AuctionTimer: PackedScene = preload("res://src/ui_components/timer/timer.t
 @onready var auction_button: Button = $Buttons/Auction
 @onready var next_button: Button = $Buttons/Next
 @onready var previous_button: Button = $Buttons/Previous
+@onready var follow_auction_check_box: CheckBox = $FollowAuctionCheckBox
 
 
 func _ready() -> void:
@@ -29,6 +30,8 @@ func _ready() -> void:
 		assign_button.hide()
 		next_button.hide()
 		previous_button.hide()
+	
+	follow_auction_check_box.button_pressed = Config.follow_auction_in_player_list
 
 
 func set_player(player: Player) -> void:
@@ -54,3 +57,7 @@ func _on_assign_pressed() -> void:
 
 func _on_next_pressed() -> void:
 	next.emit()
+
+
+func _on_follow_auction_check_box_toggled(toggled_on: bool) -> void:
+	Config.follow_auction_in_player_list = toggled_on

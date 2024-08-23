@@ -4,12 +4,22 @@
 
 [node name="AuctionControl" type="HBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.355
+anchor_right = 1.0
 anchor_bottom = 0.036
-offset_right = 0.399963
+offset_right = -5.0
 offset_bottom = 0.119999
 theme_override_constants/separation = 60
+alignment = 1
 script = ExtResource("1_1ofna")
+
+[node name="FollowAuctionCheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+text = "FOLLOW"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Labels" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(300, 0)
@@ -54,6 +64,12 @@ text = "ASSIGN"
 layout_mode = 2
 text = ">>"
 
+[node name="VSeparator2" type="VSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="toggled" from="FollowAuctionCheckBox" to="." method="_on_follow_auction_check_box_toggled"]
 [connection signal="pressed" from="Buttons/Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Buttons/Auction" to="." method="_on_auction_pressed"]
 [connection signal="pressed" from="Buttons/Assign" to="." method="_on_assign_pressed"]

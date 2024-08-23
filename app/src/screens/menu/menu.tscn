@@ -138,7 +138,6 @@ structured_text_bidi_override = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="AdminButton" type="Button" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_right = 0.15
