@@ -49,7 +49,7 @@ func set_up(_player: Player) -> void:
 			label_settings.font_color = Color.GREEN
 		Player.Position.C:
 			color_rect.color = Color.DARK_BLUE
-			label_settings.font_color = Color.BLUE
+			label_settings.font_color = Color.AQUA
 		Player.Position.A:
 			color_rect.color = Color.DARK_GREEN
 			label_settings.font_color = Color.RED
