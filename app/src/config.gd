@@ -76,7 +76,6 @@ func reset_data() -> void:
 	history = []
 	player_messages = []
 	
-	#players = _init_players()
 	for player: Player in Config.players:
 		player.reset()
 
@@ -110,7 +109,6 @@ func add_to_history(player: Player, team: Team, price:int):
 
 
 func active_player() -> Player:
-	players[active_player_index].was_active = true
 	return players[active_player_index]
 
 

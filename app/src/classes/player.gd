@@ -4,7 +4,6 @@
 
 class_name Player
 
-# trasnform to enum
 enum Position {
 	P,
 	D,
@@ -12,17 +11,16 @@ enum Position {
 	A
 }
 
+var team_id: int = -1
+var price: int
 var id: int
 var position: int
 var name: String
-var team_id: int = -1
 var real_team: String
 var real_team_short: String
 var mfv: float
-var price: int
 var price_initial: int
 var price_current: int
-var was_active: bool = false
 
 
 func set_up(

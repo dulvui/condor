@@ -10,12 +10,14 @@ const PlayerLabel:PackedScene = preload("res://src/ui_components/player_label/pl
 
 @onready var list:VBoxContainer = $VBoxContainer/ScrollContainer/VBoxContainer
 @onready var scroll:ScrollContainer = $VBoxContainer/ScrollContainer
-@onready var positions:OptionButton = $VBoxContainer/Filter/Positions
+@onready var positions:OptionButton = $VBoxContainer/Options/Positions
 
 var filters:Dictionary = {
 	"name" : "",
-	"position" : ""
+	"position" : "",
+	"team_id" : "",
 }
+
 
 func _ready() -> void:
 	set_up_list()
@@ -34,14 +36,9 @@ func set_up_list():
 		list.add_child(player_label)
 		player_label.set_up(player)
 		player_label.action.connect(_set_active_player.bind(player))
-		if player.id == Config.active_player().id:
-			player_label.activate()
-		elif player.team_id < 0:
-			player_label.deactivate()
-		else:
-			player_label.deactivate()
-			player_label.disable_player()
-		
+	
+	update()
+
 
 func update() -> void:
 	for player_label in list.get_children():
@@ -77,6 +74,7 @@ func _on_positions_item_selected(index: int) -> void:
 		filters.position = str(index - 1)
 	_apply_filter()
 
+
 func _filter(player: Player) -> bool:
 	for key in filters.keys():
 		if not filters[key].is_empty():
@@ -88,3 +86,15 @@ func _filter(player: Player) -> bool:
 func _apply_filter() -> void:
 	for player_label in list.get_children():
 		player_label.visible = _filter(player_label.player)
+
+
+func _on_name_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		filters["team_id"] = "-1"
+	else:
+		filters["team_id"] = ""
+	_apply_filter()
