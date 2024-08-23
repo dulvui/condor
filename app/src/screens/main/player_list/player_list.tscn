@@ -29,26 +29,19 @@ placeholder_text = "SEARCH"
 layout_mode = 2
 
 [node name="Name" type="Button" parent="VBoxContainer/Options"]
-visible = false
 layout_mode = 2
 text = "NAME"
 
-[node name="Team" type="Button" parent="VBoxContainer/Options"]
-visible = false
-layout_mode = 2
-text = "TEAM"
-
 [node name="Price" type="Button" parent="VBoxContainer/Options"]
-visible = false
 layout_mode = 2
 text = "PRICE"
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Options"]
-layout_mode = 2
-text = "AVAILABLE"
-
 [node name="Positions" type="OptionButton" parent="VBoxContainer/Options"]
 layout_mode = 2
+
+[node name="OnlyAvailableCheckBox" type="CheckBox" parent="VBoxContainer/Options"]
+layout_mode = 2
+text = "DISP."
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -62,5 +55,6 @@ theme_override_constants/separation = 5
 
 [connection signal="text_changed" from="VBoxContainer/Search" to="." method="_on_search_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Options/Name" to="." method="_on_name_pressed"]
-[connection signal="toggled" from="VBoxContainer/Options/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="VBoxContainer/Options/Price" to="." method="_on_price_pressed"]
 [connection signal="item_selected" from="VBoxContainer/Options/Positions" to="." method="_on_positions_item_selected"]
+[connection signal="toggled" from="VBoxContainer/Options/OnlyAvailableCheckBox" to="." method="_on_only_available_check_box_toggled"]
