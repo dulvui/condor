@@ -50,12 +50,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 text = "EXPORT"
 
-[node name="Options" type="HBoxContainer" parent="VBoxContainer/AdminSection"]
-layout_mode = 2
-theme_override_constants/separation = 40
-alignment = 1
-
-[node name="BudgetSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
+[node name="BudgetSpinner" type="SpinBox" parent="VBoxContainer/AdminSection"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 max_value = 500.0
@@ -63,41 +58,56 @@ value = 500.0
 allow_greater = true
 prefix = "BUDGET"
 
-[node name="GoalkeeperSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
+[node name="PlayerOptions" type="HBoxContainer" parent="VBoxContainer/AdminSection"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="GoalkeeperSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-min_value = 1.0
+min_value = 2.0
 max_value = 9.0
 value = 3.0
 allow_greater = true
 prefix = "P"
 
-[node name="DefenderSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
+[node name="DefenderSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-min_value = 1.0
+min_value = 3.0
 max_value = 9.0
 value = 8.0
 allow_greater = true
 prefix = "D"
 
-[node name="MiddlefieldSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
+[node name="MiddlefieldSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-min_value = 1.0
+min_value = 5.0
 max_value = 9.0
 value = 8.0
 allow_greater = true
 prefix = "C"
 
-[node name="AttackerSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/Options"]
+[node name="AttackerSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-min_value = 1.0
+min_value = 3.0
 max_value = 9.0
 value = 6.0
 allow_greater = true
 prefix = "A"
+
+[node name="TotalSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 13.0
+max_value = 50.0
+value = 25.0
+exp_edit = true
+allow_greater = true
+prefix = "TOTAL"
 
 [node name="Teams" parent="VBoxContainer" instance=ExtResource("2_ygfth")]
 layout_mode = 2
@@ -128,6 +138,7 @@ structured_text_bidi_override = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="AdminButton" type="Button" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_right = 0.15
@@ -139,16 +150,18 @@ text = "ADMIN"
 
 [node name="ResetDialog" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1
-title = "DELETE_TEAM"
+title = "DELETE DATA?"
 size = Vector2i(200, 102)
-dialog_text = "DELETE ALL DATA?"
+dialog_text = "ALL DATA WILL BE RESET AND RESYNCED WITH ADMIN.
+PROCEED?"
 
 [connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/Options/BudgetSpinner" to="." method="_on_budget_spinner_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/Options/GoalkeeperSpinner" to="." method="_on_goalkeeper_spinner_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/Options/DefenderSpinner" to="." method="_on_defender_spinner_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/Options/MiddlefieldSpinner" to="." method="_on_middlefield_spinner_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/Options/AttackerSpinner" to="." method="_on_attacker_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/BudgetSpinner" to="." method="_on_budget_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/GoalkeeperSpinner" to="." method="_on_goalkeeper_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/DefenderSpinner" to="." method="_on_defender_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner" to="." method="_on_middlefield_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner" to="." method="_on_attacker_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/TotalSpinner" to="." method="_on_total_spinner_value_changed"]
 [connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="AdminButton" to="." method="_on_admin_button_pressed"]
 [connection signal="confirmed" from="ResetDialog" to="." method="_on_reset_dialog_confirmed"]

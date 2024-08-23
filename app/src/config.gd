@@ -9,6 +9,16 @@ var is_admin: bool = false
 
 const FILE_PATH: String = "res://assets/players/players.csv"
 
+# default values
+var p_amount: int = 3
+var d_amount: int = 8
+var c_amount: int = 8
+var a_amount: int = 6
+var total_amount: int = 25
+
+var budget: int = 500
+
+
 var config: ConfigFile
 
 var active_time: int
@@ -25,12 +35,6 @@ var ready_for_player_messages: bool = false
 
 var player_messages: Array
 
-var budget: int = 500
-
-var p_amount: int = 3
-var d_amount: int = 8
-var c_amount: int = 8
-var a_amount: int = 6
 
 
 # Called when the node enters the scene tree for the first time.

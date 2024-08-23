@@ -21,7 +21,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
+theme_override_constants/separation = 15
 
 [node name="TeamAdd" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -35,4 +35,5 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "ADD"
 
+[connection signal="text_submitted" from="TeamAdd/Name" to="." method="_on_name_text_submitted"]
 [connection signal="pressed" from="TeamAdd/Add" to="." method="_on_add_pressed"]

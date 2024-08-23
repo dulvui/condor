@@ -36,21 +36,25 @@ func _add_team(team: Team):
 	Config.save_all_data()
 
 
-func _create_team(team_name: String) -> Team:
+func _on_add_pressed() -> void:
+	_create_team()
+
+
+func _on_name_text_submitted(new_text: String) -> void:
+	_create_team()
+
+
+func _create_team() -> void:
+	if name_edit.text.length() < 1:
+		return
+	
+	var team_name: String = name_edit.text.replace(" ", "")
 	var team: Team = Team.new()
 	# todo use global incremetnal id
 	team.set_up(team_name)
-	return team
-
-
-func _on_add_pressed() -> void:
-	if name_edit.text.length() < 1:
-		return
-		
-	var team = _create_team(name_edit.text)
 	Config.teams.append(team)
 	
 	_add_team(team)
 	
-	name_edit.text = ""
+	name_edit.clear()
 	update_list()

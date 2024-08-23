@@ -47,19 +47,3 @@ func remove_player(player: Player) -> void:
 	slots[player.get_position_string()] += 1
 	slots.total += 1
 	budget += player.price
-
-
-func to_dict() -> Dictionary:
-	var dict: Dictionary = {}
-	dict.name = name
-	dict.id = id
-	dict.budget = budget
-	return dict
-
-
-func from_dict(dict: Dictionary) -> void:
-	if dict.id != id:
-		print("trying to assign wrong team")
-		return
-	dict.name = dict.name
-	dict.budget = dict.budget

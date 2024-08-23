@@ -8,11 +8,12 @@ extends Control
 @onready var reset_dialog: ConfirmationDialog = $ResetDialog
 @onready var teams: VBoxContainer = $VBoxContainer/Teams
 
-@onready var budget_spinner: SpinBox = $VBoxContainer/AdminSection/Options/BudgetSpinner
-@onready var goalkeeper_spinner: SpinBox = $VBoxContainer/AdminSection/Options/GoalkeeperSpinner
-@onready var defender_spinner: SpinBox = $VBoxContainer/AdminSection/Options/DefenderSpinner
-@onready var middlefield_spinner: SpinBox = $VBoxContainer/AdminSection/Options/MiddlefieldSpinner
-@onready var attacker_spinner: SpinBox = $VBoxContainer/AdminSection/Options/AttackerSpinner
+@onready var budget_spinner: SpinBox = $VBoxContainer/AdminSection/BudgetSpinner
+@onready var goalkeeper_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/GoalkeeperSpinner
+@onready var defender_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/DefenderSpinner
+@onready var middlefield_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner
+@onready var attacker_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner
+@onready var total_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/TotalSpinner
 
 
 func _ready() -> void:
@@ -30,8 +31,7 @@ func _ready() -> void:
 	defender_spinner.value = Config.d_amount
 	middlefield_spinner.value = Config.c_amount
 	attacker_spinner.value = Config.a_amount
-	
-	
+	total_spinner.value = Config.total_amount
 
 
 func _on_export_pressed() -> void:
@@ -97,3 +97,7 @@ func _on_middlefield_spinner_value_changed(value: float) -> void:
 
 func _on_attacker_spinner_value_changed(value: float) -> void:
 	Config.a_amount = value
+
+
+func _on_total_spinner_value_changed(value: float) -> void:
+	pass # Replace with function body.

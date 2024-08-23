@@ -25,6 +25,8 @@ signal player_active(player_id: int)
 
 signal get_teams()
 
+signal get_base_data()
+
 signal reconnect()
 
 
@@ -76,6 +78,7 @@ func connect_to_server() -> int:
 	if err != OK:
 		return err
 	last_state = socket.get_ready_state()
+	Config.ready_for_player_messages = true
 	return OK
 
 
@@ -197,4 +200,26 @@ func _on_client_message_received(message: String) -> void:
 				get_teams.emit()
 			else:
 				print("No teams...")
+	elif get_base_data.get_name() in message:
+		if Config.is_admin:
+			print("Sending base data...")
+			var base_data_message: String =  Client.get_teams.get_name()
+			for player: Player in Config.players:
+				base_data_message += Client.DATA_DELIMETER + player.to_json()
+			Client.send(base_data_message)
+		else:
+			print("Receving base data...")
+			var team_names: PackedStringArray = message.split(DATA_DELIMETER)
+			if team_names.size() > 1:
+				team_names.remove_at(0) # remove signal name
+				Config.teams = []
+				for team_name: String in team_names:
+					var team: Team = Team.new()
+					print(team_name)
+					team.set_up(team_name)
+					Config.teams.append(team)
+				get_teams.emit()
+			else:
+				print("No teams...")
+		
 	print(message)
