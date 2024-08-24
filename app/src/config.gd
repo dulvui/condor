@@ -61,6 +61,7 @@ func save_all_data() -> void:
 	config.set_value("data","players",players)
 	config.set_value("data","teams",teams)
 	config.set_value("data","active_team_id",active_team_id)
+	config.set_value("data", "next_team_id", next_team_id)
 	config.set_value("data","active_player_index",active_player_index)
 	config.set_value("data","history",history)
 	config.set_value("data","player_messages",player_messages)
@@ -68,7 +69,6 @@ func save_all_data() -> void:
 
 
 func reset_data() -> void:
-	next_team_id = 0
 	active_time = 30
 	teams = []
 	active_team_id = -1

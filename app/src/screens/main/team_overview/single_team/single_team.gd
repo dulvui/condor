@@ -22,10 +22,11 @@ const PlayerBox: PackedScene = preload("res://src/ui_components/player_box/playe
 
 var team: Team
 
+
 func set_up(team: Team) -> void:
 	self.team = team
 	name_label.text = team.name
-	budget_label.text = " %d M"%team.budget
+	budget_label.text = "%d M"%team.budget
 	
 	for player in Config.players:
 		if player.team_id == team.id:
