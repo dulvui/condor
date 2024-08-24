@@ -48,7 +48,7 @@ func _create_team() -> void:
 	if name_edit.text.length() < 1:
 		return
 	
-	var team_name: String = name_edit.text.replace(" ", "")
+	var team_name: String = name_edit.text.strip_edges()
 	var team: Team = Team.new()
 	# todo use global incremetnal id
 	team.set_up(team_name)
