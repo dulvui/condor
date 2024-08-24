@@ -118,4 +118,3 @@ func _on_attacker_spinner_value_changed(value: float) -> void:
 
 func _on_theme_option_button_item_selected(index: int) -> void:
 	theme = ThemeUtil.set_active_theme(index)
-	teams.theme = ThemeUtil.get_active_theme()

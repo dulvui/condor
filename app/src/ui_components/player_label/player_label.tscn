@@ -5,9 +5,9 @@
 [node name="PlayerLabel" type="Control"]
 custom_minimum_size = Vector2(200, 42)
 layout_mode = 3
-anchor_right = 0.156
+anchor_right = 0.208
 anchor_bottom = 0.039
-offset_right = 0.47998
+offset_right = 0.639984
 offset_bottom = -0.120003
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -52,9 +52,9 @@ layout_mode = 2
 text = "SAS"
 
 [node name="Price" type="Label" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-text = "12 M"
+text = "239"
 horizontal_alignment = 2
 
 [node name="Link" type="Button" parent="MarginContainer/HBoxContainer"]

@@ -46,6 +46,7 @@ func _append_player_label(player: Player) -> void:
 	var player_box: PlayerBox = PlayerBox.instantiate()
 	player_list.add_child(player_box)
 	player_box.set_player(player)
+	player_box.player_label.position_label.visible = false
 	player_box.player_removed.connect(_on_player_removed.bind(player))
 	scrool.ensure_control_visible(player_box)
 

@@ -22,6 +22,7 @@ layout_mode = 2
 placeholder_text = "PRICE"
 
 [node name="FastPrices" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 

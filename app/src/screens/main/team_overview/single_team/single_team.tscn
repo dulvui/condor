@@ -55,3 +55,4 @@ follow_focus = true
 
 [node name="PlayerList" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3

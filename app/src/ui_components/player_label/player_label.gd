@@ -33,13 +33,13 @@ func set_up(_player: Player) -> void:
 	name_label.text = player.name
 	team_name_label.text = player.real_team_short
 	if player.price != 0:
-		price_label.text = "%d M"%player.price
+		price_label.text = "%d"%player.price
 	else:
-		price_label.text = "%d M"%[player.price_current]
+		price_label.text = "%d"%[player.price_current]
 	
 	# set position label color
 	var label_settings = LabelSettings.new()
-	label_settings.font_size = get_theme_default_font_size()
+	label_settings.font_size = ThemeUtil.get_active_theme().default_font_size
 
 	match player.position:
 		Player.Position.P:

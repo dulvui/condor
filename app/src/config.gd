@@ -5,7 +5,7 @@
 extends Node
 
 # change to ship admin client
-var is_admin: bool = false
+var is_admin: bool = true
 
 const FILE_PATH: String = "res://assets/players/players.csv"
 
