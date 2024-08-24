@@ -27,6 +27,7 @@ var finished:bool = false
 
 var active_player: Player
 
+
 func _ready() -> void:
 	timer.wait_time = Config.active_time
 	time_label.text = "%2.2f"%timer.time_left
@@ -44,6 +45,7 @@ func _process(delta: float) -> void:
 	if not timer.is_stopped() and not finished:
 		sound.countdown(timer.time_left)
 
+
 func trigger_toggle(delta:float = 0) -> void:
 	if delta > 0:
 		timer.wait_time -= delta * 0.001
@@ -57,14 +59,17 @@ func trigger_toggle(delta:float = 0) -> void:
 	else:
 		restart()
 
+
 func set_time(time:int) -> void:
 	Config.active_time = time
 	Config.save_all_data()
 	timer.wait_time = Config.active_time
 
+
 func set_player(player: Player):
 	active_player = player
 	name_label.text = active_player.name
+
 
 func _on_start_pressed() -> void:
 	finished = false
@@ -72,6 +77,7 @@ func _on_start_pressed() -> void:
 		timer.start()
 	else:
 		timer.paused = not timer.paused
+
 
 func _on_timer_timeout() -> void:
 	finished = true
@@ -82,7 +88,7 @@ func _on_back_pressed() -> void:
 	hide()
 
 
-func _on_bug_button_pressed() -> void:
+func _on_big_button_pressed() -> void:
 	if Config.is_admin or (not timer.is_stopped() and not timer.paused):
 		toggle.emit()
 		if timer.paused:
@@ -97,20 +103,24 @@ func _on_bug_button_pressed() -> void:
 func _on_pause_pressed() -> void:
 	pause()
 	paused.emit()
-	
+
+
 func pause() -> void:
 	timer.paused = true
+
 
 func _on_restart_pressed() -> void:
 	restart()
 	reseted.emit()
+
 
 func restart() -> void:
 	finished = false
 	timer.stop()
 	timer.paused = false
 	timer.wait_time = Config.active_time
-	
+
+
 func change_time(time:float) -> void:
 	if Config.active_time + time <= MIN_TIME:
 		Config.active_time = MIN_TIME
@@ -123,15 +133,19 @@ func change_time(time:float) -> void:
 
 	timer.wait_time = Config.active_time
 
+
 func _set_time(time:float) -> void:
 	change_time(time)
 	time_change.emit()
 
+
 func _on_minus_minutes_pressed() -> void:
 	_set_time(-10)
 
+
 func _on_minus_5_pressed() -> void:
 	_set_time(-5)
+
 
 func _on_minus_seconds_pressed() -> void:
 	_set_time(-1)
@@ -140,8 +154,10 @@ func _on_minus_seconds_pressed() -> void:
 func _on_plus_seconds_pressed() -> void:
 	_set_time(+1)
 
+
 func _on_plus_5_pressed() -> void:
 	_set_time(+5)
+
 
 func _on_plus_minutes_pressed() -> void:
 	_set_time(+10)

@@ -142,10 +142,6 @@ func _on_connect_pressed() -> void:
 	Client.connect_to_server()
 
 
-func _on_timer_time_changed(time) -> void:
-	Client.send(Client.timer_change.get_name() + Client.DATA_DELIMETER + str(time))
-
-
 func _on_timer_paused() -> void:
 	Client.send(Client.timer_pause.get_name())
 

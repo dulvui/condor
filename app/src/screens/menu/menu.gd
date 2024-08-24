@@ -13,7 +13,8 @@ extends Control
 @onready var defender_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/DefenderSpinner
 @onready var middlefield_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner
 @onready var attacker_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner
-@onready var total_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/TotalSpinner
+
+@onready var total_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions2/TotalSpinner
 
 
 func _ready() -> void:

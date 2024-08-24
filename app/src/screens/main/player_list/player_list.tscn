@@ -24,18 +24,18 @@ theme_override_constants/separation = 15
 [node name="Search" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "SEARCH"
+placeholder_text = "CERCA"
 
 [node name="Options" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="Name" type="Button" parent="VBoxContainer/Options"]
 layout_mode = 2
-text = "NAME"
+text = "NOME"
 
 [node name="Price" type="Button" parent="VBoxContainer/Options"]
 layout_mode = 2
-text = "PRICE"
+text = "PREZZO"
 
 [node name="Positions" type="OptionButton" parent="VBoxContainer/Options"]
 layout_mode = 2

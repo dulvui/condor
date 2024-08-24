@@ -14,7 +14,7 @@ script = ExtResource("1_1ofna")
 
 [node name="FollowAuctionCheckBox" type="CheckBox" parent="."]
 layout_mode = 2
-text = "FOLLOW"
+text = "SEGUI ASTA"
 
 [node name="VSeparator" type="VSeparator" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -54,11 +54,11 @@ text = "<<"
 
 [node name="Auction" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "AUCTION"
+text = "ASTA"
 
 [node name="Assign" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "ASSIGN"
+text = "ASSEGNA"
 
 [node name="Next" type="Button" parent="Buttons"]
 layout_mode = 2

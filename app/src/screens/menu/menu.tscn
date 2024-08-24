@@ -37,7 +37,7 @@ alignment = 1
 
 [node name="AdminSection" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="AdminActive" type="Label" parent="VBoxContainer/AdminSection"]
@@ -46,17 +46,13 @@ text = "ADMIN"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Export" type="Button" parent="VBoxContainer/AdminSection"]
-layout_mode = 2
-text = "EXPORT"
-
 [node name="BudgetSpinner" type="SpinBox" parent="VBoxContainer/AdminSection"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 max_value = 500.0
 value = 500.0
 allow_greater = true
-prefix = "BUDGET"
+prefix = "CREDITI"
 
 [node name="PlayerOptions" type="HBoxContainer" parent="VBoxContainer/AdminSection"]
 layout_mode = 2
@@ -99,7 +95,16 @@ value = 6.0
 allow_greater = true
 prefix = "A"
 
-[node name="TotalSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
+[node name="PlayerOptions2" type="HBoxContainer" parent="VBoxContainer/AdminSection"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/AdminSection/PlayerOptions2"]
+layout_mode = 2
+text = "DINAMICO"
+
+[node name="TotalSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 min_value = 13.0
@@ -107,7 +112,11 @@ max_value = 50.0
 value = 25.0
 exp_edit = true
 allow_greater = true
-prefix = "TOTAL"
+prefix = "TOTALI"
+
+[node name="Export" type="Button" parent="VBoxContainer/AdminSection"]
+layout_mode = 2
+text = "EXPORT"
 
 [node name="Teams" parent="VBoxContainer" instance=ExtResource("2_ygfth")]
 layout_mode = 2
@@ -115,7 +124,7 @@ size_flags_vertical = 3
 
 [node name="Reset" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "RESET"
+text = "CANCELLARE DATI"
 
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
@@ -149,18 +158,19 @@ text = "ADMIN"
 
 [node name="ResetDialog" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1
-title = "DELETE DATA?"
+title = "CANCELLARE TUTTI DATI?"
 size = Vector2i(200, 102)
-dialog_text = "ALL DATA WILL BE RESET AND RESYNCED WITH ADMIN.
-PROCEED?"
+ok_button_text = "SI"
+dialog_text = "TUTTI DATI SARANNO PERSI E DOVRANNO ESSERE RISCARICATI DAL ADMIN.
+CONTINUARE?"
 
-[connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/BudgetSpinner" to="." method="_on_budget_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/GoalkeeperSpinner" to="." method="_on_goalkeeper_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/DefenderSpinner" to="." method="_on_defender_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner" to="." method="_on_middlefield_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner" to="." method="_on_attacker_spinner_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/TotalSpinner" to="." method="_on_total_spinner_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions2/TotalSpinner" to="." method="_on_total_spinner_value_changed"]
+[connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
 [connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="AdminButton" to="." method="_on_admin_button_pressed"]
 [connection signal="confirmed" from="ResetDialog" to="." method="_on_reset_dialog_confirmed"]

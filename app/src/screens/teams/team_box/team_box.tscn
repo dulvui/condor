@@ -21,7 +21,7 @@ text_overrun_behavior = 4
 
 [node name="Delete" type="Button" parent="."]
 layout_mode = 2
-text = "DELETE"
+text = "ELIMINA"
 
 [node name="DeleteDialog" type="ConfirmationDialog" parent="."]
 title = "DELETE_TEAM"

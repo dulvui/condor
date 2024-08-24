@@ -11,9 +11,15 @@ SPDX-License-Identifier: CC0-1.0
 [![itch.io upload](https://github.com/dulvui/fanta-timer/actions/workflows/upload-itchio.yml/badge.svg)](https://github.com/dulvui/fanta-timer/actions/workflows/upload-itchio.yml)
 [![REUSE Compliance Check](https://github.com/dulvui/fanta-timer/actions/workflows/reuse.yml/badge.svg?branch=main)](https://github.com/dulvui/fanta-timer/actions/workflows/reuse.yml)
 
-Mobile and desktop application for the Fantacalcio auction.
+!!WARNING!!  
+There is now an official Windows, MacOS and Web app for by fantacalcio.it for real time live auction https://www.fantacalcio.it/app-fantaasta  
+For official support and a overall better experience, I recommend using the official one.
+If you care about being Open Source or running it on Linux and mobile (not released yet), Condor is stil a valid option.
 
-Made with [Godot Engine](https://godotengine.org) version 4.1.0
+
+Desktop and web (mobile not yet) application for the Fantacalcio auction.
+
+Made with [Godot Engine](https://godotengine.org) version 4.2.0
 
 ## Table of contents
 
