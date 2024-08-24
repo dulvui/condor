@@ -71,7 +71,7 @@ prefix = "P"
 [node name="DefenderSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-min_value = 3.0
+min_value = 5.0
 max_value = 9.0
 value = 8.0
 allow_greater = true
@@ -95,25 +95,6 @@ value = 6.0
 allow_greater = true
 prefix = "A"
 
-[node name="PlayerOptions2" type="HBoxContainer" parent="VBoxContainer/AdminSection"]
-layout_mode = 2
-theme_override_constants/separation = 40
-alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/AdminSection/PlayerOptions2"]
-layout_mode = 2
-text = "DINAMICO"
-
-[node name="TotalSpinner" type="SpinBox" parent="VBoxContainer/AdminSection/PlayerOptions2"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-min_value = 13.0
-max_value = 50.0
-value = 25.0
-exp_edit = true
-allow_greater = true
-prefix = "TOTALI"
-
 [node name="Export" type="Button" parent="VBoxContainer/AdminSection"]
 layout_mode = 2
 text = "EXPORT"
@@ -124,7 +105,7 @@ size_flags_vertical = 3
 
 [node name="Reset" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "CANCELLARE DATI"
+text = "SINCRONIZZA SUQADRE"
 
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
@@ -169,7 +150,6 @@ CONTINUARE?"
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/DefenderSpinner" to="." method="_on_defender_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner" to="." method="_on_middlefield_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner" to="." method="_on_attacker_spinner_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions2/TotalSpinner" to="." method="_on_total_spinner_value_changed"]
 [connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
 [connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="AdminButton" to="." method="_on_admin_button_pressed"]

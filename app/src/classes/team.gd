@@ -25,7 +25,7 @@ func set_up(p_name: String) -> Team:
 	slots["D"] = Config.d_amount
 	slots["C"] = Config.c_amount
 	slots["A"] = Config.a_amount
-	slots["total"] = Config.p_amount + Config.d_amount + Config.c_amount + Config.p_amount
+	slots["total"] = Config.p_amount + Config.d_amount + Config.c_amount + Config.a_amount
 	
 	return self
 
@@ -47,3 +47,6 @@ func remove_player(player: Player) -> void:
 	slots[player.get_position_string()] += 1
 	slots.total += 1
 	budget += player.price
+
+func get_max_budget() -> int:
+	return budget - slots.total + 1

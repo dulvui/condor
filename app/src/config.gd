@@ -14,7 +14,6 @@ var p_amount: int = 3
 var d_amount: int = 8
 var c_amount: int = 8
 var a_amount: int = 6
-var total_amount: int = 25
 
 var budget: int = 500
 

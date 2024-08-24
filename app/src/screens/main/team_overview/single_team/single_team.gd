@@ -26,13 +26,14 @@ var team: Team
 func set_up(team: Team) -> void:
 	self.team = team
 	name_label.text = team.name
-	budget_label.text = "%d M"%team.budget
+	
 	
 	for player in Config.players:
 		if player.team_id == team.id:
 			_append_player_label(player)
 	
 	update_player_amount()
+	update_budget()
 
 
 func add_player(player: Player) -> void:
@@ -69,7 +70,7 @@ func remove_player(player: Player) -> void:
 
 
 func update_budget() -> void:
-	budget_label.text = "%d M"%team.budget
+	budget_label.text = "%d M - max %d M"%[team.budget, team.get_max_budget()]
 
 
 func update_player_amount() -> void:

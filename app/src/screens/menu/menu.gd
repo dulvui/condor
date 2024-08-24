@@ -14,8 +14,6 @@ extends Control
 @onready var middlefield_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner
 @onready var attacker_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner
 
-@onready var total_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions2/TotalSpinner
-
 
 func _ready() -> void:
 	Config.ready_for_player_messages = false
@@ -32,7 +30,6 @@ func _ready() -> void:
 	defender_spinner.value = Config.d_amount
 	middlefield_spinner.value = Config.c_amount
 	attacker_spinner.value = Config.a_amount
-	total_spinner.value = Config.total_amount
 	
 	# fetch teams on first start
 	if Config.teams.size() == 0:
