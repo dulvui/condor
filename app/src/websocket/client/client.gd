@@ -133,10 +133,8 @@ func _on_client_message_received(message: String) -> void:
 	if message == auction_start.get_name():
 		auction_start.emit()
 	elif timer_start.get_name() in message:
-		var timestamp: int  = int(message.split(DATA_DELIMETER)[1])
-		var current_timestamp: int = Time.get_unix_time_from_system()
-		var delta:float = current_timestamp - timestamp + 100
-		timer_start.emit(delta)
+		var timestamp: float  = float(message.split(DATA_DELIMETER)[1])
+		timer_start.emit(timestamp)
 	elif timer_toggle.get_name() in message:
 		# todo: add delta also to toggle
 		timer_toggle.emit()

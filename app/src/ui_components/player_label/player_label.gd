@@ -22,7 +22,8 @@ var player: Player
 func _ready() -> void:
 	set_process(false)
 	action_button.visible = Config.is_admin
-	link_button.visible = OS.get_name() in ["Linux", "Windows", "Web"]
+	#link_button.visible = OS.get_name() in ["Linux", "Windows", "Web"]
+	link_button.visible = Config.is_admin
 
 
 func set_up(_player: Player) -> void:

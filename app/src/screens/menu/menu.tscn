@@ -145,6 +145,15 @@ ok_button_text = "SI"
 dialog_text = "TUTTI DATI SARANNO PERSI E DOVRANNO ESSERE RISCARICATI DAL ADMIN.
 CONTINUARE?"
 
+[node name="Players" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.021
+anchor_bottom = 0.029
+offset_right = -0.320004
+offset_bottom = -0.320002
+
 [connection signal="value_changed" from="VBoxContainer/AdminSection/BudgetSpinner" to="." method="_on_budget_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/GoalkeeperSpinner" to="." method="_on_goalkeeper_spinner_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/DefenderSpinner" to="." method="_on_defender_spinner_value_changed"]

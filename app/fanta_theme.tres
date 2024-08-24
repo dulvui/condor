@@ -7,7 +7,7 @@
 bg_color = Color(0.134586, 0.470461, 0.74826, 1)
 
 [resource]
-default_font_size = 22
+default_font_size = 32
 HSeparator/styles/separator = ExtResource("1_qm4td")
 Panel/styles/panel = SubResource("StyleBoxFlat_ckpab")
 VSeparator/styles/separator = ExtResource("2_1rlub")

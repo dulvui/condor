@@ -13,7 +13,6 @@ signal reseted
 
 const MIN_TIME:int = 5
 const MAX_TIME:int = 60
-const DEFAULT_TIME:int = 10
 
 @onready var timer:Timer = $Timer
 @onready var time_label:Label = $VBoxContainer/Time
@@ -46,11 +45,15 @@ func _process(delta: float) -> void:
 		sound.countdown(timer.time_left)
 
 
-func trigger_toggle(delta:float = 0) -> void:
-	if delta > 0:
-		timer.wait_time -= delta * 0.001
+func trigger_toggle(timestamp :float = 0) -> void:
+	if timestamp > 0:
+		var current_timestamp: float = Time.get_unix_time_from_system()
+		var delta:float = current_timestamp - timestamp
+		timer.wait_time = Config.active_time
+		timer.wait_time -= delta
+		print(delta)
 	else:
-		timer.wait_time = DEFAULT_TIME
+		timer.wait_time = Config.active_time
 	if timer.paused:
 		timer.paused = false
 	elif not finished:

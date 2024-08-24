@@ -21,6 +21,8 @@ func _ready() -> void:
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 	
+	timer.set_player(active_player)
+	
 	Client.connected_to_server.connect(_on_client_connected_to_server)
 	Client.connection_closed.connect(_on_client_connection_closed)
 	
@@ -83,26 +85,28 @@ func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
-func _on_auction_control_next() -> void:
-	Client.send(Client.player_next.get_name())
-	_next_player()
-
-
 func _next_player() -> void:
 	active_player = Config.next_player()
 	auction_control.set_player(active_player)
+	timer.set_player(active_player)
 	player_list.update()
-
-
-func _on_auction_control_previous() -> void:
-	Client.send(Client.player_previous.get_name())
-	_previous_player()
 
 
 func _previous_player() -> void:
 	active_player = Config.previous_player()
 	auction_control.set_player(active_player)
+	timer.set_player(active_player)
 	player_list.update()
+
+
+func _on_auction_control_next() -> void:
+	Client.send(Client.player_next.get_name())
+	_next_player()
+
+
+func _on_auction_control_previous() -> void:
+	Client.send(Client.player_previous.get_name())
+	_previous_player()
 
 
 func _on_player_list_active_player_change() -> void:
@@ -122,7 +126,7 @@ func _refresh_lists() -> void:
 
 
 func _on_timer_toggle() -> void:
-	var timestamp:int = Time.get_unix_time_from_system()
+	var timestamp: float = Time.get_unix_time_from_system()
 	Client.send(Client.timer_start.get_name() + Client.DATA_DELIMETER + str(timestamp))
 
 
@@ -159,8 +163,10 @@ func _on_client_auction_start() -> void:
 	timer.show()
 
 
-func _on_client_timer_start(delta:float) -> void:
-	timer.trigger_toggle(delta)
+func _on_client_timer_start(timestamp: float) -> void:
+	timer.trigger_toggle(timestamp)
+	if Config.follow_auction_in_player_list:
+		timer.show()
 
 
 func _on_client_timer_change(time:int) -> void:
@@ -205,6 +211,7 @@ func _on_client_player_previous() -> void:
 func _on_client_player_active(player_id:int) -> void:
 	var player: Player = Config.get_player_by_id(player_id)
 	active_player = Config.set_active_player(player)
+	timer.set_player(active_player)
 	auction_control.set_player(player)
 	player_list.update()
 

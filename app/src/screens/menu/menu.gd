@@ -21,8 +21,11 @@ func _ready() -> void:
 	# always close server connection in menu
 	if Client.last_state != WebSocketPeer.STATE_OPEN:
 		Client.connect_to_server()
+	else:
+		_sync_teams()
 	
 	Client.get_teams.connect(func() -> void: teams.update_list())
+	Client.connected_to_server.connect(_sync_teams)
 	
 	budget_spinner.value = Config.budget
 	
@@ -31,6 +34,10 @@ func _ready() -> void:
 	middlefield_spinner.value = Config.c_amount
 	attacker_spinner.value = Config.a_amount
 	
+	$Players.text = str(Config.players.size())
+
+
+func _sync_teams() -> void:
 	# fetch teams on first start
 	if Config.teams.size() == 0:
 		Client.send(Client.get_teams.get_name())

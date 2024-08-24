@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dcxrkfsdl86cs" path="res://src/ui_components/player_label/player_label.tscn" id="2_b4nm0"]
 
 [node name="PlayerBox" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
 anchors_preset = -1
-anchor_right = 0.208333
-anchor_bottom = 0.0388889
+anchor_right = 0.191146
+anchor_bottom = 0.0537037
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

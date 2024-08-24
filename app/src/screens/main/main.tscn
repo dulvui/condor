@@ -43,7 +43,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="Left" type="VBoxContainer" parent="MarginContainer/Dashboard"]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
 [node name="PlayerList" parent="MarginContainer/Dashboard/Left" instance=ExtResource("3_w4uhl")]

@@ -27,7 +27,7 @@ var active_team_id: int
 var next_team_id: int
 var players: Array
 
-var teams: Array[Team]
+var teams: Array
 var active_player_index: int
 var history: Array
 
