@@ -18,6 +18,8 @@ var active_player: Player
 
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	active_player = Config.active_player()
 	auction_control.set_player(active_player)
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cce4r3em5m283"]
 
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="1_lsxx0"]
-[ext_resource type="PackedScene" uid="uid://h78og16kspcj" path="res://src/screens/teams/teams.tscn" id="2_ygfth"]
+[ext_resource type="PackedScene" uid="uid://h78og16kspcj" path="res://src/screens/menu/teams/teams.tscn" id="2_ygfth"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -105,7 +105,10 @@ size_flags_vertical = 3
 
 [node name="Reset" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "SINCRONIZZA SUQADRE"
+text = "SINCRONIZZA SQUADRE"
+
+[node name="ThemeOptionButton" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="Homepage" type="LinkButton" parent="."]
 visible = false
@@ -161,5 +164,6 @@ offset_bottom = -0.320002
 [connection signal="value_changed" from="VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner" to="." method="_on_attacker_spinner_value_changed"]
 [connection signal="pressed" from="VBoxContainer/AdminSection/Export" to="." method="_on_export_pressed"]
 [connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="item_selected" from="VBoxContainer/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
 [connection signal="pressed" from="AdminButton" to="." method="_on_admin_button_pressed"]
 [connection signal="confirmed" from="ResetDialog" to="." method="_on_reset_dialog_confirmed"]

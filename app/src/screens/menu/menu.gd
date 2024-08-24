@@ -14,8 +14,16 @@ extends Control
 @onready var middlefield_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/MiddlefieldSpinner
 @onready var attacker_spinner: SpinBox = $VBoxContainer/AdminSection/PlayerOptions/AttackerSpinner
 
+@onready var theme_options: OptionButton = $VBoxContainer/ThemeOptionButton
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
+	theme = ThemeUtil.get_active_theme()
+	for theme_name: String in ThemeUtil.get_theme_names():
+		theme_options.add_item(theme_name)
+	theme_options.selected = Config.theme_index
+	
 	Config.ready_for_player_messages = false
 	admin_section.visible = Config.is_admin
 	# always close server connection in menu
@@ -108,5 +116,6 @@ func _on_attacker_spinner_value_changed(value: float) -> void:
 	Config.a_amount = value
 
 
-func _on_total_spinner_value_changed(value: float) -> void:
-	pass # Replace with function body.
+func _on_theme_option_button_item_selected(index: int) -> void:
+	theme = ThemeUtil.set_active_theme(index)
+	teams.theme = ThemeUtil.get_active_theme()

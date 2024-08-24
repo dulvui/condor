@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 Config="*res://src/config.gd"
 Client="*res://src/websocket/client/client.gd"
+ThemeUtil="*res://src/theme_util.gd"
 
 [display]
 

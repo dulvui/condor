@@ -4,7 +4,7 @@
 
 extends VBoxContainer
 
-const TeamBox: PackedScene = preload("res://src/screens/teams/team_box/team_box.tscn")
+const TeamBox: PackedScene = preload("res://src/screens/menu/teams/team_box/team_box.tscn")
 
 @onready var add_player:HBoxContainer = $TeamAdd
 @onready var add_button:Button = $TeamAdd/Add

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ui_components/player_label/player_label.gd" id="1_myfyj"]
 
 [node name="PlayerLabel" type="Control"]
-custom_minimum_size = Vector2(300, 42)
+custom_minimum_size = Vector2(200, 42)
 layout_mode = 3
 anchor_right = 0.156
 anchor_bottom = 0.039

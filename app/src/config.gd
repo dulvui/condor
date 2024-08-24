@@ -17,6 +17,9 @@ var a_amount: int = 6
 
 var budget: int = 500
 
+
+var theme_index: int
+
 var follow_auction_in_player_list: bool
 
 var config: ConfigFile
@@ -40,6 +43,7 @@ func _ready() -> void:
 	config = ConfigFile.new()
 	config.load("user://settings.cfg")
 	active_time = config.get_value("settings", "active_time", 30)
+	theme_index = config.get_value("settings", "theme_index", ThemeUtil.default_theme_index())
 	is_admin = config.get_value("settings", "is_admin", false)
 	follow_auction_in_player_list = config.get_value("settings", "follow_auction_in_player_list", true)
 	# try saving teams and players as dictionary to save space
@@ -55,6 +59,7 @@ func _ready() -> void:
 
 func save_all_data() -> void:
 	config.set_value("settings","active_time",active_time)
+	config.set_value("settings","theme_index",theme_index)
 	config.set_value("settings","is_admin",is_admin)
 	config.set_value("settings","follow_auction_in_player_list",follow_auction_in_player_list)
 	config.set_value("data","players",players)

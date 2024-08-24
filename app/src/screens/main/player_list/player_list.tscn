@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/screens/main/player_list/player_list.gd" id="1_h755l"]
 
 [node name="PlayerList" type="Control"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

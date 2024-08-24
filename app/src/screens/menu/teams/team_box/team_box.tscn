@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3lgl5d7g118"]
 
-[ext_resource type="Script" path="res://src/screens/teams/team_box/team_box.gd" id="1_4l10t"]
+[ext_resource type="Script" path="res://src/screens/menu/teams/team_box/team_box.gd" id="1_4l10t"]
 
 [node name="TeamBox" type="HBoxContainer"]
 anchors_preset = -1

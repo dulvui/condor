@@ -16,6 +16,27 @@ script = ExtResource("1_1ofna")
 layout_mode = 2
 text = "SEGUI ASTA"
 
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Previous" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "<<"
+
+[node name="Auction" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "ASTA"
+
+[node name="Assign" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "ASSEGNA"
+
+[node name="Next" type="Button" parent="Buttons"]
+layout_mode = 2
+text = ">>"
+
 [node name="VSeparator" type="VSeparator" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -42,27 +63,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "SAS"
 horizontal_alignment = 1
-
-[node name="Buttons" type="HBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="Previous" type="Button" parent="Buttons"]
-layout_mode = 2
-text = "<<"
-
-[node name="Auction" type="Button" parent="Buttons"]
-layout_mode = 2
-text = "ASTA"
-
-[node name="Assign" type="Button" parent="Buttons"]
-layout_mode = 2
-text = "ASSEGNA"
-
-[node name="Next" type="Button" parent="Buttons"]
-layout_mode = 2
-text = ">>"
 
 [node name="VSeparator2" type="VSeparator" parent="."]
 modulate = Color(1, 1, 1, 0)

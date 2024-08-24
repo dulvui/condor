@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://h78og16kspcj"]
 
-[ext_resource type="Script" path="res://src/screens/teams/teams.gd" id="1_rs82a"]
+[ext_resource type="Script" path="res://src/screens/menu/teams/teams.gd" id="1_rs82a"]
 [ext_resource type="Theme" uid="uid://ctqg0on3ebbdy" path="res://fanta_theme.tres" id="1_vow8b"]
 
 [node name="Teams" type="VBoxContainer"]
