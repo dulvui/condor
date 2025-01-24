@@ -15,7 +15,7 @@ env:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/prod'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout source code
@@ -31,7 +31,7 @@ jobs:
         run: cp $WORKING_DIRECTORY/export_presets.html.example $WORKING_DIRECTORY/export_presets.cfg
 
       - name: Godot HTML5 export
-        uses: dulvui/godot-4-html-export@v1
+        uses: dulvui/godot-4-html-export@v1.0.2
         with:
           working-directory: $WORKING_DIRECTORY
           godot-version: 4.3
