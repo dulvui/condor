@@ -4,6 +4,12 @@ SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 SPDX-License-Identifier: CC0-1.0
 -->
 
+# MOVED TO CODEBERG
+The main repository is on now [Codeberg](https://codeberg.org/dulvui/condor).  
+FOSS should be hosted by FOSS.
+
+----
+
 # Condor
 
 [![Android upload](https://github.com/dulvui/fanta-timer/actions/workflows/upload-android.yml/badge.svg)](https://github.com/dulvui/fanta-timer/actions/workflows/upload-android.yml)
